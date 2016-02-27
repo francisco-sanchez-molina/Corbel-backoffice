@@ -1,0 +1,7 @@
+config.json
+node_modules
+/dist
+*.swp
+app.js
+/out
+.DS_Store
