@@ -44,17 +44,9 @@ class Connect extends React.Component {
     return (
       <div>
       <h1>Connect</h1>
-      <div class="form-group">
-        <label>Token:</label>
-        <Input type="text" class="form-control" placeholder="token" value={this.state.token} />
-      </div>
-      <div class="form-group">
-        <label>Refresh token:</label>
-        <Input type="text" class="form-control" placeholder="token" value={this.state.refreshToken} />
-      </div>
-      <div class="form-group">
-        <Button onClick={() => this.onConnectClick()} class="btn btn-form btn-primary" text="Connect" />
-      </div>
+      <Input type="text" label="Token:" placeholder="token" value={this.state.token} />
+      <Input type="text" label="Refresh token:" placeholder="token" value={this.state.refreshToken} />
+      <Button onClick={() => this.onConnectClick()} class="btn btn-form btn-primary" text="Connect" />
       </div>
     )
   }

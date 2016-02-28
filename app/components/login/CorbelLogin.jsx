@@ -1,10 +1,9 @@
 import React from "react";
 import {Window, Button, Pane, Input} from "react-photonkit";
 
-import Configuration from "./Configuration.jsx";
-import Connect from "./Connect.jsx";
-import Status from "./Status.jsx";
-
+import Configuration from "./component/Configuration.jsx";
+import Connect from "./component/Connect.jsx";
+import Status from "./component/Status.jsx";
 
 class CorbelLogin extends React.Component {
 
