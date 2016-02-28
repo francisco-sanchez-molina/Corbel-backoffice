@@ -18,39 +18,50 @@ import CorbelService from "./service/CorbelService"
 require('../index.scss');
 
 var corbel = {corbelStore : CorbelStore,
-              corbelActions : CorbelActions,
-              corbelService : CorbelService}
+  corbelActions : CorbelActions,
+  corbelService : CorbelService}
 
-class App extends React.Component {
-  render() {
-    return (
-      <Window>
-        <Header/>
+  class App extends React.Component {
+    render() {
+      return (
+        <Window>
+          <Header/>
           <Content>
             <PaneGroup>
-							<Sidebar/>
-							<Pane className="padded-more">
-								{this.props.children}
-				      </Pane>
-					</PaneGroup>
-					</Content>
-					<Footer/>
-			</Window>
-	  )
-	}
-}
+              <Sidebar/>
+              <Pane className="padded-more">
+                {this.props.children}
+              </Pane>
+            </PaneGroup>
+          </Content>
+          <Footer/>
+        </Window>
+      )
+    }
+  }
 
-AppActions.addSidebarEntry(new SidebarEntry('Home', '#/home', 'home'));
-AppActions.addSidebarEntry(new SidebarEntry('Login', '#/CorbelLogin', 'cog'));
-AppActions.addSidebarEntry(new SidebarEntry('Users', '#/users', 'user'));
+  AppActions.addSidebarEntry(new SidebarEntry('Home', '#/home', 'home'));
+  AppActions.addSidebarEntry(new SidebarEntry('Login', '#/CorbelLogin', 'cog'));
+  AppActions.addSidebarEntry(new SidebarEntry('Users', '#/users', 'user'));
 
-var routes = (
-  <Route component={App} path="/">
-    <Route component={Home} path="/home" />
-    <Route component={CorbelLogin} path="/CorbelLogin" corbel={corbel} />
-    <Route component={CorbelUsers} path="/users" corbel={corbel} />
-  </Route>
-)
+  var routes = (
+    <Route component={App} path="/">
+      <Route component={Home} path="/home" />
+      <Route
+        component={CorbelLogin}
+        path="/CorbelLogin"
+        corbel={corbel} />
+      <Route
+        component={CorbelUsers}
+        path="/users"
+        corbel={corbel} />
+    </Route>
+  )
 
-hashHistory.push('/home')
-ReactDom.render(<Router history={hashHistory}>{routes}</Router>, document.getElementById("main"))
+  hashHistory.push('/home')
+  ReactDom.render(
+    <Router history={hashHistory}>
+      {routes}
+    </Router>,
+    document.getElementById("main")
+  )

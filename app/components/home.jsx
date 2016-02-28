@@ -7,14 +7,16 @@ class Home extends React.Component {
       textAlign: 'center',
       verticalAlign: 'middle',
       lineHeight: '90px'
-      };
+    };
 
-      return (
-        <div style={divStyle}>
-          <h1>Welcome to Corbel backoffice</h1>
-          <img width='200px' src='assets/corbel.png'/>
-        </div>
-      )
+    return (
+      <div style={divStyle}>
+        <h1>
+          Welcome to Corbel backoffice
+        </h1>
+        <img width='200px' src='assets/corbel.png'/>
+      </div>
+    )
   }
 }
 

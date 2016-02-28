@@ -1,14 +1,13 @@
 import React from "react";
 import {Window, Button, Pane, Input} from "react-photonkit";
 
-
 class Users extends React.Component {
 
   constructor(props) {
-      super(props);
-      this.state = {};
-      this.state.users=[];
-      this.corbelService = props.route.corbel.corbelService;
+    super(props);
+    this.state = {};
+    this.state.users=[];
+    this.corbelService = props.route.corbel.corbelService;
   }
 
   loadUsers(result) {
@@ -27,7 +26,7 @@ class Users extends React.Component {
   editUser(user) {
     console.log(user);
   }
-
+  
   render() {
     var divPad = {
       padding: '10px 10px 10px 10px'
@@ -40,17 +39,23 @@ class Users extends React.Component {
     return (
       <div>
         <h1>Users</h1>
-          {
-                this.state.users.map(function(user) {
-                    return (
-                      <div style={divPad}>
-                        <div style={divStyle} onClick={() => that.editUser(user)}>
-                          <div><pre>{JSON.stringify(user, null, 2)}</pre></div>
-                        </div>
-                      </div>
-                    )
-                })
-            }
+        {
+          this.state.users.map(function(user) {
+            return (
+              <div style={divPad}>
+                <div
+                  style={divStyle}
+                  onClick={() => that.editUser(user)}>
+                  <div>
+                    <pre>
+                      {JSON.stringify(user, null, 2)}
+                    </pre>
+                  </div>
+                </div>
+              </div>
+            )
+          })
+        }
       </div>
     )
   }

@@ -8,9 +8,8 @@ import Status from "./component/Status.jsx";
 class CorbelLogin extends React.Component {
 
   constructor(props) {
-      super(props);
-      this.corbel = props.route.corbel;
-      console.log(this.corbel);
+    super(props);
+    this.corbel = props.route.corbel;
   }
 
   render() {

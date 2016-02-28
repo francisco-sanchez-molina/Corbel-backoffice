@@ -4,10 +4,10 @@ import {Window, Button, Pane, Input} from "react-photonkit";
 class Status extends React.Component {
 
   constructor(props) {
-      super(props);
-      this.corbel = props.corbel;
-      this.state = {};
-      this._onChange = this._onChange.bind(this);
+    super(props);
+    this.corbel = props.corbel;
+    this.state = {};
+    this._onChange = this._onChange.bind(this);
   }
 
   loadState() {
@@ -48,12 +48,24 @@ class Status extends React.Component {
       <div>
         <h1>Status</h1>
         <div class="form-group">
-          <p>Type {this.state.type}</p>
-          <p>ClientId {this.state.clientId}</p>
-          <p>UserId {this.state.userId}</p>
-          <p>Groups {this.state.groups}</p>
-          <p>State {this.state.state}</p>
-          <p>Domain {this.state.domainId}</p>
+          <p>
+            Type {this.state.type}
+          </p>
+          <p>
+            ClientId {this.state.clientId}
+          </p>
+          <p>
+            UserId {this.state.userId}
+          </p>
+          <p>
+            Groups {this.state.groups}
+          </p>
+          <p>
+            State {this.state.state}
+          </p>
+          <p>
+            Domain {this.state.domainId}
+          </p>
         </div>
       </div>
     )
