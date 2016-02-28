@@ -18,7 +18,9 @@ class CorbelStore {
 		this.backofficeCorbel.getCorbelConfig()
 			.setClientId(state.clientId)
 			.setClientSecret(state.clientSecret)
-			.setUrlBase(state.urlBase);
+			.setUrlBase(state.urlBase)
+			.setLogin(state.login)
+			.setPassword(state.password);
 		this.toSessionStorage();
 	}
 
@@ -27,7 +29,9 @@ class CorbelStore {
 	}
 
 	onNewLogin(state) {
-		this.backofficeCorbel.getCorbelSession().setToken(state.token);
+		this.backofficeCorbel.getCorbelSession()
+			.setToken(state.token)
+			.setRefreshToken(state.refreshToken);
 		this.toSessionStorage();
 	}
 

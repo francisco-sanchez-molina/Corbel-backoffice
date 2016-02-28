@@ -41,4 +41,5 @@ var routes = (
   </Route>
 )
 
-ReactDom.render( <Router history={hashHistory}>{routes}</Router>, document.getElementById("main"))
+hashHistory.push('/home')
+ReactDom.render(<Router history={hashHistory}>{routes}</Router>, document.getElementById("main"))

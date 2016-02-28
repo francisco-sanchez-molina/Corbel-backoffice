@@ -2,13 +2,20 @@ import React from "react";
 
 class Home extends React.Component {
 
-  render() { return (
-    <div><h1>hello!</h1></div>
-    )
+  render() {
+    var divStyle = {
+      textAlign: 'center',
+      verticalAlign: 'middle',
+      lineHeight: '90px'
+      };
+
+      return (
+        <div style={divStyle}>
+          <h1>Welcome to Corbel backoffice</h1>
+          <img width='200px' src='assets/corbel.png'/>
+        </div>
+      )
   }
 }
-
-Home.title = 'Home'
-Home.path = '/home'
 
 export default Home;

@@ -26,6 +26,8 @@ class Credentials extends React.Component {
     state.clientId = corbelConfig.getClientId();
     state.secret = corbelConfig.getClientSecret();
     state.token = corbelSession.getToken();
+    state.login = corbelConfig.getLogin();
+    state.password = corbelConfig.getPassword();
     return state;
   }
 
@@ -43,7 +45,12 @@ class Credentials extends React.Component {
   }
 
   onSaveClientCredentialsClick () {
-    CorbelActions.storeCorbelConfig({clientId: this.state.clientId, clientSecret: this.state.secret, urlBase: this.state.urlBase});
+    CorbelActions.storeCorbelConfig(
+        { clientId: this.state.clientId,
+          clientSecret: this.state.secret,
+          urlBase: this.state.urlBase,
+          login: this.state.login,
+          password: this.state.password});
   }
 
   handleChange(event) {
@@ -55,22 +62,21 @@ class Credentials extends React.Component {
   render() {
     return (
       <Pane>
-        <h1>Corbel credentials</h1>
-        <div class="form-group">
-          <label>Client id</label>
-          <Input id="clientId" type="text" class="form-control" placeholder="Client id" value={this.state.clientId} onChange={(event) => this.handleChange(event)} />
+        <h1>Corbel configuration</h1>
+        <Input label="Url base" id="urlBase" placeholder="Url base" value={this.state.urlBase} onChange={(event) => this.handleChange(event)}/>
+        <Input label="Client id" id="clientId" placeholder="Client id" value={this.state.clientId} onChange={(event) => this.handleChange(event)} />
+        <Input label="Client secret" id="secret" placeholder="Client secret" value={this.state.secret} onChange={(event) => this.handleChange(event)}/>
+        <Input label="Login" id="login" placeholder="login" value={this.state.login} onChange={(event) => this.handleChange(event)} />
+        <div className="form-group">
+              <label>Password</label>
+              <input  ref="text"
+                className="form-control"
+                placeholder="password"
+                type="password"
+                value={this.state.password}
+                onChange={(event) => this.handleChange(event)} />
         </div>
-        <div class="form-group">
-          <label>Client secret</label>
-          <Input id="secret" type="text" class="form-control" placeholder="Client secret" value={this.state.secret} onChange={(event) => this.handleChange(event)}/>
-        </div>
-        <div class="form-group">
-          <label>Urlbase</label>
-          <Input id="urlBase" type="text" class="form-control" placeholder="Client secret" value={this.state.urlBase} onChange={(event) => this.handleChange(event)}/>
-        </div>
-        <div class="form-group">
-          <Button onClick={() => this.onSaveClientCredentialsClick()} class="btn btn-form btn-primary" text="Save"/>
-        </div>
+        <Button onClick={() => this.onSaveClientCredentialsClick()} class="btn btn-form btn-primary" text="Save"/>
       </Pane>
     )
   }

@@ -22,6 +22,7 @@ class Connect extends React.Component {
     var corbelSession = CorbelStore.getState().backofficeCorbel.getCorbelSession();
     var state = {};
     state.token = corbelSession.getToken();
+    state.refreshToken = corbelSession.getRefreshToken();
     return state;
   }
 
@@ -49,6 +50,10 @@ class Connect extends React.Component {
       <div class="form-group">
         <label>Token:</label>
         <Input type="text" class="form-control" placeholder="token" value={this.state.token} />
+      </div>
+      <div class="form-group">
+        <label>Refresh token:</label>
+        <Input type="text" class="form-control" placeholder="token" value={this.state.refreshToken} />
       </div>
       <div class="form-group">
         <Button onClick={() => this.onConnectClick()} class="btn btn-form btn-primary" text="Connect" />

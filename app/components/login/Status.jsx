@@ -31,11 +31,13 @@ class Status extends React.Component {
       state.connected = 'disconnected';
       state.tokenInfo = {};
     }
+
     state.type = state.tokenInfo.type || '';
     state.clientId = state.tokenInfo.clientId || '';
     state.state = state.tokenInfo.state ? new Date(parseInt(state.tokenInfo.state)).toString() : '';
     state.domainId = state.tokenInfo.domainId || '';
-
+    state.userId = state.tokenInfo.userId || '';
+    state.groups = state.tokenInfo.groups || '';
     return state;
   }
 
@@ -59,6 +61,8 @@ class Status extends React.Component {
         <div class="form-group">
           <p>Type {this.state.type}</p>
           <p>ClientId {this.state.clientId}</p>
+          <p>UserId {this.state.userId}</p>
+          <p>Groups {this.state.groups}</p>
           <p>State {this.state.state}</p>
           <p>Domain {this.state.domainId}</p>
         </div>

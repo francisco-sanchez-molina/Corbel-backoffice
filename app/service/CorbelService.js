@@ -17,9 +17,22 @@ class CorbelService {
       clientSecret: corbelConfig.getClientSecret(),
       scopes : ''
     });
+
+    var params = {}
+
+    if (corbelConfig.getLogin() && corbelConfig.getLogin().length>0) {
+        params.claims = {
+            'basic_auth.username': corbelConfig.getLogin(),
+            'basic_auth.password': corbelConfig.getPassword()
+        };
+    }
+    if (corbelConfig.getDevice() && corbelConfig.getDevice().length>0) {
+      params.claims['device_id'] = deviceId;
+    }
+
     CorbelActions.storeCorbelDriver(driver);
-    driver.iam.token().create().then(function(result){
-      CorbelActions.newLogin({token: result.data.accessToken});
+    driver.iam.token().create(params).then(function(result){
+      CorbelActions.newLogin({token: result.data.accessToken, refreshToken: result.data.refreshToken});
     });
   }
 

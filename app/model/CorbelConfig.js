@@ -39,4 +39,30 @@ export default class CorbelConfig {
     return this.state.urlBase;
   }
 
+	setLogin(login: string): ? CorbelConfig {
+    this.state.login = login;
+    return this;
+  }
+
+  getLogin(): ? string {
+    return this.state.login;
+  }
+
+	setPassword(password: string): ? CorbelConfig {
+    this.state.password = password;
+    return this;
+  }
+
+  getPassword(): ? string {
+    return this.state.password;
+  }
+
+	setDevice(device: string): ? CorbelConfig {
+    this.state.device = device;
+    return this;
+  }
+
+  getDevice(): ? string {
+    return this.state.device;
+  }
 }
