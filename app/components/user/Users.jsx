@@ -1,5 +1,7 @@
 import React from "react";
-import {Window, Button, Pane, Input} from "react-photonkit";
+
+import JsonViewer from "../viewer/JsonViewer.jsx"
+
 
 class Users extends React.Component {
 
@@ -23,36 +25,14 @@ class Users extends React.Component {
   componentWillUnmount() {
   }
 
-  editUser(user) {
-    console.log(user);
-  }
-  
   render() {
-    var divPad = {
-      padding: '10px 10px 10px 10px'
-    };
-    var that = this;
-    var divStyle = {
-      display: 'block',
-      backgroundColor: 'WhiteSmoke'
-    };
     return (
       <div>
         <h1>Users</h1>
         {
           this.state.users.map(function(user) {
             return (
-              <div style={divPad}>
-                <div
-                  style={divStyle}
-                  onClick={() => that.editUser(user)}>
-                  <div>
-                    <pre>
-                      {JSON.stringify(user, null, 2)}
-                    </pre>
-                  </div>
-                </div>
-              </div>
+              <JsonViewer data={user}/>
             )
           })
         }
