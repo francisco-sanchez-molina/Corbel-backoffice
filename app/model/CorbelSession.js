@@ -21,6 +21,17 @@ export default class CorbelSession {
     return this.state.token;
   }
 
+	getTokenInfo(): ? string {
+		var token = this.getToken();
+		var tokenInfo;
+		try{
+			tokenInfo = JSON.parse(window.atob(token.split('.')[0]));
+		} catch(error) {
+			tokenInfo = {};
+		}
+		return tokenInfo;
+	}
+
 	setRefreshToken(refreshToken: string): ? CorbelSession {
 		this.state.refreshToken = refreshToken;
 		return this;

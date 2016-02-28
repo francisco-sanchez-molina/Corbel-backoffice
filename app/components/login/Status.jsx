@@ -1,12 +1,11 @@
 import React from "react";
 import {Window, Button, Pane, Input} from "react-photonkit";
 
-import CorbelStore from "../../stores/CorbelStore";
-
 class Status extends React.Component {
 
   constructor(props) {
       super(props);
+      this.corbel = props.corbel;
       this.state = {};
       this._onChange = this._onChange.bind(this);
   }
@@ -17,21 +16,11 @@ class Status extends React.Component {
   }
 
   getAppState() {
-    var corbelSession = CorbelStore.getState().backofficeCorbel.getCorbelSession();
+    var corbelSession = this.corbel.corbelStore.getState().backofficeCorbel.getCorbelSession();
     var state = {};
     state.token = corbelSession.getToken();
-    if (state.token) {
-      state.connected = 'connected';
-      try{
-        state.tokenInfo = JSON.parse(window.atob(state.token.split('.')[0]));
-      } catch (error){
-        state.tokenInfo = {};
-      }
-    } else {
-      state.connected = 'disconnected';
-      state.tokenInfo = {};
-    }
-
+    state.tokenInfo = corbelSession.getTokenInfo();
+    state.connected = state.token ? 'connected' : 'disconnected'
     state.type = state.tokenInfo.type || '';
     state.clientId = state.tokenInfo.clientId || '';
     state.state = state.tokenInfo.state ? new Date(parseInt(state.tokenInfo.state)).toString() : '';
@@ -42,12 +31,12 @@ class Status extends React.Component {
   }
 
   componentDidMount() {
-    CorbelStore.listen(this._onChange);
+    this.corbel.corbelStore.listen(this._onChange);
     this.loadState();
   }
 
   componentWillUnmount() {
-    CorbelStore.unlisten(this._onChange);
+    this.corbel.corbelStore.unlisten(this._onChange);
   }
 
   _onChange() {

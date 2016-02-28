@@ -1,14 +1,11 @@
 import React from "react";
 import {Button, Input} from "react-photonkit";
 
-import CorbelStore from "../../stores/CorbelStore";
-import CorbelService from "../../service/CorbelService"
-
-
 class Connect extends React.Component {
 
   constructor(props) {
       super(props);
+      this.corbel = props.corbel;
       this.state = {};
       this._onChange = this._onChange.bind(this);
   }
@@ -19,7 +16,7 @@ class Connect extends React.Component {
   }
 
   getAppState() {
-    var corbelSession = CorbelStore.getState().backofficeCorbel.getCorbelSession();
+    var corbelSession = this.corbel.corbelStore.getState().backofficeCorbel.getCorbelSession();
     var state = {};
     state.token = corbelSession.getToken();
     state.refreshToken = corbelSession.getRefreshToken();
@@ -27,12 +24,12 @@ class Connect extends React.Component {
   }
 
   componentDidMount() {
-    CorbelStore.listen(this._onChange);
+    this.corbel.corbelStore.listen(this._onChange);
     this.loadState();
   }
 
   componentWillUnmount() {
-    CorbelStore.unlisten(this._onChange);
+    this.corbel.corbelStore.unlisten(this._onChange);
   }
 
   _onChange() {
@@ -40,7 +37,7 @@ class Connect extends React.Component {
   }
 
   onConnectClick() {
-    CorbelService.login();
+    this.corbel.corbelService.login();
   }
 
   render() {

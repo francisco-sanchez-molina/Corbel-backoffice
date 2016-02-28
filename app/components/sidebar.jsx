@@ -30,7 +30,7 @@ class Sidebar extends React.Component {
       </NavGroup>;
       navGroup.props.children.pop();
     this.state.app.sidebar.forEach((sidebarEntry) => {
-        var child = <NavGroupItem href={sidebarEntry.getLink()} key={counter} eventKey={counter} glyph="download" text={sidebarEntry.getName()} />;
+        var child = <NavGroupItem href={sidebarEntry.getLink()} key={counter} eventKey={counter} glyph={sidebarEntry.getGlyph()} text={sidebarEntry.getName()} />;
         navGroup.props.children.push(child);
         counter ++;
         });
