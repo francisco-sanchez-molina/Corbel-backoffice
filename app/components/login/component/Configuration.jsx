@@ -90,6 +90,7 @@ class Configuration extends React.Component {
             <div className="form-group">
               <label>Password</label>
               <input
+                id="password"
                 ref="text"
                 className="form-control"
                 placeholder="password"
