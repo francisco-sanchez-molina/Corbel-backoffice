@@ -7,19 +7,25 @@ import Footer from "./footer.jsx";
 import Home from "./components/home.jsx"
 import Sidebar from "./components/sidebar.jsx"
 import CorbelLogin from "./components/login/CorbelLogin.jsx"
-import CorbelUsers from "./components/user/Users.jsx"
+import CorbelUsers from "./components/iam/user/Users.jsx"
+import CorbelClients from "./components/iam/client/Clients.jsx"
+
 import AppActions from "./actions/AppActions";
 import SidebarEntry from "./model/SidebarEntry.js"
 
 import CorbelStore from "./stores/CorbelStore";
 import CorbelActions from "./actions/CorbelActions";
 import CorbelService from "./service/CorbelService"
+import UserDataCollector from "./service/UserDataCollector"
+import ClientsDataCollector from "./service/ClientsDataCollector"
 
 require('../index.scss');
 
 var corbel = {corbelStore : CorbelStore,
   corbelActions : CorbelActions,
-  corbelService : CorbelService}
+  corbelService : CorbelService,
+  UserDataCollector : UserDataCollector,
+  ClientsDataCollector: ClientsDataCollector}
 
   class App extends React.Component {
     render() {
@@ -43,6 +49,8 @@ var corbel = {corbelStore : CorbelStore,
   AppActions.addSidebarEntry(new SidebarEntry('Home', '#/home', 'home'));
   AppActions.addSidebarEntry(new SidebarEntry('Login', '#/CorbelLogin', 'cog'));
   AppActions.addSidebarEntry(new SidebarEntry('Users', '#/users', 'user'));
+  AppActions.addSidebarEntry(new SidebarEntry('Clients', '#/clients', 'user'));
+
 
   var routes = (
     <Route component={App} path="/">
@@ -54,6 +62,10 @@ var corbel = {corbelStore : CorbelStore,
       <Route
         component={CorbelUsers}
         path="/users"
+        corbel={corbel} />
+      <Route
+        component={CorbelClients}
+        path="/clients"
         corbel={corbel} />
     </Route>
   )

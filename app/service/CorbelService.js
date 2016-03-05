@@ -13,21 +13,21 @@ class CorbelService {
 		if (!this.driver) {
 			this.login();
 		}
-    return this.driver;
+		return this.driver;
 	}
 
 	login() {
 		var params = {}
-    var corbelConfig = CorbelStore.getState().backofficeCorbel.getCorbelConfig();
-    var driver = corbel.getDriver({
-      urlBase: corbelConfig.getUrlBase(),
-      clientId: corbelConfig.getClientId(),
-      clientSecret: corbelConfig.getClientSecret(),
-      scopes: ''
-    });
-    this.driver = driver;
+		var corbelConfig = CorbelStore.getState().backofficeCorbel.getCorbelConfig();
+		var driver = corbel.getDriver({
+			urlBase: corbelConfig.getUrlBase(),
+			clientId: corbelConfig.getClientId(),
+			clientSecret: corbelConfig.getClientSecret(),
+			scopes: ''
+		});
+		this.driver = driver;
 
-    if (corbelConfig.getLogin() && corbelConfig.getLogin().length > 0) {
+		if (corbelConfig.getLogin() && corbelConfig.getLogin().length > 0) {
 			params.claims = {
 				'basic_auth.username': corbelConfig.getLogin(),
 				'basic_auth.password': corbelConfig.getPassword()
@@ -46,13 +46,22 @@ class CorbelService {
 		});
 	}
 
-	getUsers(props, callback) {
-		this.getDriver().iam.users()
-			.get().then(function(result) {
-				callback(result.data)
+	getUsers(props) {
+		return this.getDriver().iam.users()
+			.get(props)
+			.then(function(result) {
+				return result.data;
 			});
 	}
 
+	getClients(props) {
+		var domain = this.getDriver().config.config.domain;
+		return this.getDriver().iam.client(domain)
+			.getAll(props)
+			.then(function(result) {
+				return result.data;
+			});
+	}
 
 }
 
