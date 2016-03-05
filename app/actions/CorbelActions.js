@@ -4,6 +4,7 @@ class CorbelActions {
   constructor() {
       this.generateActions(
           'storeCorbelConfig',
+          'storeNewProfile',
           'storeCorbelDriver',
           'newLogin'
       )

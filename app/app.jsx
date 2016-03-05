@@ -7,8 +7,11 @@ import Footer from "./footer.jsx";
 import Home from "./components/home.jsx"
 import Sidebar from "./components/sidebar.jsx"
 import CorbelLogin from "./components/login/CorbelLogin.jsx"
+import Configuration from "./components/configuration/Configuration.jsx"
+
 import CorbelUsers from "./components/iam/user/Users.jsx"
 import CorbelClients from "./components/iam/client/Clients.jsx"
+import CorbelResources from "./components/resources/Resources.jsx"
 
 import AppActions from "./actions/AppActions";
 import SidebarEntry from "./model/SidebarEntry.js"
@@ -18,6 +21,7 @@ import CorbelActions from "./actions/CorbelActions";
 import CorbelService from "./service/CorbelService"
 import UserDataCollector from "./service/UserDataCollector"
 import ClientsDataCollector from "./service/ClientsDataCollector"
+import ResourcesDataCollector from "./service/ResourcesDataCollector"
 
 require('../index.scss');
 
@@ -25,7 +29,8 @@ var corbel = {corbelStore : CorbelStore,
   corbelActions : CorbelActions,
   corbelService : CorbelService,
   UserDataCollector : UserDataCollector,
-  ClientsDataCollector: ClientsDataCollector}
+  ClientsDataCollector: ClientsDataCollector,
+  ResourcesDataCollector: ResourcesDataCollector}
 
   class App extends React.Component {
     render() {
@@ -50,6 +55,8 @@ var corbel = {corbelStore : CorbelStore,
   AppActions.addSidebarEntry(new SidebarEntry('Login', '#/CorbelLogin', 'cog'));
   AppActions.addSidebarEntry(new SidebarEntry('Users', '#/users', 'user'));
   AppActions.addSidebarEntry(new SidebarEntry('Clients', '#/clients', 'user'));
+  AppActions.addSidebarEntry(new SidebarEntry('Resources', '#/resources', 'document'));
+  AppActions.addSidebarEntry(new SidebarEntry('Configuration', '#/configuration', 'cog'));
 
 
   var routes = (
@@ -66,6 +73,14 @@ var corbel = {corbelStore : CorbelStore,
       <Route
         component={CorbelClients}
         path="/clients"
+        corbel={corbel} />
+      <Route
+        component={CorbelResources}
+        path="/resources"
+        corbel={corbel} />
+      <Route
+        component={Configuration}
+        path="/configuration"
         corbel={corbel} />
     </Route>
   )

@@ -1,6 +1,6 @@
 export default class CorbelConfig {
 	constructor() {
-    this.state={};
+		this.deserialize('{}');
 	}
 
   serialize(): ? string {
@@ -9,60 +9,92 @@ export default class CorbelConfig {
 
   deserialize(state: string): ? CorbelConfig {
     this.state = JSON.parse(state);
+		this.state.profiles = this.state.profiles || {default:{}};
+		this.state.defaultProfileId = this.state.defaultProfileId || 'default';
     return this;
   }
 
-  setClientId(clientId: string): ? CorbelConfig {
-    this.state.clientId = clientId;
+  setDefaultProfile(profileId: string): ? CorbelConfig {
+    this.state.defaultProfileId = profileId;
     return this;
   }
 
-  getClientId(): ? string {
-    return this.state.clientId;
-  }
+	getDefaultProfile(): ? CorbelConfig {
+		return this.state.defaultProfileId;
+	}
 
-  setClientSecret(clientSecret: string): ? CorbelConfig {
-    this.state.clientSecret = clientSecret;
+  setClientId(profileName, clientId: string): ? CorbelConfig {
+		this.state.profiles[profileName].clientId = clientId;
     return this;
   }
 
-  getClientSecret(): ? string {
-    return this.state.clientSecret;
+  getClientId(profileName): ? string {
+		profileName = profileName || this.state.defaultProfileId;
+		return this.state.profiles[this.state.defaultProfileId].clientId;
   }
 
-  setUrlBase(urlBase: string): ? CorbelConfig {
-    this.state.urlBase = urlBase;
+  setClientSecret(profileName, clientSecret: string): ? CorbelConfigProfile {
+		this.state.profiles[profileName].clientSecret = clientSecret;
     return this;
   }
 
-  getUrlBase(): ? string {
-    return this.state.urlBase;
+  getClientSecret(profileName): ? string {
+		profileName = profileName || this.state.defaultProfileId;
+    return this.state.profiles[this.state.defaultProfileId].clientSecret;
   }
 
-	setLogin(login: string): ? CorbelConfig {
-    this.state.login = login;
+  setUrlBase(profileName, urlBase: string): ? CorbelConfigProfile {
+    this.state.profiles[profileName].urlBase = urlBase;
     return this;
   }
 
-  getLogin(): ? string {
-    return this.state.login;
+  getUrlBase(profileName): ? string {
+		profileName = profileName || this.state.defaultProfileId;
+    return this.state.profiles[this.state.defaultProfileId].urlBase;
   }
 
-	setPassword(password: string): ? CorbelConfig {
-    this.state.password = password;
+	setLogin(profileName, login: string): ? CorbelConfigProfile {
+		profileName = profileName || this.state.defaultProfileId;
+		this.state.profiles[this.state.defaultProfileId].login = login;
     return this;
   }
 
-  getPassword(): ? string {
-    return this.state.password;
+  getLogin(profileName): ? string {
+		profileName = profileName || this.state.defaultProfileId;
+		return this.state.profiles[this.state.defaultProfileId].login;
   }
 
-	setDevice(device: string): ? CorbelConfig {
-    this.state.device = device;
+	setPassword(profileName, password: string): ? CorbelConfigProfile {
+		this.state.profiles[profileName].password = password;
     return this;
   }
 
-  getDevice(): ? string {
-    return this.state.device;
+  getPassword(profileName): ? string {
+		profileName = profileName || this.state.defaultProfileId;
+		return this.state.profiles[this.state.defaultProfileId].password;
   }
+
+	setDevice(profileName, device: string): ? CorbelConfigProfile {
+    this.state.profiles[profileName].device = device;
+    return this;
+  }
+
+  getDevice(profileName): ? string {
+		profileName = profileName || this.state.defaultProfileId;
+    return this.state.profiles[profileName].device;
+  }
+
+  getProfiles(): ? string {
+    return this.state.profiles;
+  }
+
+	addProfile(profileName) {
+		this.state.profiles[profileName] = this.state.profiles[profileName] || {};
+		return this;
+	}
+
+	getProfileNames(): ? string {
+    return Object.keys(this.state.profiles);
+  }
+
 }

@@ -7,7 +7,6 @@ export default class BackofficeCorbel {
 		this.state = {};
     this.state.corbelConfig = new CorbelConfig();
     this.state.corbelSession = new CorbelSession();
-
 	}
 
   serialize(): ? string {

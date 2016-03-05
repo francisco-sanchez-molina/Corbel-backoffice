@@ -7,6 +7,7 @@ class Configuration extends React.Component {
     super(props);
     this.corbel = props.corbel;
     this.state = {};
+    this.state.profiles = [];
     this._onChange = this._onChange.bind(this);
   }
 
@@ -20,12 +21,15 @@ class Configuration extends React.Component {
     var corbelSession = this.corbel.corbelStore.getState().backofficeCorbel.getCorbelSession();
 
     var state = {};
-    state.urlBase =  corbelConfig.getUrlBase();
-    state.clientId = corbelConfig.getClientId();
-    state.secret = corbelConfig.getClientSecret();
-    state.token = corbelSession.getToken();
-    state.login = corbelConfig.getLogin();
-    state.password = corbelConfig.getPassword();
+    state.profiles = corbelConfig.getProfileNames();
+    state.profileSelected = this.state.profileSelected || state.profiles[0];
+
+    state.urlBase =  corbelConfig.getUrlBase(state.profileSelected);
+    state.clientId = corbelConfig.getClientId(state.profileSelected);
+    state.secret = corbelConfig.getClientSecret(state.profileSelected);
+    state.token = corbelSession.getToken(state.profileSelected);
+    state.login = corbelConfig.getLogin(state.profileSelected);
+    state.password = corbelConfig.getPassword(state.profileSelected);
     return state;
   }
 
@@ -42,13 +46,26 @@ class Configuration extends React.Component {
     this.loadState();
   }
 
-  onSaveClientCredentialsClick () {
-    this.corbel.corbelActions.storeCorbelConfig(
-      { clientId: this.state.clientId,
-        clientSecret: this.state.secret,
-        urlBase: this.state.urlBase,
-        login: this.state.login,
-        password: this.state.password});
+  onSaveNewProfile () {
+    this.corbel.corbelActions.storeNewProfile(
+      { profileName: this.state.profileName});
+  }
+
+
+      onSaveClientCredentialsClick () {
+        this.corbel.corbelActions.storeCorbelConfig(
+          { profileName: this.state.profileSelected,
+            clientId: this.state.clientId,
+            clientSecret: this.state.secret,
+            urlBase: this.state.urlBase,
+            login: this.state.login,
+            password: this.state.password});
+      }
+
+      onChangeProfile(event) {
+        var state = {};
+        state.profileSelected = event.target.value;
+        this.setState(state);
       }
 
       handleChange(event) {
@@ -63,6 +80,31 @@ class Configuration extends React.Component {
             <h1>
               Corbel configuration
             </h1>
+            <Input
+              label="Add new profile"
+              id="profileName"
+              placeholder="Profile name"
+              value={this.state.profileName}
+              onChange={(event) => this.handleChange(event)}/>
+            <Button
+              onClick={() => this.onSaveNewProfile()}
+              class="btn btn-form btn-primary"
+              text="Save"/>
+            <h1>
+              Profiles
+            </h1>
+
+            {this.state.profileSelected}
+            <select onChange={(event) => this.onChangeProfile(event)} className="form-control" ref="profileSelect">
+              {
+                this.state.profiles.map(function(profileName) {
+                  return (
+                    <option>{profileName}</option>
+                        )
+                        })
+              }
+            </select>
+
             <Input
               label="Url base"
               id="urlBase"

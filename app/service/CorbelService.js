@@ -63,6 +63,13 @@ class CorbelService {
 			});
 	}
 
+	getCollection(collection, props) {
+		return this.getDriver().resources.collection(collection)
+			.get(props)
+			.then(function(result) {
+				return result.data;
+			});
+	}
 }
 
 export default new CorbelService();

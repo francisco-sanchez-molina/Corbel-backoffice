@@ -14,13 +14,19 @@ class CorbelStore {
 		localStorage.setItem('CorbelStore', this.backofficeCorbel.serialize());
 	}
 
+  onStoreNewProfile(state) {
+		this.backofficeCorbel.getCorbelConfig()
+			.addProfile(state.profileName);
+		this.toSessionStorage();
+	}
+
 	onStoreCorbelConfig(state) {
 		this.backofficeCorbel.getCorbelConfig()
-			.setClientId(state.clientId)
-			.setClientSecret(state.clientSecret)
-			.setUrlBase(state.urlBase)
-			.setLogin(state.login)
-			.setPassword(state.password);
+			.setClientId(state.profileName, state.clientId)
+			.setClientSecret(state.profileName, state.clientSecret)
+			.setUrlBase(state.profileName, state.urlBase)
+			.setLogin(state.profileName, state.login)
+			.setPassword(state.profileName, state.password);
 		this.toSessionStorage();
 	}
 
