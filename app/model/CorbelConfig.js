@@ -19,7 +19,7 @@ export default class CorbelConfig {
     return this;
   }
 
-	getDefaultProfile(): ? CorbelConfig {
+	getDefaultProfile(): ? string {
 		return this.state.defaultProfileId;
 	}
 
@@ -30,7 +30,7 @@ export default class CorbelConfig {
 
   getClientId(profileName): ? string {
 		profileName = profileName || this.state.defaultProfileId;
-		return this.state.profiles[this.state.defaultProfileId].clientId;
+		return this.state.profiles[profileName].clientId;
   }
 
   setClientSecret(profileName, clientSecret: string): ? CorbelConfigProfile {
@@ -40,7 +40,7 @@ export default class CorbelConfig {
 
   getClientSecret(profileName): ? string {
 		profileName = profileName || this.state.defaultProfileId;
-    return this.state.profiles[this.state.defaultProfileId].clientSecret;
+    return this.state.profiles[profileName].clientSecret;
   }
 
   setUrlBase(profileName, urlBase: string): ? CorbelConfigProfile {
@@ -50,18 +50,18 @@ export default class CorbelConfig {
 
   getUrlBase(profileName): ? string {
 		profileName = profileName || this.state.defaultProfileId;
-    return this.state.profiles[this.state.defaultProfileId].urlBase;
+    return this.state.profiles[profileName].urlBase;
   }
 
 	setLogin(profileName, login: string): ? CorbelConfigProfile {
 		profileName = profileName || this.state.defaultProfileId;
-		this.state.profiles[this.state.defaultProfileId].login = login;
+		this.state.profiles[profileName].login = login;
     return this;
   }
 
   getLogin(profileName): ? string {
 		profileName = profileName || this.state.defaultProfileId;
-		return this.state.profiles[this.state.defaultProfileId].login;
+		return this.state.profiles[profileName].login;
   }
 
 	setPassword(profileName, password: string): ? CorbelConfigProfile {
@@ -71,7 +71,7 @@ export default class CorbelConfig {
 
   getPassword(profileName): ? string {
 		profileName = profileName || this.state.defaultProfileId;
-		return this.state.profiles[this.state.defaultProfileId].password;
+		return this.state.profiles[profileName].password;
   }
 
 	setDevice(profileName, device: string): ? CorbelConfigProfile {
