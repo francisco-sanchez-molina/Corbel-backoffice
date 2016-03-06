@@ -7,7 +7,8 @@ class CorbelActions {
           'deleteCorbelConfigProfile',
           'storeNewProfile',
           'storeCorbelDriver',
-          'newLogin'
+          'newLogin',
+          'setProfile'
       )
   }
 }

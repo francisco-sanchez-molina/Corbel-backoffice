@@ -13,13 +13,13 @@ export default class CorbelSession {
     return this;
   }
 
-	setProfile(profileId: string): ? CorbelConfig {
-		this.state.defaultProfileId = profileId;
+	setProfile(profile: string): ? CorbelConfig {
+		this.state.profile = profile;
 		return this;
 	}
 
 	getProfile(): ? string {
-		return this.state.defaultProfileId;
+		return this.state.profile;
 	}
 
   setToken(token: string): ? CorbelSession {

@@ -41,7 +41,8 @@ class CorbelService {
 		driver.iam.token().create(params).then(function(result) {
 			CorbelActions.newLogin({
 				token: result.data.accessToken,
-				refreshToken: result.data.refreshToken
+				refreshToken: result.data.refreshToken,
+				profile: corbelConfig.getDefaultProfile()
 			});
 		});
 	}

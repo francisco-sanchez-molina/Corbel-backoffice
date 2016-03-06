@@ -22,8 +22,10 @@ class Connect extends React.Component {
     var state = {};
     state.token = this.corbelSession.getToken();
     state.refreshToken = this.corbelSession.getRefreshToken();
+    state.sessionProfile = this.corbelSession.getProfile();
     state.profiles = this.corbelConfig.getProfileNames();
     state.profile = this.corbelConfig.getDefaultProfile();
+
     return state;
   }
 
@@ -47,7 +49,7 @@ class Connect extends React.Component {
   onChangeProfile(event) {
     var corbelConfig = this.corbel.corbelStore.getState().backofficeCorbel.getCorbelConfig();
     var profileSelected = this.refs.profileSelect.value || state.profiles[0];
-    
+    this.corbel.corbelActions.setProfile({name: profileSelected});
   }
 
   render() {
@@ -79,6 +81,11 @@ class Connect extends React.Component {
           label="Refresh token:"
           placeholder="token"
           value={this.state.refreshToken} />
+        <Input
+          type="text"
+          label="Profile:"
+          placeholder="profile"
+          value={this.state.sessionProfile} />
         <Button
           onClick={() => this.onConnectClick()}
           class="btn btn-form btn-primary"

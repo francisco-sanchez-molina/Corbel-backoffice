@@ -2,7 +2,7 @@ import React from "react";
 import ReactDom from 'react-dom'
 import {Window, Content, PaneGroup, Pane} from "react-photonkit";
 import {Router, Route, Link, hashHistory} from 'react-router'
-import Header from "./header.jsx"
+import Header from "./components/header/Header.jsx"
 import Footer from "./footer.jsx";
 import Home from "./components/home.jsx"
 import Sidebar from "./components/sidebar.jsx"
@@ -36,7 +36,7 @@ var corbel = {corbelStore : CorbelStore,
     render() {
       return (
         <Window>
-          <Header/>
+          <Header corbel={corbel} />
           <Content>
             <PaneGroup>
               <Sidebar/>
