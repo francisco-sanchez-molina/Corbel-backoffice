@@ -5,6 +5,7 @@ class SetupProfiles extends React.Component {
 
   constructor(props) {
     super(props);
+    this.FIRST_OPTION = 'firstOption';
     this.corbel = props.corbel;
     this.state = {};
     this.state.profiles = [];
@@ -33,7 +34,7 @@ class SetupProfiles extends React.Component {
 
   onSaveClientCredentialsClick () {
     var profileSelected = this.refs.profileSelect.value;
-    if (profileSelected=='undefined') {
+    if (profileSelected==this.FIRST_OPTION) {
       return;
     }
 
@@ -47,9 +48,21 @@ class SetupProfiles extends React.Component {
     this.corbel.corbelActions.storeCorbelConfig(data);
   }
 
+  onDeleteClientCredentialsClick () {
+    var profileSelected = this.refs.profileSelect.value;
+    if (profileSelected==this.FIRST_OPTION) {
+      return;
+    }
+    this.refs.profileSelect.value = this.FIRST_OPTION;
+    this.corbel.corbelActions.deleteCorbelConfigProfile({name:profileSelected});
+  }
+
   onChangeProfile(event) {
     var corbelConfig = this.corbel.corbelStore.getState().backofficeCorbel.getCorbelConfig();
     var profileSelected = this.refs.profileSelect.value || state.profiles[0];
+    if (profileSelected==this.FIRST_OPTION) {
+      return;
+    }
     this.refs.urlBase.refs.text.value =  corbelConfig.getUrlBase(profileSelected);
     this.refs.clientId.refs.text.value = corbelConfig.getClientId(profileSelected);
     this.refs.secret.refs.text.value = corbelConfig.getClientSecret(profileSelected);
@@ -65,12 +78,11 @@ class SetupProfiles extends React.Component {
           Profiles
         </h1>
 
-        {this.state.profileSelected}
         <select
           onChange={(event) => this.onChangeProfile(event)}
           className="form-control"
           ref="profileSelect">
-          <option value='undefined'>
+          <option value={this.FIRST_OPTION}>
             Select one profile:
           </option>
           {
@@ -115,10 +127,21 @@ class SetupProfiles extends React.Component {
             type="password"
             ref="password" />
         </div>
-        <Button
-          onClick={() => this.onSaveClientCredentialsClick()}
-          class="btn btn-form btn-primary"
-          text="Save"/>
+        <div>
+          <div style={{float: 'left'}}>
+            <Button
+              onClick={() => this.onSaveClientCredentialsClick()}
+              class="btn btn-form btn-primary"
+              text="Save"/>
+          </div>
+          <div style={{float: 'right'}}>
+            <Button
+              onClick={() => this.onDeleteClientCredentialsClick()}
+              class="btn btn-form btn-primary"
+              text="Delete"/>
+          </div>
+        </div>
+
       </div>
     )
   }

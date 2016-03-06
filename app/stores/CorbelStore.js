@@ -30,6 +30,11 @@ class CorbelStore {
 		this.toSessionStorage();
 	}
 
+	onDeleteCorbelConfigProfile(state) {
+		this.backofficeCorbel.getCorbelConfig().deleteProfile(state.name);
+		this.toSessionStorage();
+	}
+
 	onStoreCorbelDriver(corbelDriver) {
 		this.backofficeCorbel.setDriver(corbelDriver);
 	}

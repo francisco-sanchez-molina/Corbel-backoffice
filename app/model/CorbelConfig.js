@@ -23,6 +23,11 @@ export default class CorbelConfig {
 		return this.state.defaultProfileId;
 	}
 
+	deleteProfile(name) : ? CorbelConfig {
+		delete this.state.profiles[name];
+		return this;
+	}
+
   setClientId(profileName, clientId: string): ? CorbelConfig {
 		this.state.profiles[profileName].clientId = clientId;
     return this;
