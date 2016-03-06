@@ -1,5 +1,6 @@
 import CorbelConfig from "./CorbelConfig";
 import CorbelSession from "./CorbelSession";
+import corbel from "corbel-js";
 
 export default class BackofficeCorbel {
 
@@ -35,13 +36,5 @@ export default class BackofficeCorbel {
 		return this.state.corbelSession;
 	}
 
-	setDriver(driver) {
-		this.corbelDriver = driver;
-		return this;
-	}
-
-	getDriver() {
-		return this.corbelDriver;
-	}
 
 }

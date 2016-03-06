@@ -13,7 +13,7 @@ class JsonViewer extends React.Component {
   render() {
     var that = this;
     var divPad = {
-      padding: '10px 10px 10px 10px'
+      padding: '10px 10px 10px 5px'
     };
     var divStyle = {
       display: 'block',

@@ -5,13 +5,17 @@ import CorbelStore from "../stores/CorbelStore";
 import CorbelActions from "../actions/CorbelActions";
 
 class CorbelService {
-	constructor() {
-
-	}
+	constructor() {}
 
 	getDriver() {
 		if (!this.driver) {
-			this.login();
+			var corbelSession =  CorbelStore.getState().backofficeCorbel.getCorbelSession();
+			var config = corbelSession.getCorbelDriverConfig();
+			if (config.urlBase) {
+				this.driver = corbel.getDriver(config);
+			} else {
+				this.login();
+			}
 		}
 		return this.driver;
 	}
@@ -37,7 +41,7 @@ class CorbelService {
 			params.claims['device_id'] = deviceId;
 		}
 
-		CorbelActions.storeCorbelDriver(driver);
+		CorbelActions.storeCorbelDriver(driver.config.config);
 		driver.iam.token().create(params).then(function(result) {
 			CorbelActions.newLogin({
 				token: result.data.accessToken,

@@ -66,13 +66,18 @@ class Pager extends React.Component {
       overflow: 'auto',
     }
     return (
-      <div ref="pager" style={style} onScroll={(e) => {this.scrollState(e)}}>
+      <div
+        ref="pager"
+        style={style}
+        onScroll={(e) => {this.scrollState(e)}}>
         {
           Object.keys(this.state).filter((t) => t.startsWith('Page_')).map(function(page) {
             return (
-                  <Page data={that.state[page].data} page={that.state[page].page} />
-                  )
-                  })
+              <Page
+                data={that.state[page].data}
+                page={that.state[page].page} />
+            )
+          })
         }
       </div>
     )

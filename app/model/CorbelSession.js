@@ -51,4 +51,12 @@ export default class CorbelSession {
 		return this.state.refreshToken;
 	}
 
+	setCorbelDriverConfig(config) {
+		this.state.corbelDriverConfig = config;
+		return this;
+	}
+
+	getCorbelDriverConfig() {
+		return this.state.corbelDriverConfig;
+	}
 }

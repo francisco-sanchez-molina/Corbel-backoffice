@@ -40,8 +40,10 @@ class CorbelStore {
 		this.toSessionStorage();
 	}
 
-	onStoreCorbelDriver(corbelDriver) {
-		this.backofficeCorbel.setDriver(corbelDriver);
+	onStoreCorbelDriver(corbelDriverConfig) {
+		this.backofficeCorbel.getCorbelSession()
+			.setCorbelDriverConfig(corbelDriverConfig);
+		this.toSessionStorage();
 	}
 
 	onNewLogin(state) {
