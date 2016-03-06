@@ -6,7 +6,10 @@ class Connect extends React.Component {
   constructor(props) {
     super(props);
     this.corbel = props.corbel;
+    this.corbelSession =  this.corbel.corbelStore.getState().backofficeCorbel.getCorbelSession();
+    this.corbelConfig = this.corbel.corbelStore.getState().backofficeCorbel.getCorbelConfig();
     this.state = {};
+    this.state.profiles = [];
     this._onChange = this._onChange.bind(this);
   }
 
@@ -16,10 +19,11 @@ class Connect extends React.Component {
   }
 
   getAppState() {
-    var corbelSession = this.corbel.corbelStore.getState().backofficeCorbel.getCorbelSession();
     var state = {};
-    state.token = corbelSession.getToken();
-    state.refreshToken = corbelSession.getRefreshToken();
+    state.token = this.corbelSession.getToken();
+    state.refreshToken = this.corbelSession.getRefreshToken();
+    state.profiles = this.corbelConfig.getProfileNames();
+    state.profile = this.corbelConfig.getDefaultProfile();
     return state;
   }
 
@@ -40,10 +44,31 @@ class Connect extends React.Component {
     this.corbel.corbelService.login();
   }
 
+  onChangeProfile(event) {
+    var corbelConfig = this.corbel.corbelStore.getState().backofficeCorbel.getCorbelConfig();
+    var profileSelected = this.refs.profileSelect.value || state.profiles[0];
+    
+  }
+
   render() {
     return (
       <div>
         <h1>Connect</h1>
+        <select
+          onChange={(event) => this.onChangeProfile(event)}
+          className="form-control"
+          value={this.state.profile}
+          ref="profileSelect">
+          {
+            this.state.profiles.map(function(profileName) {
+              return (
+                <option value={profileName}>
+                  {profileName}
+                </option>
+              )
+            })
+          }
+        </select>
         <Input
           type="text"
           label="Token:"

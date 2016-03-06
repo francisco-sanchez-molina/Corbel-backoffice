@@ -1,6 +1,7 @@
 export default class CorbelSession {
 	constructor() {
     this.state={};
+		this.state.defaultProfileId = 'default';
 	}
 
   serialize(): ? string {
@@ -11,6 +12,15 @@ export default class CorbelSession {
     this.state = JSON.parse(state);
     return this;
   }
+
+	setProfile(profileId: string): ? CorbelConfig {
+		this.state.defaultProfileId = profileId;
+		return this;
+	}
+
+	getProfile(): ? string {
+		return this.state.defaultProfileId;
+	}
 
   setToken(token: string): ? CorbelSession {
     this.state.token = token;

@@ -14,6 +14,7 @@ class SetupProfiles extends React.Component {
 
   loadState() {
     this.onChangeProfile();
+    this.loadProfiles();
   }
 
   loadProfiles() {
@@ -61,13 +62,22 @@ class SetupProfiles extends React.Component {
     var corbelConfig = this.corbel.corbelStore.getState().backofficeCorbel.getCorbelConfig();
     var profileSelected = this.refs.profileSelect.value || state.profiles[0];
     if (profileSelected==this.FIRST_OPTION) {
+      this.cleanFields();
       return;
     }
-    this.refs.urlBase.refs.text.value =  corbelConfig.getUrlBase(profileSelected);
-    this.refs.clientId.refs.text.value = corbelConfig.getClientId(profileSelected);
-    this.refs.secret.refs.text.value = corbelConfig.getClientSecret(profileSelected);
-    this.refs.login.refs.text.value = corbelConfig.getLogin(profileSelected);
-    this.refs.password.value = corbelConfig.getPassword(profileSelected);
+    this.refs.urlBase.refs.text.value = corbelConfig.getUrlBase(profileSelected) || '';
+    this.refs.clientId.refs.text.value = corbelConfig.getClientId(profileSelected) || '';
+    this.refs.secret.refs.text.value = corbelConfig.getClientSecret(profileSelected) || '';
+    this.refs.login.refs.text.value = corbelConfig.getLogin(profileSelected) || '';
+    this.refs.password.value = corbelConfig.getPassword(profileSelected) || '';
+  }
+
+  cleanFields(){
+    this.refs.urlBase.refs.text.value = '';
+    this.refs.clientId.refs.text.value = '';
+    this.refs.secret.refs.text.value = '';
+    this.refs.login.refs.text.value = '';
+    this.refs.password.value = '';
   }
 
   render() {
