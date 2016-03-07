@@ -46,7 +46,7 @@ class SetupProfiles extends React.Component {
     data.clientSecret = this.refs.secret.refs.text.value;
     data.login = this.refs.login.refs.text.value;
     data.password = this.refs.password.value;
-    this.corbel.corbelActions.storeCorbelConfig(data);
+    this.corbel.corbelActions.storeCorbelConfigProfile(data);
   }
 
   onDeleteClientCredentialsClick () {

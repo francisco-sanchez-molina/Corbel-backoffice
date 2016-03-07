@@ -2,7 +2,7 @@ import React from "react";
 
 import {Input} from "react-photonkit";
 
-import Pager from "../viewer/Pager.jsx"
+import DataViewer from "../viewer/DataViewer.jsx"
 
 class Resources extends React.Component {
 
@@ -21,7 +21,7 @@ class Resources extends React.Component {
 
   render() {
     var dataCollector = new this.corbel.ResourcesDataCollector(this.state.collection);
-    var pager = <Pager dataCollector={dataCollector}/>;
+    var dataViewer = <DataViewer dataCollector={dataCollector}/>;
 
     return (
       <div>
@@ -32,7 +32,7 @@ class Resources extends React.Component {
           placeholder="Url base"
           value="books:Book"
           onChange={(event) => this.handleChange(event)}/>
-          {pager}
+          {dataViewer}
       </div>
     )
   }

@@ -1,48 +1,31 @@
 import React from "react";
 
+import dataViewerStore from "../../stores/DataViewerStore";
+import dataViewerActions from "../../actions/DataViewerActions";
+
 import JsonViewer from "./JsonViewer.jsx"
 import Page from "./Page.jsx"
 
 class Pager extends React.Component {
+
   constructor(props) {
     super(props);
-    this.state = {};
-    this.state.disableScrollCheck = true;
-    this.state.lastPageLoaded=-1;
+    this.state = dataViewerStore.getState();
+    this.onChange = this.onChange.bind(this);
   }
 
-  setDataForPage(page, data) {
-    var state = {}
-    state.disableScrollCheck = false;
-    state['Page_' + page] = {data: data, page:page};
-    this.setState(state);
-  }
-
-  setFailDataForPage(page, data) {
-    var state = {}
-    state.disableScrollCheck = false;
-    state['Page_' + page] = {data: [{status:'fail', cause: data}], page:page};
-    this.setState(state);
+  onChange(state) {
+    this.setState(state || {});
   }
 
   componentDidMount() {
-    this.loadNextPage();
-  }
+    dataViewerStore.listen(this.onChange);
+    dataViewerActions.fetchNextPage();
 
-  loadNextPage() {
-    var state = {};
-    state.disableScrollCheck=true;
-    var loadPage = this.state.lastPageLoaded + 1;
-    state.lastPageLoaded = loadPage;
-
-    var updateFunction = this.setDataForPage.bind(this, loadPage);
-    var failFunction = this.setFailDataForPage.bind(this, loadPage);
-    this.props.dataCollector.fetchPage(loadPage).then(updateFunction).catch(failFunction);
-    state['Page_' + loadPage] = {data: [{status:'loading'}], page:loadPage};
-    this.setState(state);
   }
 
   componentWillUnmount () {
+    dataViewerStore.unlisten(this._onChange);
   }
 
   scrollState(event) {
@@ -55,7 +38,7 @@ class Pager extends React.Component {
     var percentage = 100 - 100*(height - top)/height;
 
     if (percentage > 80) {
-      this.loadNextPage();
+      dataViewerActions.fetchNextPage();
     }
   }
 

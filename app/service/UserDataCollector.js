@@ -5,6 +5,11 @@ export default class UserDataCollector {
 		this.pageSize = 20;
 	}
 
+	newQuery(query: string) {
+		query = JSON.parse(query);
+		this.apiQuery = query;
+	}
+
 	fetchPage(page: int) {
 		var that = this;
 		var query = {
@@ -13,6 +18,10 @@ export default class UserDataCollector {
 				pageSize: this.pageSize
 			}
 		};
+
+		if(this.apiQuery) {
+			query.query = [this.apiQuery];
+		}
 
 		return corbelService.getUsers(query);
 	}

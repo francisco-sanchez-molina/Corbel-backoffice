@@ -17,6 +17,10 @@ import SidebarEntry from "./model/SidebarEntry.js"
 
 import CorbelStore from "./stores/CorbelStore";
 import CorbelActions from "./actions/CorbelActions";
+
+import DataViewerStore from "./stores/DataViewerStore";
+import DataViewerActions from "./actions/DataViewerActions";
+
 import CorbelService from "./service/CorbelService"
 import UserDataCollector from "./service/UserDataCollector"
 import ClientsDataCollector from "./service/ClientsDataCollector"

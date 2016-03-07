@@ -3,7 +3,7 @@ import alt from '../alt';
 class CorbelActions {
   constructor() {
       this.generateActions(
-          'storeCorbelConfig',
+          'storeCorbelConfigProfile',
           'deleteCorbelConfigProfile',
           'storeNewProfile',
           'storeCorbelDriver',

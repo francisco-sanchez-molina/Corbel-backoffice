@@ -1,6 +1,6 @@
 import React from "react";
 
-import Pager from "../../viewer/Pager.jsx"
+import DataViewer from "../../viewer/DataViewer.jsx"
 
 class Users extends React.Component {
 
@@ -15,7 +15,7 @@ class Users extends React.Component {
     return (
       <div>
         <h1>Users</h1>
-        <Pager dataCollector={new this.corbel.UserDataCollector()}/>
+        <DataViewer dataCollector={new this.corbel.UserDataCollector()}/>
       </div>
     )
   }

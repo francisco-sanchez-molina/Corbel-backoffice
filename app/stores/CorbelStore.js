@@ -20,7 +20,7 @@ class CorbelStore {
 		this.toSessionStorage();
 	}
 
-	onStoreCorbelConfig(state) {
+	onStoreCorbelConfigProfile(state) {
 		this.backofficeCorbel.getCorbelConfig()
 			.setClientId(state.profileName, state.clientId)
 			.setClientSecret(state.profileName, state.clientSecret)
