@@ -1,8 +1,5 @@
 import React from "react";
 
-import dataViewerStore from "../../stores/DataViewerStore";
-import dataViewerActions from "../../actions/DataViewerActions";
-
 import JsonViewer from "./JsonViewer.jsx"
 import Page from "./Page.jsx"
 
@@ -10,7 +7,7 @@ class Pager extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = dataViewerStore.getState();
+    this.state = this.props.dataViewerStore.getState();
     this.onChange = this.onChange.bind(this);
   }
 
@@ -19,13 +16,12 @@ class Pager extends React.Component {
   }
 
   componentDidMount() {
-    dataViewerStore.listen(this.onChange);
-    dataViewerActions.fetchNextPage();
-
+    this.props.dataViewerStore.listen(this.onChange);
+    this.props.dataViewerActions.fetchNextPage();
   }
 
   componentWillUnmount () {
-    dataViewerStore.unlisten(this._onChange);
+    this.props.dataViewerStore.unlisten(this._onChange);
   }
 
   scrollState(event) {
@@ -38,7 +34,7 @@ class Pager extends React.Component {
     var percentage = 100 - 100*(height - top)/height;
 
     if (percentage > 80) {
-      dataViewerActions.fetchNextPage();
+      this.props.dataViewerActions.fetchNextPage();
     }
   }
 

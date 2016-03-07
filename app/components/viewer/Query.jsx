@@ -11,7 +11,7 @@ class Query extends React.Component {
   }
 
   onQueryClick() {
-    this.props.dataCollector.newQuery(this.refs.query.refs.text.value);
+    this.props.dataViewerActions.setQuery({query: this.refs.query.refs.text.value})
   }
 
   render() {
@@ -22,10 +22,10 @@ class Query extends React.Component {
           id="query"
           placeholder="query"
           ref="query"/>
-          <Button
-            onClick={() => this.onQueryClick()}
-            class="btn btn-form btn-primary"
-            text="Search!"/>
+        <Button
+          onClick={() => this.onQueryClick()}
+          class="btn btn-form btn-primary"
+          text="Search!"/>
       </div>
     )
   }

@@ -1,28 +1,12 @@
 import corbelService from "./CorbelService.js";
+import DataCollector from "./DataCollector.js";
 
-export default class UserDataCollector {
+export default class UserDataCollector extends DataCollector {
 	constructor() {
-		this.pageSize = 20;
+		super()
 	}
 
-	newQuery(query: string) {
-		query = JSON.parse(query);
-		this.apiQuery = query;
-	}
-
-	fetchPage(page: int) {
-		var that = this;
-		var query = {
-			pagination: {
-				page: page,
-				pageSize: this.pageSize
-			}
-		};
-
-		if(this.apiQuery) {
-			query.query = [this.apiQuery];
-		}
-
+	collectionProcessor(query) {
 		return corbelService.getUsers(query);
 	}
 

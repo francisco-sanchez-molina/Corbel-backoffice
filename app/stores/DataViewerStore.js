@@ -40,8 +40,17 @@ class DataViewerStore {
 		this.setState(state);
   }
 
-	ofSetQuery(state){
-
+	onSetQuery(state){
+			var query = JSON.parse(state.query);
+			this.apiQuery = query;
+			this.state = {
+				dataCollector: this.state.dataCollector,
+				disableScrollCheck: true,
+				lastPageLoaded:-1,
+				currentQuery: query
+			}
+			this.state.dataCollector.setQuery(query);
+			this.onFetchNextPage();
 	}
 
 	onSetDataCollector(state) {

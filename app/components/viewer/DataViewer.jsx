@@ -16,8 +16,14 @@ class DataViewer extends React.Component {
   render() {
     return (
       <div>
-        <Query dataCollector={this.props.dataCollector}/>
-        <Pager dataCollector={this.props.dataCollector}/>
+        <Query
+          dataCollector={this.props.dataCollector}
+          dataViewerStore={dataViewerStore}
+          dataViewerActions={dataViewerActions}/>
+        <Pager
+          dataCollector={this.props.dataCollector}
+          dataViewerStore={dataViewerStore}
+          dataViewerActions={dataViewerActions}/>
       </div>
     )
   }

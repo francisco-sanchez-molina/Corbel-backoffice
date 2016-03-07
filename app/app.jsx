@@ -39,10 +39,10 @@ var corbel = {
 
 var sidebarEntries = [
   new SidebarEntry('Home', '#/home', 'home'),
-  new SidebarEntry('Login', '#/CorbelLogin', 'cog'),
+  new SidebarEntry('Login', '#/CorbelLogin', 'rocket'),
   new SidebarEntry('Users', '#/users', 'user'),
-  new SidebarEntry('Clients', '#/clients', 'user'),
-  new SidebarEntry('Resources', '#/resources', 'document'),
+  new SidebarEntry('Clients', '#/clients', 'monitor'),
+  new SidebarEntry('Resources', '#/resources', 'archive'),
   new SidebarEntry('Configuration', '#/configuration', 'cog')
 ];
 

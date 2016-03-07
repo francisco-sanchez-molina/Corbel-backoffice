@@ -1,20 +1,13 @@
 import corbelService from "./CorbelService.js";
+import DataCollector from "./DataCollector.js";
 
-export default class ResourcesDataCollector {
+export default class ResourcesDataCollector extends DataCollector {
 	constructor(collection) {
-		this.pageSize = 20;
+		super()
 		this.collection = collection;
 	}
 
-	fetchPage(page: int) {
-		var that = this;
-		var query = {
-			pagination: {
-				page: page,
-				pageSize: this.pageSize
-			}
-		};
-
+	collectionProcessor(query) {
 		return corbelService.getCollection(this.collection, query);
 	}
 
