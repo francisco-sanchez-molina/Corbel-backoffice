@@ -1,22 +1,20 @@
 import React from "react";
 
-
 class BackendVersion extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = {};
     this.corbel = props.route.corbel;
+    this.state = this.corbel.corbelVersionStore.getState() || {};
     this._onChange = this._onChange.bind(this);
   }
 
-  _onChange() {
-    this.loadState();
+  _onChange(state) {
+    this.setState(state || {});
   }
 
   componentDidMount() {
     this.corbel.corbelVersionStore.listen(this._onChange);
-    this.loadState();
   }
 
   componentWillUnmount() {
@@ -24,9 +22,11 @@ class BackendVersion extends React.Component {
   }
 
   render() {
+    var r = JSON.stringify(this.state)
     return (
       <div>
         <h1>Versions</h1>
+        {r}
       </div>
     )
   }

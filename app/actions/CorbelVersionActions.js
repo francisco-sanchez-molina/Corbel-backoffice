@@ -3,7 +3,8 @@ import alt from '../alt';
 class CorbelVersionActions {
   constructor() {
       this.generateActions(
-          'refresh'
+          'refresh',
+          'saveVersion'
       )
   }
 }

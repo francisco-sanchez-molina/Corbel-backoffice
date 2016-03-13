@@ -17,19 +17,23 @@ class CorbelVersionStore {
 		return urlBase.replace('{{module}}', module).replace(/\/v.*/,'')
 	}
 
+	onSaveVersion(state) {
+		this.state[state.module] = state.version
+	}
+
 	onRefresh() {
 		var modules = ['iam', 'resources']
-
-		var args = {
-			url: this.getModuleEndpoint('iam') + '/version',
-			method: corbel.request.method.GET
-		};
-		corbel.request.send(args)
-			.then(function(result) {
-				console.log(result);
-			})
-		console.log('refresh!')
-
+		var that = this
+		modules.forEach(module => {
+			var args = {
+				url: this.getModuleEndpoint(module) + '/version',
+				method: corbel.request.method.GET
+			};
+			corbel.request.send(args)
+				.then(function(result) {
+					CorbelVersionActions.saveVersion({module: module, version: result.data['build.version']})
+				})
+		})
 	}
 
 

@@ -14,8 +14,8 @@ class CorbelLogin extends React.Component {
   render() {
     return (
       <div>
-        <Connect       corbel={this.corbel} />
-        <Status        corbel={this.corbel} />
+        <Connect corbel={this.corbel} />
+        <Status  corbel={this.corbel} />
       </div>
     )
   }
