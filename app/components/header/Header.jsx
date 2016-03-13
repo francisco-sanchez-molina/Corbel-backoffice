@@ -32,9 +32,8 @@ class Header extends React.Component {
     state.token = this.corbelSession.getToken();
     state.refreshToken = this.corbelSession.getRefreshToken();
     state.sessionProfile = this.corbelSession.getProfile();
-    state.profiles = this.corbelConfig.getProfileNames();
-    state.profile = this.corbelConfig.getDefaultProfile();
-
+    state.url = this.corbelSession.getUrl()
+    state.login= this.corbelSession.getLogin()
     return state;
   }
 
@@ -43,14 +42,35 @@ class Header extends React.Component {
   }
 
   render() {
+    var leftstyle = {
+      float: 'left',
+      width: '75%'
+    };
+    var style = {
+      float: 'left',
+      width: '25%',
+      textAlign: 'right'
+    };
     return (
       <Toolbar title="Corbel backoffice">
-        <Actionbar>
-          <ButtonGroup>
-            <Button glyph="home" />
-          </ButtonGroup>
-        </Actionbar>
-        <div>{this.state.sessionProfile} - {this.state.token}</div>
+        <div style={leftstyle}>
+          <Actionbar>
+            <ButtonGroup>
+              <Button glyph="home" />
+            </ButtonGroup>
+          </Actionbar>
+        </div>
+        <div style={style}>
+          <div>
+            Loaded profile: {this.state.sessionProfile}
+          </div>
+          <div>
+            Login: {this.state.login}
+          </div>
+          <div>
+            URL: {this.state.url}
+          </div>
+        </div>
       </Toolbar>
     );
   }

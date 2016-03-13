@@ -8,6 +8,8 @@ class CorbelActions {
           'storeNewProfile',
           'storeCorbelDriver',
           'newLogin',
+          'storeNewLoginData',
+          'resetLastLoginData',
           'setProfile'
       )
   }

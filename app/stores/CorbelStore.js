@@ -46,11 +46,28 @@ class CorbelStore {
 		this.toSessionStorage();
 	}
 
+	onStoreNewLoginData(state) {
+		this.backofficeCorbel.getCorbelSession()
+			.setProfile(state.profile)
+			.setLogin(state.login)
+			.setUrl(state.url);
+		this.toSessionStorage();
+	}
+
+	onResetLastLoginData() {
+		this.backofficeCorbel.getCorbelSession()
+			.setToken(undefined)
+			.setRefreshToken(undefined)
+			.setProfile(undefined)
+			.setLogin(undefined)
+			.setUrl(undefined);
+		this.toSessionStorage();
+	}
+
 	onNewLogin(state) {
 		this.backofficeCorbel.getCorbelSession()
 			.setToken(state.token)
-			.setRefreshToken(state.refreshToken)
-			.setProfile(state.profile);
+			.setRefreshToken(state.refreshToken);
 		this.toSessionStorage();
 	}
 

@@ -13,10 +13,15 @@ import CorbelUsers from "./components/iam/user/Users.jsx"
 import CorbelClients from "./components/iam/client/Clients.jsx"
 import CorbelResources from "./components/resources/Resources.jsx"
 
+import BackendVersions from "./components/backendVersion/versions.jsx"
+
 import SidebarEntry from "./model/SidebarEntry.js"
 
 import CorbelStore from "./stores/CorbelStore";
 import CorbelActions from "./actions/CorbelActions";
+
+import CorbelVersionStore from "./stores/CorbelVersionStore";
+import CorbelVersionActions from "./actions/CorbelVersionActions";
 
 import DataViewerStore from "./stores/DataViewerStore";
 import DataViewerActions from "./actions/DataViewerActions";
@@ -30,6 +35,7 @@ require('../index.scss');
 
 var corbel = {
   corbelStore: CorbelStore,
+  corbelVersionStore: CorbelVersionStore,
   corbelActions: CorbelActions,
   corbelService: CorbelService,
   UserDataCollector: UserDataCollector,
@@ -43,7 +49,8 @@ var sidebarEntries = [
   new SidebarEntry('Users', '#/users', 'user'),
   new SidebarEntry('Clients', '#/clients', 'monitor'),
   new SidebarEntry('Resources', '#/resources', 'archive'),
-  new SidebarEntry('Configuration', '#/configuration', 'cog')
+  new SidebarEntry('Configuration', '#/configuration', 'cog'),
+  new SidebarEntry('Versions', '#/versions', 'cog')
 ];
 
 class App extends React.Component {
@@ -105,6 +112,11 @@ var routes = (
       path="/configuration"
       corbel={corbel}/>
 
+    <Route
+        component={BackendVersions}
+        path="/versions"
+        corbel={corbel}/>
+
   </Route>
 )
 
@@ -115,3 +127,11 @@ ReactDom.render(
   </Router>,
   document.getElementById("main")
 )
+
+
+
+function refreshVersion () {
+  CorbelVersionActions.refresh()
+  setTimeout(refreshVersion,5000)
+}
+refreshVersion()

@@ -31,6 +31,24 @@ export default class CorbelSession {
     return this.state.token;
   }
 
+	setLogin(login: string): ? CorbelSession {
+    this.state.login = login;
+    return this;
+  }
+
+  getLogin(): ? string {
+    return this.state.login;
+  }
+
+	setUrl(url: string): ? CorbelSession {
+		this.state.url = url;
+		return this;
+	}
+
+	getUrl(): ? string {
+		return this.state.url;
+	}
+
 	getTokenInfo(): ? string {
 		var token = this.getToken();
 		var tokenInfo;

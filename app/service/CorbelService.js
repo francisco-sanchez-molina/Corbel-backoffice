@@ -9,7 +9,7 @@ class CorbelService {
 
 	getDriver() {
 		if (!this.driver) {
-			var corbelSession =  CorbelStore.getState().backofficeCorbel.getCorbelSession();
+			var corbelSession = CorbelStore.getState().backofficeCorbel.getCorbelSession();
 			var config = corbelSession.getCorbelDriverConfig();
 			if (config.urlBase) {
 				this.driver = corbel.getDriver(config);
@@ -21,6 +21,8 @@ class CorbelService {
 	}
 
 	login() {
+		CorbelActions.resetLastLoginData();
+
 		var params = {}
 		var corbelConfig = CorbelStore.getState().backofficeCorbel.getCorbelConfig();
 		var driver = corbel.getDriver({
@@ -30,6 +32,14 @@ class CorbelService {
 			scopes: ''
 		});
 		this.driver = driver;
+
+		CorbelActions.storeCorbelDriver(driver.config.config);
+		CorbelActions.storeNewLoginData({
+			profile: corbelConfig.getDefaultProfile(),
+			login: corbelConfig.getLogin(),
+			url: corbelConfig.getUrlBase()
+		});
+
 
 		if (corbelConfig.getLogin() && corbelConfig.getLogin().length > 0) {
 			params.claims = {
@@ -41,12 +51,11 @@ class CorbelService {
 			params.claims['device_id'] = deviceId;
 		}
 
-		CorbelActions.storeCorbelDriver(driver.config.config);
 		driver.iam.token().create(params).then(function(result) {
 			CorbelActions.newLogin({
 				token: result.data.accessToken,
-				refreshToken: result.data.refreshToken,
-				profile: corbelConfig.getDefaultProfile()
+				refreshToken: result.data.refreshToken
+
 			});
 		});
 	}
