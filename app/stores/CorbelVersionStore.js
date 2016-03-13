@@ -22,7 +22,7 @@ class CorbelVersionStore {
 	}
 
 	onRefresh() {
-		var modules = ['iam', 'resources']
+		var modules = ['iam', 'resources', 'assets', 'evci', 'scheduler']
 		var that = this
 		modules.forEach(module => {
 			var args = {

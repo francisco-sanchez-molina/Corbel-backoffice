@@ -20,34 +20,33 @@ class CorbelService {
 		return this.driver;
 	}
 
-	login() {
+	login(profileName) {
 		CorbelActions.resetLastLoginData();
 
 		var params = {}
 		var corbelConfig = CorbelStore.getState().backofficeCorbel.getCorbelConfig();
 		var driver = corbel.getDriver({
-			urlBase: corbelConfig.getUrlBase(),
-			clientId: corbelConfig.getClientId(),
-			clientSecret: corbelConfig.getClientSecret(),
+			urlBase: corbelConfig.getUrlBase(profileName),
+			clientId: corbelConfig.getClientId(profileName),
+			clientSecret: corbelConfig.getClientSecret(profileName),
 			scopes: ''
 		});
 		this.driver = driver;
 
 		CorbelActions.storeCorbelDriver(driver.config.config);
 		CorbelActions.storeNewLoginData({
-			profile: corbelConfig.getDefaultProfile(),
-			login: corbelConfig.getLogin(),
-			url: corbelConfig.getUrlBase()
+			profile: profileName,
+			login: corbelConfig.getLogin(profileName),
+			url: corbelConfig.getUrlBase(profileName)
 		});
 
-
-		if (corbelConfig.getLogin() && corbelConfig.getLogin().length > 0) {
+		if (corbelConfig.getLogin(profileName) && corbelConfig.getLogin(profileName).length > 0) {
 			params.claims = {
-				'basic_auth.username': corbelConfig.getLogin(),
-				'basic_auth.password': corbelConfig.getPassword()
+				'basic_auth.username': corbelConfig.getLogin(profileName),
+				'basic_auth.password': corbelConfig.getPassword(profileName)
 			};
 		}
-		if (corbelConfig.getDevice() && corbelConfig.getDevice().length > 0) {
+		if (corbelConfig.getDevice(profileName) && corbelConfig.getDevice(profileName).length > 0) {
 			params.claims['device_id'] = deviceId;
 		}
 
@@ -55,9 +54,10 @@ class CorbelService {
 			CorbelActions.newLogin({
 				token: result.data.accessToken,
 				refreshToken: result.data.refreshToken
-
 			});
-		});
+		}).catch(error => {
+			console.log(error)
+		})
 	}
 
 	getUsers(props) {

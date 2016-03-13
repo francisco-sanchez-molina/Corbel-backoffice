@@ -10,18 +10,8 @@ export default class CorbelConfig {
   deserialize(state: string): ? CorbelConfig {
     this.state = JSON.parse(state);
 		this.state.profiles = this.state.profiles || {default:{}};
-		this.state.defaultProfileId = this.state.defaultProfileId || 'default';
-    return this;
+	  return this;
   }
-
-  setDefaultProfile(profileId: string): ? CorbelConfig {
-    this.state.defaultProfileId = profileId;
-    return this;
-  }
-
-	getDefaultProfile(): ? string {
-		return this.state.defaultProfileId;
-	}
 
 	deleteProfile(name) : ? CorbelConfig {
 		delete this.state.profiles[name];
@@ -34,7 +24,6 @@ export default class CorbelConfig {
   }
 
   getClientId(profileName): ? string {
-		profileName = profileName || this.state.defaultProfileId;
 		return this.state.profiles[profileName].clientId;
   }
 
@@ -44,7 +33,6 @@ export default class CorbelConfig {
   }
 
   getClientSecret(profileName): ? string {
-		profileName = profileName || this.state.defaultProfileId;
     return this.state.profiles[profileName].clientSecret;
   }
 
@@ -54,18 +42,15 @@ export default class CorbelConfig {
   }
 
   getUrlBase(profileName): ? string {
-		profileName = profileName || this.state.defaultProfileId;
     return this.state.profiles[profileName].urlBase;
   }
 
 	setLogin(profileName, login: string): ? CorbelConfigProfile {
-		profileName = profileName || this.state.defaultProfileId;
 		this.state.profiles[profileName].login = login;
     return this;
   }
 
   getLogin(profileName): ? string {
-		profileName = profileName || this.state.defaultProfileId;
 		return this.state.profiles[profileName].login;
   }
 
@@ -75,7 +60,6 @@ export default class CorbelConfig {
   }
 
   getPassword(profileName): ? string {
-		profileName = profileName || this.state.defaultProfileId;
 		return this.state.profiles[profileName].password;
   }
 
@@ -85,7 +69,6 @@ export default class CorbelConfig {
   }
 
   getDevice(profileName): ? string {
-		profileName = profileName || this.state.defaultProfileId;
     return this.state.profiles[profileName].device;
   }
 

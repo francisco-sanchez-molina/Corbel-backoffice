@@ -22,11 +22,14 @@ class BackendVersion extends React.Component {
   }
 
   render() {
-    var r = JSON.stringify(this.state)
+    var modules = Object.keys(this.state);
+    var result = modules.map(module =>
+      <div>{module} {this.state[module]}</div>
+    )
     return (
       <div>
         <h1>Versions</h1>
-        {r}
+        {result}
       </div>
     )
   }
