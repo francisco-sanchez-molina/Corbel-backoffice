@@ -24,7 +24,9 @@ import CorbelVersionStore from "./stores/CorbelVersionStore";
 import CorbelVersionActions from "./actions/CorbelVersionActions";
 
 import DataViewerStore from "./stores/DataViewerStore";
-import DataViewerActions from "./actions/DataViewerActions";
+import WaitingStore from "./stores/WaitingStore";
+import WaitingActions from "./actions/WaitingActions";
+
 
 import CorbelService from "./service/CorbelService"
 import UserDataCollector from "./service/UserDataCollector"
@@ -36,6 +38,8 @@ require('../index.scss');
 var corbel = {
   corbelStore: CorbelStore,
   corbelVersionStore: CorbelVersionStore,
+  waitingStore: WaitingStore,
+  waitingActions:  WaitingActions,
   corbelActions: CorbelActions,
   corbelService: CorbelService,
   UserDataCollector: UserDataCollector,
@@ -127,8 +131,6 @@ ReactDom.render(
   </Router>,
   document.getElementById("main")
 )
-
-
 
 function refreshVersion () {
   CorbelVersionActions.refresh()

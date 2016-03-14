@@ -8,10 +8,7 @@ class DataViewerStore {
 		this.state = {}
 		this.state.disableScrollCheck = true
 		this.state.lastPageLoaded=-1
-	}
-
-	onLoadData(state) {
-		this.setState(state);
+		this.state.pages={}
 	}
 
 	onFetchNextPage(state) {
@@ -22,22 +19,19 @@ class DataViewerStore {
 		var updateFunction = this.setDataForPage.bind(this, loadPage);
 		var failFunction = this.setFailDataForPage.bind(this, loadPage);
 		this.state.dataCollector.fetchPage(loadPage).then(updateFunction).catch(failFunction);
-		this.state['Page_' + loadPage] = {data: [{status:'loading'}], page:loadPage};
-
+		this.state.pages[loadPage] = {data: [{status:'loading'}], page:loadPage};
 	}
 
 	setDataForPage(page, data) {
-		var state =  {};
-		state.disableScrollCheck = false;
-    state['Page_' + page] = {data: data, page:page};
-		this.setState(state);
+		this.state.disableScrollCheck = false;
+    this.state.pages[page] = {data: data, page:page};
+		this.setState(this.state)
   }
 
   setFailDataForPage(page, data) {
-		var state = {};
-		state.disableScrollCheck = false;
-    state['Page_' + page] = {data: [{status:'fail', cause: data}], page:page};
-		this.setState(state);
+		this.state.disableScrollCheck = false;
+    this.state.pages[page] = {data: [{status:'fail', cause: data}], page:page};
+		this.setState(this.state)
   }
 
 	onSetQuery(state){
@@ -54,10 +48,11 @@ class DataViewerStore {
 	}
 
 	onSetDataCollector(state) {
-		this.state = {};
 		this.state.disableScrollCheck = true
 		this.state.lastPageLoaded=-1
-		this.state.dataCollector = state.dataCollector;
+		this.state.dataCollector = state.dataCollector
+		this.state.pages = {}
+
 	}
 
 }

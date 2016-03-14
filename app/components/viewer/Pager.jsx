@@ -50,11 +50,11 @@ class Pager extends React.Component {
         style={style}
         onScroll={(e) => {this.scrollState(e)}}>
         {
-          Object.keys(this.state).filter((t) => t.startsWith('Page_')).map(function(page) {
+          Object.keys(this.state.pages).map(function(page) {
             return (
               <Page
-                data={that.state[page].data}
-                page={that.state[page].page} />
+                data={that.state.pages[page].data}
+                page={that.state.pages[page].page} />
             )
           })
         }

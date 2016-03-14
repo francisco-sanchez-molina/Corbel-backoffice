@@ -50,13 +50,14 @@ class CorbelService {
 			params.claims['device_id'] = deviceId;
 		}
 
-		driver.iam.token().create(params).then(function(result) {
+		return driver.iam.token().create(params).then(function(result) {
 			CorbelActions.newLogin({
 				token: result.data.accessToken,
 				refreshToken: result.data.refreshToken
 			});
+			return result
 		}).catch(error => {
-			console.log(error)
+			throw error
 		})
 	}
 
