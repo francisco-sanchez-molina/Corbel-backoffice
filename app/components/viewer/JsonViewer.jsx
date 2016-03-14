@@ -1,4 +1,5 @@
-import React from "react";
+import React from 'react'
+import Textarea from 'react-textarea-autosize'
 
 class JsonViewer extends React.Component {
 
@@ -17,9 +18,7 @@ class JsonViewer extends React.Component {
     var that = this;
     var content;
     if (this.state.edit) {
-      content = <div>
-          {JSON.stringify(that.props.data, null, 2)}
-      </div>
+      content = <Textarea width='100%'>{JSON.stringify(that.props.data, null, 2)}</Textarea>
     } else {
       content = <div>
         <pre>
