@@ -14,11 +14,18 @@ class JsonViewer extends React.Component {
     console.log(data);
   }
 
+  onChange(content) {
+      this.state.change = content
+      this.setState(this.state)
+      console.log(content)
+  }
+
   render() {
     var that = this;
+    this.state.data = this.state.change || JSON.stringify(this.props.data, null, 2)
     var content;
     if (this.state.edit) {
-      content = <Textarea width='100%'>{JSON.stringify(that.props.data, null, 2)}</Textarea>
+      content = <Textarea ref='textArea' width='100%' value={this.state.data} onChange={e => this.onChange(e.target.value)} />
     } else {
       content = <div>
         <pre>
