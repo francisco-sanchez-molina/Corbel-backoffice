@@ -5,7 +5,7 @@ class DataViewerActions {
       this.generateActions(
         'fetchNextPage',
         'setQuery',
-        'setDataCollector'
+        'setDataAccessObject'
       )
   }
 }

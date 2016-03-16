@@ -1,7 +1,7 @@
 import corbelService from "./CorbelService.js";
-import DataCollector from "./DataCollector.js";
+import DataAccessObject from "./DataAccessObject.js";
 
-export default class ResourcesDataCollector extends DataCollector {
+export default class ResourcesDataAccessObject extends DataAccessObject {
 	constructor(collection) {
 		super()
 		this.collection = collection;

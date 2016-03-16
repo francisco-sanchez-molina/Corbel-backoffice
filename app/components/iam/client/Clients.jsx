@@ -15,7 +15,7 @@ class Clients extends React.Component {
     return (
       <div>
         <h1>Clients</h1>
-        <DataViewer dataCollector={new this.corbel.ClientsDataCollector()}/>
+        <DataViewer dataAccessObject={new this.corbel.ClientsDataAccessObject()}/>
       </div>
     )
   }

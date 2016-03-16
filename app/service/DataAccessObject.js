@@ -1,6 +1,6 @@
 import corbelService from "./CorbelService.js";
 
-export default class DataCollector {
+export default class DataAccessObject {
 	constructor() {
 		this.pageSize = 20;
 	}

@@ -29,9 +29,9 @@ import WaitingActions from "./actions/WaitingActions";
 
 
 import CorbelService from "./service/CorbelService"
-import UserDataCollector from "./service/UserDataCollector"
-import ClientsDataCollector from "./service/ClientsDataCollector"
-import ResourcesDataCollector from "./service/ResourcesDataCollector"
+import UserDataAccessObject from "./service/UserDataAccessObject"
+import ClientsDataAccessObject from "./service/ClientsDataAccessObject"
+import ResourcesDataAccessObject from "./service/ResourcesDataAccessObject"
 
 require('../index.scss');
 
@@ -42,9 +42,9 @@ var corbel = {
   waitingActions:  WaitingActions,
   corbelActions: CorbelActions,
   corbelService: CorbelService,
-  UserDataCollector: UserDataCollector,
-  ClientsDataCollector: ClientsDataCollector,
-  ResourcesDataCollector: ResourcesDataCollector
+  UserDataAccessObject: UserDataAccessObject,
+  ClientsDataAccessObject: ClientsDataAccessObject,
+  ResourcesDataAccessObject: ResourcesDataAccessObject
 }
 
 var sidebarEntries = [

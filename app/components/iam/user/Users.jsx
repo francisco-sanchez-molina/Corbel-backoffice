@@ -15,7 +15,7 @@ class Users extends React.Component {
     return (
       <div>
         <h1>Users</h1>
-        <DataViewer dataCollector={new this.corbel.UserDataCollector()}/>
+        <DataViewer dataAccessObject={new this.corbel.UserDataAccessObject()}/>
       </div>
     )
   }

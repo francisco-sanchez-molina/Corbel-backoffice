@@ -22,9 +22,9 @@ class Resources extends React.Component {
   render() {
     var dataViewer = ''
     if (this.state.collection) {
-      var dataCollector = new this.corbel.ResourcesDataCollector(this.state.collection);
+      var dataAccessObject = new this.corbel.ResourcesDataAccessObject(this.state.collection);
       dataViewer =
-      <DataViewer dataCollector={dataCollector}/>
+      <DataViewer dataAccessObject={dataAccessObject}/>
     }
 
     return (
