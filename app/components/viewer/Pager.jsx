@@ -1,6 +1,5 @@
 import React from "react";
 
-import JsonViewer from "./JsonViewer.jsx"
 import Page from "./Page.jsx"
 
 class Pager extends React.Component {
@@ -50,11 +49,12 @@ class Pager extends React.Component {
         style={style}
         onScroll={(e) => {this.scrollState(e)}}>
         {
-          Object.keys(this.state.pages).map(function(page) {
+          Object.keys(this.state.pages).map((page) => {
             return (
               <Page
                 data={that.state.pages[page].data}
-                page={that.state.pages[page].page} />
+                page={that.state.pages[page].page}
+                dataViewerActions={this.props.dataViewerActions} />
             )
           })
         }

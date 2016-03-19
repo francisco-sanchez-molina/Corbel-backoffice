@@ -1,6 +1,6 @@
 import React from "react";
 
-import JsonViewer from "./JsonViewer.jsx"
+import JsonEditor from "./JsonEditor.jsx"
 
 class Page extends React.Component {
 
@@ -15,9 +15,13 @@ class Page extends React.Component {
           Page {this.props.page}
         </p>
         {
-          this.props.data.map(function(element) {
+          this.props.data.map((element, index) => {
             return (
-              <JsonViewer data={element}/>
+              <JsonEditor
+                data={element}
+                page={this.props.page}
+                element={index}
+                dataViewerActions={this.props.dataViewerActions}/>
             )
           })
         }

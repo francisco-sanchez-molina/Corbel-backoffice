@@ -49,7 +49,8 @@ class Header extends React.Component {
     var style = {
       float: 'left',
       width: '25%',
-      textAlign: 'right'
+      textAlign: 'right',
+      padding:'0px 5px 0px 0px'
     };
     return (
       <Toolbar title="Corbel backoffice">

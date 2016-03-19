@@ -2,7 +2,6 @@ import React from "react";
 
 import {Button, Input} from "react-photonkit";
 
-import JsonViewer from "./JsonViewer.jsx"
 
 class Query extends React.Component {
 

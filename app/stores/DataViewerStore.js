@@ -55,6 +55,10 @@ class DataViewerStore {
 
 	}
 
+	onUpdateObject(state) {
+		console.log(state)
+	}
+
 }
 
 export default alt.createStore(DataViewerStore, 'DataViewerStore');
