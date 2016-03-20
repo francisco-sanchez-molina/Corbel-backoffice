@@ -21,6 +21,13 @@ export default class DataAccessObject {
 		return this.collectionProcessor(query);
 	}
 
+	updateResource(oldData: object, newData: object) {
+		return this._updateResource(oldData.id, newData);
+	}
+
+	getResource(id: string) {
+		return this._getResource(id);
+	}
 	setQuery(query: object) {
 		this.apiQuery = query;
 	}

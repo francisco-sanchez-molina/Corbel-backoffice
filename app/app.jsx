@@ -70,9 +70,8 @@ class App extends React.Component {
 
             <Sidebar entries={sidebarEntries}/>
 
-            <Pane className="padded-more">
+            <Pane className="padded">
               {this.props.children}
-
             </Pane>
 
           </PaneGroup>

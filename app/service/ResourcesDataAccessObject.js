@@ -11,6 +11,19 @@ export default class ResourcesDataAccessObject extends DataAccessObject {
 		return corbelService.getCollection(this.collection, query);
 	}
 
+	_updateResource(id: string, data) {
+		return corbelService.getDriver().resources.resource(this.collection, id)
+			.update(data)
+	}
+
+	_getResource(id: string) {
+		return corbelService.getDriver()
+			.resources.resource(this.collection, id).get()
+			.then(function (result) {
+				return result.data
+			})
+	}
+
 	totalPages() {
 		return 10;
 	}

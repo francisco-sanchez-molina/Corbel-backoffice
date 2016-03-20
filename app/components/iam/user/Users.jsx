@@ -13,7 +13,7 @@ class Users extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className='pane'>
         <h1>Users</h1>
         <DataViewer dataAccessObject={new this.corbel.UserDataAccessObject()}/>
       </div>

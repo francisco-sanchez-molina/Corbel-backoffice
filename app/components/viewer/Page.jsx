@@ -18,9 +18,9 @@ class Page extends React.Component {
           this.props.data.map((element, index) => {
             return (
               <JsonEditor
-                data={element}
+                state={element}
                 page={this.props.page}
-                element={index}
+                index={index}
                 dataViewerActions={this.props.dataViewerActions}/>
             )
           })

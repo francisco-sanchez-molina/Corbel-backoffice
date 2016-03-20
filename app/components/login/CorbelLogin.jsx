@@ -14,10 +14,11 @@ class CorbelLogin extends React.Component {
 
   render() {
     return (
-      <Waiting name="corbelLogin">
+      <div>
+        <Waiting name="corbelLogin" />
         <Connect corbel={this.corbel} />
         <Status  corbel={this.corbel} />
-      </Waiting>
+      </div>
     )
   }
 

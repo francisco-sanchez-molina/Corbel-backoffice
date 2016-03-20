@@ -38,7 +38,6 @@ class Pager extends React.Component {
   }
 
   render() {
-    var that = this;
     var style = {
       height: '500px',
       overflow: 'auto',
@@ -52,8 +51,8 @@ class Pager extends React.Component {
           Object.keys(this.state.pages).map((page) => {
             return (
               <Page
-                data={that.state.pages[page].data}
-                page={that.state.pages[page].page}
+                data={this.state.pages[page]}
+                page={page}
                 dataViewerActions={this.props.dataViewerActions} />
             )
           })

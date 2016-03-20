@@ -10,19 +10,26 @@ class JsonEditor extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {status:'reading'};
   }
 
-  save(data){
+  save(newData){
+    var data = {
+      old: this.props.state.data,
+      new: newData,
+      page: this.props.page,
+      index: this.props.index
+    }
     this.props.dataViewerActions.updateObject(data);
+
   }
 
   getEditor() {
     var content;
-    if (this.state.edit) {
-      content = this.state.value
+    if (this.state.status==='editing') {
+      content = this.state.editorContent
     } else {
-      content = JSON.stringify(this.props.data, null, 2)
+      content = JSON.stringify(this.props.state.data, null, 2)
     }
     return <AceEditor
       style={{
@@ -31,17 +38,18 @@ class JsonEditor extends React.Component {
         height: '200px',
         width: '300px'
       }}
-      readOnly={this.state.edit ? undefined : 'true'}
+      readOnly={this.state.status!=='editing' ? 'true' : undefined}
       height='100px'
       width='100%'
       maxLines='Infinity'
       mode="json"
       theme="xcode"
-      name={"editor:page:" + this.props.page + ":index:"+ this.props.element}
+      name={"editor:page:" + this.props.page + ":index:"+ this.props.index}
       ref='editor'
       value={content}
-      onChange={(newValue) => this.setState({value: newValue})}
-      onKeyDown={() => this.setState({edit:false}) }
+      editorProps={{$blockScrolling: true}}
+      onChange={(newValue) => this.setState({editorContent: newValue})}
+      onKeyDown={() => this.setState({status:'reading'}) }
       />
   }
 
@@ -49,8 +57,8 @@ class JsonEditor extends React.Component {
     return <div>
       <Button
         onClick={() => {
-          this.setState({edit:true,
-            value: JSON.stringify(this.props.data, null, 2)
+          this.setState({status:'editing',
+            editorContent: JSON.stringify(this.props.state.data, null, 2)
           })
         }}
         class="btn btn-form btn-primary"
@@ -61,18 +69,23 @@ class JsonEditor extends React.Component {
   getEditingStateContorls() {
     return <div>
       <Button
-        onClick={() => this.setState({edit:false})}
+        onClick={() => this.setState({status:'reading'})}
         class="btn btn-form btn-primary"
         text="Cancel"/>
       <Button
-        onClick={() => this.save({original: this.props.data, new: JSON.parse(this.state.value) })}
+        onClick={() => this.save(JSON.parse(this.state.editorContent))}
         class="btn btn-form btn-primary"
         text="Save"/>
+      <p>{this.props.state.status}</p>
     </div>
   }
 
   getControls() {
-    return this.state.edit ? this.getEditingStateContorls() : this.getReadingStateContorls()
+    if (this.state.status==='editing') {
+      return this.getEditingStateContorls()
+    } else if(this.state.status==='reading') {
+      return this.getReadingStateContorls()
+    }
   }
 
   render() {
