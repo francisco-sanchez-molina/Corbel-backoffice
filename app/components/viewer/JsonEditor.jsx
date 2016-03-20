@@ -6,8 +6,6 @@ import AceEditor from 'react-ace';
 import 'brace/mode/json';
 import 'brace/theme/xcode';
 
-require('jsoneditor/dist/jsoneditor.css');
-
 class JsonEditor extends React.Component {
 
   constructor(props) {
