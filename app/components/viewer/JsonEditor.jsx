@@ -21,7 +21,7 @@ class JsonEditor extends React.Component {
       index: this.props.index
     }
     this.props.dataViewerActions.updateObject(data);
-
+    this.setState({status:'saving'})
   }
 
   getEditor() {
@@ -85,6 +85,11 @@ class JsonEditor extends React.Component {
       return this.getEditingStateContorls()
     } else if(this.state.status==='reading') {
       return this.getReadingStateContorls()
+    } else if(this.state.status==='saving') {
+      if (this.props.state.status==='saved') {
+        this.setState({status:'reading'})
+      }
+      return <p>saving...</p>
     }
   }
 

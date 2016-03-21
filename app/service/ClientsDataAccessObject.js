@@ -2,16 +2,19 @@ import corbelService from "./CorbelService.js";
 import DataAccessObject from "./DataAccessObject.js";
 
 export default class ClientsDataAccessObject extends DataAccessObject {
+
 	constructor() {
 		super()
 	}
 
-	collectionProcessor(query) {
-		return corbelService.getClients(query);
-	}
-
-	totalPages() {
-		return 10;
+	_getCollection(query) {
+		var driver = corbelService.getDriver();
+		var domain = driver.config.config.domain;
+		return driver.iam.client(domain)
+			.getAll(query)
+			.then(function(result) {
+				return result.data;
+			});
 	}
 
 }

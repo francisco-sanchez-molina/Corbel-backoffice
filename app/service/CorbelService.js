@@ -61,30 +61,6 @@ class CorbelService {
 		})
 	}
 
-	getUsers(props) {
-		return this.getDriver().iam.users()
-			.get(props)
-			.then(function(result) {
-				return result.data;
-			});
-	}
-
-	getClients(props) {
-		var domain = this.getDriver().config.config.domain;
-		return this.getDriver().iam.client(domain)
-			.getAll(props)
-			.then(function(result) {
-				return result.data;
-			});
-	}
-
-	getCollection(collection, props) {
-		return this.getDriver().resources.collection(collection)
-			.get(props)
-			.then(function(result) {
-				return result.data;
-			});
-	}
 }
 
 export default new CorbelService();

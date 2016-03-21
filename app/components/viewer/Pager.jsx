@@ -16,6 +16,7 @@ class Pager extends React.Component {
 
   componentDidMount() {
     this.props.dataViewerStore.listen(this.onChange);
+    this.props.dataViewerActions.getTotalElements();
     this.props.dataViewerActions.fetchNextPage();
   }
 
@@ -43,20 +44,25 @@ class Pager extends React.Component {
       overflow: 'auto',
     }
     return (
-      <div
-        ref="pager"
-        style={style}
-        onScroll={(e) => {this.scrollState(e)}}>
-        {
-          Object.keys(this.state.pages).map((page) => {
-            return (
-              <Page
-                data={this.state.pages[page]}
-                page={page}
-                dataViewerActions={this.props.dataViewerActions} />
-            )
-          })
-        }
+      <div>
+        <p>
+          Total elements: {this.state.elements}
+        </p>
+        <div
+          ref="pager"
+          style={style}
+          onScroll={(e) => {this.scrollState(e)}}>
+          {
+            Object.keys(this.state.pages).map((page) => {
+              return (
+                <Page
+                  data={this.state.pages[page]}
+                  page={page}
+                  dataViewerActions={this.props.dataViewerActions} />
+              )
+            })
+          }
+        </div>
       </div>
     )
   }

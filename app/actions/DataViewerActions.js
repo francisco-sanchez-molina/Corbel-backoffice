@@ -3,6 +3,7 @@ import alt from '../alt';
 class DataViewerActions {
   constructor() {
       this.generateActions(
+        'getTotalElements',
         'fetchNextPage',
         'setQuery',
         'setDataAccessObject',

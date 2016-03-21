@@ -2,12 +2,17 @@ import corbelService from "./CorbelService.js";
 import DataAccessObject from "./DataAccessObject.js";
 
 export default class UserDataAccessObject extends DataAccessObject {
+
 	constructor() {
 		super()
 	}
 
-	collectionProcessor(query) {
-		return corbelService.getUsers(query)
+	_getCollection(query) {
+		return corbelService.getDriver().iam.users()
+				.get(query)
+				.then(function(result) {
+					return result.data;
+				})
 	}
 
 	_updateResource(id: string, data) {
@@ -21,10 +26,6 @@ export default class UserDataAccessObject extends DataAccessObject {
 			.then(function (result) {
 				return result.data
 			})
-	}
-
-	totalPages() {
-		return 10
 	}
 
 }

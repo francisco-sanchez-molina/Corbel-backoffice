@@ -2,7 +2,23 @@ import corbelService from "./CorbelService.js";
 
 export default class DataAccessObject {
 	constructor() {
-		this.pageSize = 20;
+		this.pageSize = 20
+	}
+
+	getPageSize() {
+		return this.pageSize
+	}
+
+	getTotalElements() {
+		var params = {
+			aggregation: {
+				'$count': '*'
+			}
+		}
+		if (this.apiQuery) {
+			params.query = [this.apiQuery];
+		}
+		return this._getCollection(params);
 	}
 
 	fetchPage(page: int) {
@@ -14,11 +30,11 @@ export default class DataAccessObject {
 			}
 		};
 
-		if(this.apiQuery) {
+		if (this.apiQuery) {
 			query.query = [this.apiQuery];
 		}
 
-		return this.collectionProcessor(query);
+		return this._getCollection(query);
 	}
 
 	updateResource(oldData: object, newData: object) {
@@ -28,6 +44,7 @@ export default class DataAccessObject {
 	getResource(id: string) {
 		return this._getResource(id);
 	}
+
 	setQuery(query: object) {
 		this.apiQuery = query;
 	}
