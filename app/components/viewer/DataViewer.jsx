@@ -10,7 +10,11 @@ class DataViewer extends React.Component {
 
   constructor(props) {
     super(props);
-    dataViewerActions.setDataAccessObject({dataAccessObject : this.props.dataAccessObject});
+    dataViewerActions.setDataAccessObject({dataAccessObject : this.props.dataAccessObject})
+  }
+
+  componentDidUpdate() {
+    dataViewerActions.setDataAccessObject({dataAccessObject : this.props.dataAccessObject})
   }
 
   render() {

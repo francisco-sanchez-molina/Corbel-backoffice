@@ -11,14 +11,14 @@ class Resources extends React.Component {
     this.state = {};
     this.state.collection = undefined;
     this.corbel = props.route.corbel;
-    this.dataViewer = ''
+    this.state.dataViewer = ''
   }
 
   onSelectCollection(event) {
     var state = {}
     state.collection = this.refs.collection.refs.text.value
     var dataAccessObject = new this.corbel.ResourcesDataAccessObject(state.collection)
-    this.dataViewer = <DataViewer dataAccessObject={dataAccessObject}/>
+    state.dataViewer = <DataViewer dataAccessObject={dataAccessObject}/>
     this.setState(state)
   }
 
@@ -36,7 +36,7 @@ class Resources extends React.Component {
           onClick={() => this.onSelectCollection()}
           class="btn btn-form btn-primary"
           text="Select Collection!"/>
-        {this.dataViewer}
+        {this.state.dataViewer}
       </div>
     )
   }

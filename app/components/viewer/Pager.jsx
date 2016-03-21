@@ -16,8 +16,6 @@ class Pager extends React.Component {
 
   componentDidMount() {
     this.props.dataViewerStore.listen(this.onChange);
-    this.props.dataViewerActions.getTotalElements();
-    this.props.dataViewerActions.fetchNextPage();
   }
 
   componentWillUnmount () {

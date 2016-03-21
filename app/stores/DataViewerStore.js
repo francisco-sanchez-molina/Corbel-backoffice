@@ -18,7 +18,12 @@ class DataViewerStore {
 			.then((result) => this.setState({
 				elements: result.count
 			}))
-			.catch((error) => console.log(error))
+			.catch((error) => {
+				this.setState({
+					elements: 'error'
+				})
+				console.log(error)
+			})
 	}
 
 	onFetchNextPage(state) {
@@ -69,7 +74,8 @@ class DataViewerStore {
 			disableScrollCheck: true,
 			lastPageLoaded: -1,
 			currentQuery: query,
-			pages : {}
+			pages : {},
+			elements : 0
 		}
 		this.state.dataAccessObject.setQuery(query)
 		this.setState(this.state)
@@ -82,6 +88,9 @@ class DataViewerStore {
 		this.state.lastPageLoaded = -1
 		this.state.dataAccessObject = state.dataAccessObject
 		this.state.pages = {}
+		this.setState(this.state)
+		this.onFetchNextPage()
+		this.onGetTotalElements()
 	}
 
 	updateObjectState(newData, page, index) {
