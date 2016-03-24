@@ -11,7 +11,7 @@ class CorbelService {
 		if (!this.driver) {
 			var corbelSession = CorbelStore.getState().backofficeCorbel.getCorbelSession();
 			var config = corbelSession.getCorbelDriverConfig();
-			if (config.urlBase) {
+			if (config && config.urlBase) {
 				this.driver = corbel.getDriver(config);
 			} else {
 				this.login();
@@ -21,8 +21,12 @@ class CorbelService {
 	}
 
 	login(profileName) {
-		CorbelActions.resetLastLoginData();
+		//CorbelActions.resetLastLoginData();
 
+		if(!profileName || !corbelConfig.getUrlBase(profileName) || !corbelConfig.getClientId(profileName)) {
+			return;
+		}
+		
 		var params = {}
 		var corbelConfig = CorbelStore.getState().backofficeCorbel.getCorbelConfig();
 		var driver = corbel.getDriver({

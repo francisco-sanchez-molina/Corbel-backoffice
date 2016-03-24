@@ -31,26 +31,35 @@ class JsonEditor extends React.Component {
     } else {
       content = JSON.stringify(this.props.state.data, null, 2)
     }
-    return <AceEditor
+    this.ace =
+    <AceEditor
       style={{
         border: '1px solid black',
         marginBottom: '5px',
         height: '200px',
         width: '300px'
       }}
-      readOnly={this.state.status!=='editing' ? 'true' : undefined}
+      readOnly={this.state.status!=='editing' ? true : false}
       height='100px'
       width='100%'
       maxLines='Infinity'
-      mode="json"
+      mode='json'
       theme="xcode"
       name={"editor:page:" + this.props.page + ":index:"+ this.props.index}
-      ref='editor'
+      ref={"editor:page:" + this.props.page + ":index:"+ this.props.index}
       value={content}
-      editorProps={{$blockScrolling: true}}
       onChange={(newValue) => this.setState({editorContent: newValue})}
-      onKeyDown={() => this.setState({status:'reading'}) }
+      onKeyDown={() => this.setState({status:'reading'})}
       />
+    this.aceRef = "editor:page:" + this.props.page + ":index:"+ this.props.index
+    if (this.refs[this.aceRef]){
+      this.refs[this.aceRef].editor.setOption('useWorker',this.state.status==='editing')
+    }
+    return this.ace
+  }
+
+  componentDidMount() {
+    this.refs[this.aceRef].editor.setOption('useWorker',false)
   }
 
   getReadingStateContorls() {
@@ -76,7 +85,9 @@ class JsonEditor extends React.Component {
         onClick={() => this.save(JSON.parse(this.state.editorContent))}
         class="btn btn-form btn-primary"
         text="Save"/>
-      <p>{this.props.state.status}</p>
+      <p>
+        {this.props.state.status}
+      </p>
     </div>
   }
 

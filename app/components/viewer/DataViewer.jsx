@@ -10,14 +10,16 @@ class DataViewer extends React.Component {
 
   constructor(props) {
     super(props);
-    dataViewerActions.setDataAccessObject({dataAccessObject : this.props.dataAccessObject})
+    this.componentDidUpdate()
   }
 
   componentDidUpdate() {
-    dataViewerActions.setDataAccessObject({dataAccessObject : this.props.dataAccessObject})
+    if (this.props.dataAccessObject.hasDriver()) {
+      dataViewerActions.setDataAccessObject({dataAccessObject : this.props.dataAccessObject})
+    }
   }
 
-  render() {
+  componentsDataViewer () {
     return (
       <div>
         <Query
@@ -30,6 +32,18 @@ class DataViewer extends React.Component {
           dataViewerActions={dataViewerActions}/>
       </div>
     )
+  }
+
+  componentsDataLogin () {
+    return (
+      <div>
+        Login first
+      </div>
+    )
+  }
+
+  render() {
+    return this.props.dataAccessObject.hasDriver() ? this.componentsDataViewer() : this.componentsDataLogin()
   }
 
 }

@@ -19,7 +19,7 @@ class Pager extends React.Component {
   }
 
   componentWillUnmount () {
-    this.props.dataViewerStore.unlisten(this._onChange);
+    this.props.dataViewerStore.unlisten(this.onChange);
   }
 
   scrollState(event) {

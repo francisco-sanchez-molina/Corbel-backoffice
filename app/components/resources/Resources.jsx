@@ -31,11 +31,13 @@ class Resources extends React.Component {
           label="Collection"
           id="collection"
           placeholder="Collection name"
-          ref="collection" />
-        <Button
-          onClick={() => this.onSelectCollection()}
-          class="btn btn-form btn-primary"
-          text="Select Collection!"/>
+          ref="collection"
+          onKeyPress = {(e) => {
+             if (e.key === 'Enter') {
+              this.onSelectCollection()
+            }
+           }}
+          />
         {this.state.dataViewer}
       </div>
     )

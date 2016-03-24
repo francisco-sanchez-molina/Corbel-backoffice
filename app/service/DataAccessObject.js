@@ -5,6 +5,10 @@ export default class DataAccessObject {
 		this.pageSize = 20
 	}
 
+  hasDriver() {
+		return corbelService.getDriver()
+	}
+
 	getPageSize() {
 		return this.pageSize
 	}
