@@ -21,14 +21,11 @@ class CorbelService {
 	}
 
 	login(profileName) {
-		//CorbelActions.resetLastLoginData();
-
+		var params = {}
+		var corbelConfig = CorbelStore.getState().backofficeCorbel.getCorbelConfig();
 		if(!profileName || !corbelConfig.getUrlBase(profileName) || !corbelConfig.getClientId(profileName)) {
 			return;
 		}
-		
-		var params = {}
-		var corbelConfig = CorbelStore.getState().backofficeCorbel.getCorbelConfig();
 		var driver = corbel.getDriver({
 			urlBase: corbelConfig.getUrlBase(profileName),
 			clientId: corbelConfig.getClientId(profileName),
