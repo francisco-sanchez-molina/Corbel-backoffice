@@ -18,6 +18,7 @@
     "test": "xo",
     "start": "node starter.js --2nd",
     "start-1st": "node starter.js",
+    "dist": "NODE_ENV=production webpack -p --config webpack.config.js",
     "build": "npm run build-osx && npm run build-win",
     "build-linux": "NODE_ENV=production webpack -p --config webpack.config.js; electron-packager . $npm_package_productName --overwrite --out=dist --ignore='^/dist$' --prune --asar --platform=linux --arch=x64 --version=$npm_package_electronVersion --icon=assets/corbel.icns",
     "build-osx": "NODE_ENV=production webpack -p --config webpack.config.js; electron-packager . $npm_package_productName --overwrite --out=dist --ignore='^/dist$' --prune --asar --platform=darwin --arch=x64 --version=$npm_package_electronVersion --icon=assets/corbel.icns",

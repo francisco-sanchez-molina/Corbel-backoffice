@@ -13,9 +13,7 @@ class CorbelService {
 			var config = corbelSession.getCorbelDriverConfig();
 			if (config && config.urlBase) {
 				this.driver = corbel.getDriver(config);
-			} else {
-				this.login();
-			}
+			} 
 		}
 		return this.driver;
 	}
@@ -23,8 +21,11 @@ class CorbelService {
 	login(profileName) {
 		var params = {}
 		var corbelConfig = CorbelStore.getState().backofficeCorbel.getCorbelConfig();
-		if(!profileName || !corbelConfig.getUrlBase(profileName) || !corbelConfig.getClientId(profileName)) {
-			return;
+		if (!profileName ||
+			!corbelConfig.getUrlBase(profileName) ||
+			!corbelConfig.getClientId(profileName) ||
+			!corbelConfig.getClientSecret(profileName)) {
+			return Promise.reject();
 		}
 		var driver = corbel.getDriver({
 			urlBase: corbelConfig.getUrlBase(profileName),

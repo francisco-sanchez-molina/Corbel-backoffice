@@ -4,3 +4,4 @@ node_modules
 *.swp
 app.js
 .DS_Store
+out
