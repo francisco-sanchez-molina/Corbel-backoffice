@@ -3,6 +3,8 @@ import {Window, Button, Pane, Input} from "react-photonkit";
 
 import NewProfile from "./component/NewProfile.jsx";
 import SetupProfiles from "./component/SetupProfiles.jsx";
+import ImportProfiles from "./component/ImportProfiles.jsx";
+
 
 class Configuration extends React.Component {
 
@@ -16,6 +18,7 @@ class Configuration extends React.Component {
       <div>
         <NewProfile corbel={this.corbel} />
         <SetupProfiles corbel={this.corbel} />
+        <ImportProfiles corbel={this.corbel} />
       </div>
     )
   }

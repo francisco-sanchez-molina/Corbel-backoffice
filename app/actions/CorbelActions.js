@@ -10,7 +10,8 @@ class CorbelActions {
           'newLogin',
           'storeNewLoginData',
           'resetLastLoginData',
-          'setProfile'
+          'setProfile',
+          'importConfiguration'
       )
   }
 }

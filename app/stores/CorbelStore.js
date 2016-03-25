@@ -30,6 +30,11 @@ class CorbelStore {
 		this.toSessionStorage();
 	}
 
+	onImportConfiguration(state) {
+		this.backofficeCorbel.getCorbelConfig().deserialize(state)
+		this.toSessionStorage()
+	}
+
 	onSetProfile(state) {
 			this.backofficeCorbel.getCorbelConfig().setDefaultProfile(state.name);
 			this.toSessionStorage();
@@ -67,8 +72,8 @@ class CorbelStore {
 	onNewLogin(state) {
 		this.backofficeCorbel.getCorbelSession()
 			.setToken(state.token)
-			.setRefreshToken(state.refreshToken);
-		this.toSessionStorage();
+			.setRefreshToken(state.refreshToken)
+		this.toSessionStorage()
 	}
 
 }

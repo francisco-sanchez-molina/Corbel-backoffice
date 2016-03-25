@@ -13,34 +13,50 @@ class CorbelService {
 			var config = corbelSession.getCorbelDriverConfig();
 			if (config && config.urlBase) {
 				this.driver = corbel.getDriver(config);
-			} 
+			}
 		}
 		return this.driver;
 	}
 
-	login(profileName) {
-		var params = {}
-		var corbelConfig = CorbelStore.getState().backofficeCorbel.getCorbelConfig();
+	createDriver(profileName) {
+		var corbelConfig = CorbelStore.getState().backofficeCorbel.getCorbelConfig()
 		if (!profileName ||
 			!corbelConfig.getUrlBase(profileName) ||
 			!corbelConfig.getClientId(profileName) ||
 			!corbelConfig.getClientSecret(profileName)) {
-			return Promise.reject();
+			return undefined
 		}
-		var driver = corbel.getDriver({
+
+		return corbel.getDriver({
 			urlBase: corbelConfig.getUrlBase(profileName),
 			clientId: corbelConfig.getClientId(profileName),
 			clientSecret: corbelConfig.getClientSecret(profileName),
 			scopes: ''
-		});
-		this.driver = driver;
+		})
+	}
 
-		CorbelActions.storeCorbelDriver(driver.config.config);
+	login(profileName) {
+		var params = {}
+		var corbelConfig = CorbelStore.getState().backofficeCorbel.getCorbelConfig()
+
+
+		CorbelActions.resetLastLoginData();
+
+		this.driver = this.createDriver(profileName)
+
+		if (!this.driver) {
+			return Promise.reject({
+				error: 'misconfigure profile'
+			})
+		}
+
+		CorbelActions.storeCorbelDriver(this.driver.config.config)
+
 		CorbelActions.storeNewLoginData({
 			profile: profileName,
 			login: corbelConfig.getLogin(profileName),
 			url: corbelConfig.getUrlBase(profileName)
-		});
+		})
 
 		if (corbelConfig.getLogin(profileName) && corbelConfig.getLogin(profileName).length > 0) {
 			params.claims = {
@@ -52,7 +68,7 @@ class CorbelService {
 			params.claims['device_id'] = deviceId;
 		}
 
-		return driver.iam.token().create(params).then(function(result) {
+		return this.driver.iam.token().create(params).then(function(result) {
 			CorbelActions.newLogin({
 				token: result.data.accessToken,
 				refreshToken: result.data.refreshToken

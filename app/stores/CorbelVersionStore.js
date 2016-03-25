@@ -13,8 +13,9 @@ class CorbelVersionStore {
 	}
 
 	getModuleEndpoint(module) {
-		var urlBase = corbelService.getDriver().config.config.urlBase
-		return urlBase.replace('{{module}}', module).replace(/\/v.*/,'')
+		var driver = corbelService.getDriver()
+		var urlBase = driver.config.config.urlBase
+		return urlBase.replace('{{module}}', module).replace(/\/v.*/, '')
 	}
 
 	onSaveVersion(state) {
@@ -24,16 +25,21 @@ class CorbelVersionStore {
 	onRefresh() {
 		var modules = ['iam', 'resources', 'assets', 'evci', 'scheduler']
 		var that = this
-		modules.forEach(module => {
-			var args = {
-				url: this.getModuleEndpoint(module) + '/version',
-				method: corbel.request.method.GET
-			};
-			corbel.request.send(args)
-				.then(function(result) {
-					CorbelVersionActions.saveVersion({module: module, version: result.data['build.version']})
-				})
-		})
+		try {
+			modules.forEach(module => {
+				var args = {
+					url: this.getModuleEndpoint(module) + '/version',
+					method: corbel.request.method.GET
+				};
+				corbel.request.send(args)
+					.then(function(result) {
+						CorbelVersionActions.saveVersion({
+							module: module,
+							version: result.data['build.version']
+						})
+					})
+			})
+		} catch (error) {}
 	}
 
 

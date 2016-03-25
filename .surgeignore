@@ -5,3 +5,9 @@ dist
 scripts
 starter.js
 webpack.*
+styles
+readme.me
+package.json
+license
+index.scss
+index.js
