@@ -139,8 +139,7 @@ class JsonEditor extends React.Component {
               }}>
               {this.getControls()}
             </div>
-            <div style={{display: 'block', clear: 'both'}}>
-            </div>
+            <div style={{display: 'block', clear: 'both'}} />
           </div>
         </div>
       </div>

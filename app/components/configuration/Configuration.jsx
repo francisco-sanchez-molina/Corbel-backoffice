@@ -16,9 +16,17 @@ class Configuration extends React.Component {
   render() {
     return (
       <Pane className="padded">
-        <NewProfile corbel={this.corbel} />
-        <SetupProfiles corbel={this.corbel} />
-        <ImportProfiles corbel={this.corbel} />
+        <div>
+          <NewProfile corbel={this.corbel} />
+        </div>
+        <hr />
+        <div>
+          <SetupProfiles corbel={this.corbel} />
+        </div>
+        <hr />
+        <div>
+          <ImportProfiles corbel={this.corbel} />
+        </div>
       </Pane>
     )
   }

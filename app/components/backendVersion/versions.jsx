@@ -1,5 +1,7 @@
 import React from "react";
 
+import {Pane, ListGroup, ListItem} from "react-photonkit";
+
 class BackendVersion extends React.Component {
 
   constructor(props) {
@@ -22,15 +24,19 @@ class BackendVersion extends React.Component {
   }
 
   render() {
-    var modules = Object.keys(this.state);
+    var modules = Object.keys(this.state)
     var result = modules.map(module =>
-      <div>{module} {this.state[module]}</div>
+      <ListItem
+        title={module}
+        subtitle={this.state[module]}/>
     )
     return (
-      <div>
+      <Pane className="padded">
         <h1>Versions</h1>
-        {result}
-      </div>
+        <ListGroup>
+          {result}
+        </ListGroup>
+      </Pane>
     )
   }
 

@@ -24,10 +24,11 @@ class NewProfile extends React.Component {
 					placeholder="Profile name"
 					ref="newProfileName"/>
 
-
 				<Button
 					onClick={() => this.onSaveNewProfile()}
 					class="btn btn-form btn-primary"
+					ptStyle="positive"
+					glyph="plus"
 					text="Save"/>
 
 			</div>

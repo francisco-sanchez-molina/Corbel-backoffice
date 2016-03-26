@@ -142,14 +142,19 @@ class SetupProfiles extends React.Component {
             <Button
               onClick={() => this.onSaveClientCredentialsClick()}
               class="btn btn-form btn-primary"
+              ptStyle="positive"
+              glyph="floppy"
               text="Save"/>
           </div>
           <div style={{float: 'right'}}>
             <Button
               onClick={() => this.onDeleteClientCredentialsClick()}
               class="btn btn-form btn-primary"
+              ptStyle="negative"
+              glyph="trash"
               text="Delete"/>
           </div>
+          <div style={{display: 'block', clear: 'both'}} />
         </div>
 
       </div>
