@@ -21,11 +21,7 @@ class Connect extends React.Component {
 
   getAppState() {
     var state = {};
-    state.token = this.corbelSession.getToken();
-    state.refreshToken = this.corbelSession.getRefreshToken();
-    state.sessionProfile = this.corbelSession.getProfile();
     state.profiles = this.corbelConfig.getProfileNames();
-    state.profile = state.sessionProfile;
     return state;
   }
 
@@ -74,21 +70,6 @@ class Connect extends React.Component {
             })
           }
         </select>
-        <Input
-          type="text"
-          label="Token:"
-          placeholder="token"
-          value={this.state.token} />
-        <Input
-          type="text"
-          label="Refresh token:"
-          placeholder="token"
-          value={this.state.refreshToken} />
-        <Input
-          type="text"
-          label="Profile:"
-          placeholder="profile"
-          value={this.state.sessionProfile} />
         <Button
           onClick={() => this.onConnectClick()}
           class="btn btn-form btn-primary"

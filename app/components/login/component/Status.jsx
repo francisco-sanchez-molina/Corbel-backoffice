@@ -19,6 +19,8 @@ class Status extends React.Component {
     var corbelSession = this.corbel.corbelStore.getState().backofficeCorbel.getCorbelSession();
     var state = {};
     state.token = corbelSession.getToken();
+    state.refreshToken = corbelSession.getRefreshToken();
+    state.sessionProfile = corbelSession.getProfile();
     state.tokenInfo = corbelSession.getTokenInfo();
     state.connected = state.token ? 'connected' : 'disconnected'
     state.type = state.tokenInfo.type || '';
@@ -48,6 +50,21 @@ class Status extends React.Component {
       <div>
         <h1>Status</h1>
         <div class="form-group">
+          <Input
+            type="text"
+            label="Token:"
+            placeholder="token"
+            value={this.state.token} />
+          <Input
+            type="text"
+            label="Refresh token:"
+            placeholder="token"
+            value={this.state.refreshToken} />
+          <Input
+            type="text"
+            label="Profile:"
+            placeholder="profile"
+            value={this.state.sessionProfile} />
           <p>
             Type {this.state.type}
           </p>

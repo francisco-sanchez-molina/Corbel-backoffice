@@ -20,11 +20,13 @@ class Query extends React.Component {
           label="Query"
           id="query"
           placeholder="query"
-          ref="query"/>
-        <Button
-          onClick={() => this.onQueryClick()}
-          class="btn btn-form btn-primary"
-          text="Search!"/>
+          ref="query"
+          onKeyPress = {(e) => {
+            if (e.key === 'Enter') {
+              this.onQueryClick()
+            }
+          }}
+          />
       </div>
     )
   }
