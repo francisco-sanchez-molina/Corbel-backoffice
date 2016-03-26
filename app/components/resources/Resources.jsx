@@ -1,7 +1,7 @@
 import React from "react";
 
 import {Input, Button} from "react-photonkit";
-
+import ScrollPane from "../viewer/ScrollPane.jsx"
 import DataViewer from "../viewer/DataViewer.jsx"
 
 class Resources extends React.Component {
@@ -25,8 +25,7 @@ class Resources extends React.Component {
   render() {
 
     return (
-      <div>
-        <h1>Resources</h1>
+      <ScrollPane title='Resources'>
         <Input
           label="Collection"
           id="collection"
@@ -39,7 +38,7 @@ class Resources extends React.Component {
            }}
           />
         {this.state.dataViewer}
-      </div>
+      </ScrollPane>
     )
   }
 

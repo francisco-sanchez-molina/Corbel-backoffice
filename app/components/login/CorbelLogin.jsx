@@ -14,11 +14,11 @@ class CorbelLogin extends React.Component {
 
   render() {
     return (
-      <div>
+      <Pane className="padded">
         <Waiting name="corbelLogin" />
         <Connect corbel={this.corbel} />
         <Status  corbel={this.corbel} />
-      </div>
+      </Pane>
     )
   }
 

@@ -4,6 +4,8 @@ class Home extends React.Component {
 
   render() {
     var divStyle = {
+      width: '100%',
+      heigth: '100%',
       textAlign: 'center',
       verticalAlign: 'middle',
       lineHeight: '90px'

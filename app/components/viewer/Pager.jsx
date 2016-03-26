@@ -22,34 +22,13 @@ class Pager extends React.Component {
     this.props.dataViewerStore.unlisten(this.onChange);
   }
 
-  scrollState(event) {
-    if (this.state.disableScrollCheck) {
-      return;
-    }
-    var componentHeight = this.refs.pager.clientHeight;
-    var height = this.refs.pager.scrollHeight - componentHeight;
-    var top = this.refs.pager.scrollTop;
-    var percentage = 100 - 100*(height - top)/height;
-
-    if (percentage > 80) {
-      this.props.dataViewerActions.fetchNextPage();
-    }
-  }
-
   render() {
-    var style = {
-      height: '500px',
-      overflow: 'auto',
-    }
     return (
       <div>
         <p>
           Total elements: {this.state.elements}
         </p>
-        <div
-          ref="pager"
-          style={style}
-          onScroll={(e) => {this.scrollState(e)}}>
+        <div>
           {
             Object.keys(this.state.pages).map((page) => {
               return (

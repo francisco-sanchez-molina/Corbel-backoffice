@@ -9,7 +9,7 @@ import Pager from "./Pager.jsx"
 class DataViewer extends React.Component {
 
   constructor(props) {
-    super(props);
+    super(props)
     this.componentDidUpdate()
   }
 

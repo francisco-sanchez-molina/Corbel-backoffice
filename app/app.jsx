@@ -61,25 +61,14 @@ class App extends React.Component {
   render() {
     return (
       <Window>
-
         <Header corbel={corbel}/>
-
         <Content>
-
           <PaneGroup>
-
             <Sidebar entries={sidebarEntries}/>
-
-            <Pane className="padded">
-              {this.props.children}
-            </Pane>
-
+            {this.props.children}
           </PaneGroup>
-
         </Content>
-
         <Footer/>
-
       </Window>
     )
   }
@@ -116,9 +105,9 @@ var routes = (
       corbel={corbel}/>
 
     <Route
-        component={BackendVersions}
-        path="/versions"
-        corbel={corbel}/>
+      component={BackendVersions}
+      path="/versions"
+      corbel={corbel}/>
 
   </Route>
 )

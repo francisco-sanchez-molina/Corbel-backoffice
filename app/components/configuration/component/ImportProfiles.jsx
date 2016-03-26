@@ -9,13 +9,6 @@ class ImportProfiles extends React.Component {
     this.state = {}
   }
 
-  onImport() {
-    if (this.state.data) {
-      this.corbel.corbelActions.importConfiguration(this.state.data)
-      this.refs.file.value=''
-    }
-  }
-
   onExport(){
     var corbelConfig = this.corbel.corbelStore.getState().backofficeCorbel.getCorbelConfig()
     var content = window.btoa(corbelConfig.serialize())
@@ -25,17 +18,19 @@ class ImportProfiles extends React.Component {
     tempLink.href = url;
     tempLink.setAttribute('download', 'corbel-backoffie-profiles.data');
     tempLink.click()
-
   }
 
   handleFile(e) {
     var reader = new FileReader()
     reader.onload = function(upload) {
-      this.setState({
-        data: window.atob(upload.target.result)
-      })
+      this.onImport(window.atob(upload.target.result))
     }.bind(this)
     reader.readAsText(e.target.files[0])
+  }
+
+  onImport(data) {
+    this.corbel.corbelActions.importConfiguration(data)
+    this.refs.file.value=''
   }
 
   render() {
@@ -45,16 +40,25 @@ class ImportProfiles extends React.Component {
           Import / Export profiles
         </h1>
         <div>
-          <Button
-            onClick={() => this.onImport()}
-            class="btn btn-form btn-primary"
-            text="Import"/>
-          <input ref='file' type="file" onChange={(event) => this.handleFile(event)} />
-
-          <Button
-            onClick={() => this.onExport()}
-            class="btn btn-form btn-primary"
-            text="Export"/>
+          <input
+            style={{position:'absolute', visibility:'hidden'}}
+            ref='file'
+            type="file"
+            onChange={(event) => this.handleFile(event)} />
+          <div>
+            <Button
+              glyph="download"
+              onClick={() => this.refs.file.click()}
+              class="btn btn-form btn-primary"
+              text="Import"/>
+            </div>
+            <div>
+            <Button
+              glyph="upload"
+              onClick={() => this.onExport()}
+              class="btn btn-form btn-primary"
+              text="Export"/>
+            </div>
         </div>
       </div>
 

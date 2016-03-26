@@ -1,6 +1,7 @@
 import React from "react";
 
 import DataViewer from "../../viewer/DataViewer.jsx"
+import ScrollPane from "../../viewer/ScrollPane.jsx"
 
 class Users extends React.Component {
 
@@ -13,10 +14,9 @@ class Users extends React.Component {
 
   render() {
     return (
-      <div className='pane'>
-        <h1>Users</h1>
-        <DataViewer dataAccessObject={new this.corbel.UserDataAccessObject()}/>
-      </div>
+      <ScrollPane title='Users'>
+        <DataViewer ref='dataViewer' dataAccessObject={new this.corbel.UserDataAccessObject()}/>
+      </ScrollPane>
     )
   }
 
