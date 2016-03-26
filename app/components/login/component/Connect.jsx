@@ -55,25 +55,33 @@ class Connect extends React.Component {
     return (
       <div>
         <h1>Connect</h1>
-        <select
-          onChange={(event) => this.onChangeProfile(event)}
-          className="form-control"
-          value={this.state.profile}
-          ref="profileSelect">
-          {
-            this.state.profiles.map(function(profileName) {
-              return (
-                <option value={profileName}>
-                  {profileName}
-                </option>
-              )
-            })
-          }
-        </select>
-        <Button
-          onClick={() => this.onConnectClick()}
-          class="btn btn-form btn-primary"
-          text="Connect" />
+        <div>
+        <div style={{margin: '5px', heigth:'auto', verticalAlign: 'middle', width:'200px', float:'left'}}>
+          <select
+            onChange={(event) => this.onChangeProfile(event)}
+            className="form-control"
+            value={this.state.profile}
+            ref="profileSelect">
+            {
+              this.state.profiles.map(function(profileName) {
+                return (
+                  <option value={profileName}>
+                    {profileName}
+                  </option>
+                )
+              })
+            }
+          </select>
+        </div>
+        <div style={{margin: '5px', heigth:'auto', verticalAlign: 'middle', float:'left'}}>
+          <Button
+            onClick={() => this.onConnectClick()}
+            class="btn btn-form btn-primary"
+             ptSize="large" ptStyle="primary"
+            text="Connect" />
+        </div>
+        <div style={{display: 'block', clear: 'both'}} />
+        </div>
       </div>
     )
   }
