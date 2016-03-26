@@ -11,6 +11,8 @@ import Configuration from "./components/configuration/Configuration.jsx"
 
 import CorbelUsers from "./components/iam/user/Users.jsx"
 import CorbelClients from "./components/iam/client/Clients.jsx"
+import CorbelAssets from "./components/assets/Assets.jsx"
+
 import CorbelResources from "./components/resources/Resources.jsx"
 
 import BackendVersions from "./components/backendVersion/versions.jsx"
@@ -31,6 +33,7 @@ import WaitingActions from "./actions/WaitingActions";
 import CorbelService from "./service/CorbelService"
 import UserDataAccessObject from "./service/UserDataAccessObject"
 import ClientsDataAccessObject from "./service/ClientsDataAccessObject"
+import AssetsDataAccessObject from "./service/AssetsDataAccessObject"
 import ResourcesDataAccessObject from "./service/ResourcesDataAccessObject"
 
 require('../index.scss');
@@ -44,7 +47,8 @@ var corbel = {
   corbelService: CorbelService,
   UserDataAccessObject: UserDataAccessObject,
   ClientsDataAccessObject: ClientsDataAccessObject,
-  ResourcesDataAccessObject: ResourcesDataAccessObject
+  ResourcesDataAccessObject: ResourcesDataAccessObject,
+  AssetsDataAccessObject: AssetsDataAccessObject
 }
 
 var sidebarEntries = [
@@ -52,9 +56,10 @@ var sidebarEntries = [
   new SidebarEntry('Login', '#/CorbelLogin', 'rocket'),
   new SidebarEntry('Users', '#/users', 'user'),
   new SidebarEntry('Clients', '#/clients', 'monitor'),
+  new SidebarEntry('Assets', '#/assets', 'bag'),
   new SidebarEntry('Resources', '#/resources', 'archive'),
   new SidebarEntry('Configuration', '#/configuration', 'cog'),
-  new SidebarEntry('Versions', '#/versions', 'cog')
+  new SidebarEntry('Versions', '#/versions', 'bookmark')
 ];
 
 class App extends React.Component {
@@ -92,6 +97,11 @@ var routes = (
     <Route
       component={CorbelClients}
       path="/clients"
+      corbel={corbel}/>
+
+    <Route
+      component={CorbelAssets}
+      path="/assets"
       corbel={corbel}/>
 
     <Route
