@@ -1,6 +1,5 @@
 import corbel from "corbel-js";
 
-import BackofficeCorbel from "../model/BackofficeCorbel";
 import CorbelStore from "../stores/CorbelStore";
 import CorbelActions from "../actions/CorbelActions";
 
@@ -38,7 +37,6 @@ class CorbelService {
 	login(profileName) {
 		var params = {}
 		var corbelConfig = CorbelStore.getState().backofficeCorbel.getCorbelConfig()
-
 
 		CorbelActions.resetLastLoginData();
 
@@ -79,6 +77,16 @@ class CorbelService {
 		})
 	}
 
+	decodeToken(token) {
+		var tokenInfo
+		try{
+			tokenInfo = JSON.parse(window.atob(token.split('.')[0]))
+		} catch(error) {
+			tokenInfo = {}
+		}
+		return tokenInfo
+	}
+	
 }
 
 export default new CorbelService();

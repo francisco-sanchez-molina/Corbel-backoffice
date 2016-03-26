@@ -14,8 +14,8 @@ import CorbelClients from "./components/iam/client/Clients.jsx"
 import CorbelAssets from "./components/assets/Assets.jsx"
 
 import CorbelResources from "./components/resources/Resources.jsx"
-
 import BackendVersions from "./components/backendVersion/versions.jsx"
+import CorbelTools from "./components/tools/tools.jsx"
 
 import SidebarEntry from "./model/SidebarEntry.js"
 
@@ -59,7 +59,8 @@ var sidebarEntries = [
   new SidebarEntry('Assets', '#/assets', 'bag'),
   new SidebarEntry('Resources', '#/resources', 'archive'),
   new SidebarEntry('Configuration', '#/configuration', 'cog'),
-  new SidebarEntry('Versions', '#/versions', 'bookmark')
+  new SidebarEntry('Versions', '#/versions', 'bookmark'),
+  new SidebarEntry('Tools', '#/tools', 'cog')
 ];
 
 class App extends React.Component {
@@ -117,6 +118,11 @@ var routes = (
     <Route
       component={BackendVersions}
       path="/versions"
+      corbel={corbel}/>
+
+    <Route
+      component={CorbelTools}
+      path="/tools"
       corbel={corbel}/>
 
   </Route>
