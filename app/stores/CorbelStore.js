@@ -30,6 +30,12 @@ class CorbelStore {
 		this.toSessionStorage();
 	}
 
+	onStoreCorbelConfigEnvironment(state) {
+		this.backofficeCorbel.getCorbelConfig()
+			.setEnvironmentUrl(state.name, state.urlBase)
+		this.toSessionStorage()
+	}
+
 	onImportConfiguration(state) {
 		this.backofficeCorbel.getCorbelConfig().deserialize(state)
 		this.toSessionStorage()
@@ -42,6 +48,11 @@ class CorbelStore {
 
 	onDeleteCorbelConfigProfile(state) {
 		this.backofficeCorbel.getCorbelConfig().deleteProfile(state.name);
+		this.toSessionStorage();
+	}
+
+	onDeleteCorbelConfigEnvironment(state) {
+		this.backofficeCorbel.getCorbelConfig().deleteEnvironment(state.name);
 		this.toSessionStorage();
 	}
 

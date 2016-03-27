@@ -17,7 +17,7 @@ class NewProfile extends React.Component {
 	render() {
 		return (
 			<div>
-
+				<h2>Profile</h2>
 				<Input
 					label="Add new profile"
 					id="profileName"

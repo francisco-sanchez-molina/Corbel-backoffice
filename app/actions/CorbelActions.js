@@ -5,6 +5,8 @@ class CorbelActions {
       this.generateActions(
           'storeCorbelConfigProfile',
           'deleteCorbelConfigProfile',
+          'storeCorbelConfigEnvironment',
+          'deleteCorbelConfigEnvironment',
           'storeNewProfile',
           'storeCorbelDriver',
           'newLogin',
