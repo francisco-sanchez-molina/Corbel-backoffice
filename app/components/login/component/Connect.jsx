@@ -11,6 +11,7 @@ class Connect extends React.Component {
     this.waitingActions = this.corbel.waitingActions
     this.state = {};
     this.state.profiles = [];
+    this.state.environments = [];  
     this._onChange = this._onChange.bind(this);
   }
 
@@ -22,6 +23,7 @@ class Connect extends React.Component {
   getAppState() {
     var state = {};
     state.profiles = this.corbelConfig.getProfileNames();
+    state.environments = this.corbelConfig.getEnvironmentNames()
     return state;
   }
 
@@ -51,6 +53,13 @@ class Connect extends React.Component {
     this.setState({profile: profileSelected})
   }
 
+
+    onChangeEnvironment(event) {
+      var corbelConfig = this.corbel.corbelStore.getState().backofficeCorbel.getCorbelConfig()
+      var environmentSelected = this.refs.environmentSelect.value || state.environments[0]
+      this.setState({environment: environmentSelected})
+    }
+
   render() {
     return (
       <div>
@@ -67,6 +76,21 @@ class Connect extends React.Component {
                 return (
                   <option value={profileName}>
                     {profileName}
+                  </option>
+                )
+              })
+            }
+          </select>
+          <select
+            onChange={(event) => this.onChangeEnvironment(event)}
+            className="form-control"
+            value={this.state.evironment}
+            ref="environmentSelect">
+            {
+              this.state.environments.map(function(environmentName) {
+                return (
+                  <option value={environmentName}>
+                    {environmentName}
                   </option>
                 )
               })

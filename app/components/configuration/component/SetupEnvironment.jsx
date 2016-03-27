@@ -81,7 +81,6 @@ class SetupEnvironment extends React.Component {
           {
             this.state.environments.map(function(environmetName) {
               return (
-
                 <option value={environmetName}>
                   {environmetName}
                 </option>
