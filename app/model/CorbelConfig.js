@@ -22,7 +22,7 @@ export default class CorbelConfig {
 	}
 
 	deleteEnvironment(name): ? CorbelConfig {
-		delete this.state.environment[name]
+		delete this.state.environments[name]
 		return this
 	}
 

@@ -26,7 +26,6 @@ class CorbelStore {
 		this.backofficeCorbel.getCorbelConfig()
 			.setClientId(state.profileName, state.clientId)
 			.setClientSecret(state.profileName, state.clientSecret)
-			.setUrlBase(state.profileName, state.urlBase)
 			.setLogin(state.profileName, state.login)
 			.setPassword(state.profileName, state.password)
 		this.toSessionStorage()

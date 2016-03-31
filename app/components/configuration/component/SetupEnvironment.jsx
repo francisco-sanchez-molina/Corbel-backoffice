@@ -46,7 +46,7 @@ class SetupEnvironment extends React.Component {
       return
     }
     this.refs.environmentSelect.value = this.FIRST_OPTION;
-    this.corbel.corbelActions.deleteCorbelConfigEnvironmet({name:environmentSelected});
+    this.corbel.corbelActions.deleteCorbelConfigEnvironment({name:environmentSelected});
   }
 
   onChangeEnvironment(event) {
