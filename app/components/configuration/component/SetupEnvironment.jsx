@@ -5,39 +5,46 @@ class SetupEnvironment extends React.Component {
 
   constructor(props) {
     super(props);
-    this.FIRST_OPTION = 'firstOption';
-    this.corbel = props.corbel;
-    this.state = {};
-    this.state.environments = [];
-    this.loadState = this.loadState.bind(this);
+    this.corbel = props.corbel
+    this.FIRST_OPTION = 'firstOption'
+    this.state = {
+      environments: [],
+      environment: this.FIRST_OPTION
+    }
+    this.loadState = this.loadState.bind(this)
   }
 
   loadState() {
-    this.onChangeEnvironment();
-    this.loadEnvironments();
+    this.loadEnvironments()
   }
 
   loadEnvironments() {
-    var corbelConfig = this.corbel.corbelStore.getState().backofficeCorbel.getCorbelConfig();
-    var state = {};
-    state.environments = corbelConfig.getEnvironmentNames();
-    this.setState(state);
+    var corbelConfig = this.corbel.corbelStore.getState().backofficeCorbel.getCorbelConfig()
+    this.setState({environments: corbelConfig.getEnvironmentNames()})
   }
 
   componentDidMount() {
-    this.corbel.corbelStore.listen(this.loadState);
-    this.loadEnvironments();
+    this.corbel.corbelStore.listen(this.loadState)
+    this.loadEnvironments()
   }
 
   componentWillUnmount() {
-    this.corbel.corbelStore.unlisten(this.loadState);
+    this.corbel.corbelStore.unlisten(this.loadState)
   }
 
   onSaveEnvironmentClick () {
-    var data = {};
-    data.name = this.refs.name.refs.text.value;
-    data.urlBase = this.refs.urlBase.refs.text.value;
-    this.corbel.corbelActions.storeCorbelConfigEnvironment(data);
+    var environmentSelected = this.refs.name.refs.text.value
+    if (environmentSelected.length<1) {
+      return
+    }
+
+    var data = {
+      name: environmentSelected,
+      urlBase: this.refs.urlBase.refs.text.value
+    }
+
+    this.corbel.corbelActions.storeCorbelConfigEnvironment(data)
+    this.setState({environment: data.name})
   }
 
   onDeleteEnvironmentClick () {
@@ -45,24 +52,29 @@ class SetupEnvironment extends React.Component {
     if (environmentSelected==this.FIRST_OPTION) {
       return
     }
-    this.refs.environmentSelect.value = this.FIRST_OPTION;
-    this.corbel.corbelActions.deleteCorbelConfigEnvironment({name:environmentSelected});
+    this.cleanFields()
+    this.corbel.corbelActions.deleteCorbelConfigEnvironment({name:environmentSelected})
+    this.setState({environment: this.FIRST_OPTION})
   }
 
   onChangeEnvironment(event) {
-    var corbelConfig = this.corbel.corbelStore.getState().backofficeCorbel.getCorbelConfig();
-    var environmentSelected = this.refs.environmentSelect.value || state.environments[0];
+    var corbelConfig = this.corbel.corbelStore.getState().backofficeCorbel.getCorbelConfig()
+    var environmentSelected = this.refs.environmentSelect.value
+
     if (environmentSelected==this.FIRST_OPTION) {
-      this.cleanFields();
-      return;
+      this.cleanFields()
+      return
     }
-    this.refs.urlBase.refs.text.value = corbelConfig.getEnvironmentUrl(environmentSelected) || ''
+
     this.refs.name.refs.text.value = environmentSelected
+    this.refs.urlBase.refs.text.value = corbelConfig.getEnvironmentUrl(environmentSelected) || ''
+
+    this.setState({environmet: environmentSelected})
   }
 
   cleanFields(){
-    this.refs.urlBase.refs.text.value = '';
-    this.refs.name.refs.text.value = '';
+    this.refs.urlBase.refs.text.value = ''
+    this.refs.name.refs.text.value = ''
   }
 
   render() {
@@ -76,7 +88,8 @@ class SetupEnvironment extends React.Component {
             <select
               onChange={(event) => this.onChangeEnvironment(event)}
               className="form-control"
-              ref="environmentSelect">
+              ref="environmentSelect"
+              value={this.state.environment}>
               <option value={this.FIRST_OPTION}>
                 Select one environmet:
               </option>

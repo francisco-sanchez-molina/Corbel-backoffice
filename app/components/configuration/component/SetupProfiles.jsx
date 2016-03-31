@@ -5,11 +5,13 @@ class SetupProfiles extends React.Component {
 
   constructor(props) {
     super(props);
-    this.FIRST_OPTION = 'firstOption';
-    this.corbel = props.corbel;
-    this.state = {};
-    this.state.profiles = [];
-    this.loadState = this.loadState.bind(this);
+    this.corbel = props.corbel
+    this.FIRST_OPTION = 'firstOption'
+    this.state = {
+      profiles: [],
+      profile: this.FIRST_OPTION
+    }
+    this.loadState = this.loadState.bind(this)
   }
 
   loadState() {
@@ -25,7 +27,7 @@ class SetupProfiles extends React.Component {
 
   componentDidMount() {
     this.corbel.corbelStore.listen(this.loadState);
-    this.loadProfiles();
+    this.loadProfiles()
   }
 
   componentWillUnmount() {
@@ -38,32 +40,32 @@ class SetupProfiles extends React.Component {
       return
     }
 
-    var data = {}
-    data.profileName = profileSelected
-    data.clientId = this.refs.clientId.refs.text.value
-    data.clientSecret = this.refs.secret.refs.text.value
-    data.login = this.refs.login.refs.text.value
-    data.password = this.refs.password.value
+    var data = {
+      profileName : profileSelected,
+      clientId : this.refs.clientId.refs.text.value,
+      clientSecret : this.refs.secret.refs.text.value,
+      login : this.refs.login.refs.text.value,
+      password : this.refs.password.value
+    }
 
     this.corbel.corbelActions.storeCorbelConfigProfile(data)
-    this.refs.profileSelect.value = profileSelected
+    this.setState({profile: profileSelected})
   }
 
   onDeleteClientCredentialsClick () {
-    var profileSelected = this.refs.profileSelect.value;
+    var profileSelected = this.refs.profileSelect.value
     if (profileSelected==this.FIRST_OPTION) {
-      return;
+      return
     }
-    this.refs.profileSelect.value = this.FIRST_OPTION;
-    this.corbel.corbelActions.deleteCorbelConfigProfile({name:profileSelected});
+    this.cleanFields()
+    this.corbel.corbelActions.deleteCorbelConfigProfile({name:profileSelected})
+    this.setState({profile:this.FIRST_OPTION})
   }
 
   onChangeProfile(event) {
     var corbelConfig = this.corbel.corbelStore.getState().backofficeCorbel.getCorbelConfig()
-    var profileSelected = this.refs.profileSelect.value || this.FIRST_OPTION
-    if (event==undefined) {
-      profileSelected = this.lastSelected
-    }
+    var profileSelected = this.refs.profileSelect.value
+
     if (profileSelected==this.FIRST_OPTION) {
       this.cleanFields()
       return
@@ -73,6 +75,8 @@ class SetupProfiles extends React.Component {
     this.refs.secret.refs.text.value = corbelConfig.getClientSecret(profileSelected) || ''
     this.refs.login.refs.text.value = corbelConfig.getLogin(profileSelected) || ''
     this.refs.password.value = corbelConfig.getPassword(profileSelected) || ''
+
+    this.setState({profile: profileSelected})
   }
 
   cleanFields(){
@@ -96,7 +100,8 @@ class SetupProfiles extends React.Component {
             <select
               onChange={(event) => this.onChangeProfile(event)}
               className="form-control"
-              ref="profileSelect">
+              ref="profileSelect"
+              value={this.state.profile}>
               <option value={this.FIRST_OPTION}>
                 Select one profile:
               </option>
