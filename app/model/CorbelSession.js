@@ -22,6 +22,15 @@ export default class CorbelSession {
 		return this.state.profile;
 	}
 
+	setEnvironment(environment: string): ? CorbelConfig {
+		this.state.environment = environment;
+		return this;
+	}
+
+	getEnvironment(): ? string {
+		return this.state.environment;
+	}
+
   setToken(token: string): ? CorbelSession {
     this.state.token = token;
     return this;

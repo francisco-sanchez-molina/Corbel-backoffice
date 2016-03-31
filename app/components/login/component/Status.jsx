@@ -21,6 +21,8 @@ class Status extends React.Component {
     state.token = corbelSession.getToken();
     state.refreshToken = corbelSession.getRefreshToken();
     state.sessionProfile = corbelSession.getProfile();
+    state.sessionEnvironment = corbelSession.getEnvironment();
+
     state.tokenInfo = corbelSession.getTokenInfo();
     state.connected = state.token ? 'connected' : 'disconnected'
     state.type = state.tokenInfo.type || '';
@@ -65,6 +67,11 @@ class Status extends React.Component {
             label="Profile:"
             placeholder="profile"
             value={this.state.sessionProfile} />
+          <Input
+            type="text"
+            label="Environment:"
+            placeholder="profile"
+            value={this.state.sessionEnvironment} />
           <p>
             Type {this.state.type}
           </p>

@@ -56,57 +56,58 @@ class Connect extends React.Component {
   }
 
 
-    onChangeEnvironment(event) {
-      var corbelConfig = this.corbel.corbelStore.getState().backofficeCorbel.getCorbelConfig()
-      var environmentSelected = this.refs.environmentSelect.value || state.environments[0]
-      this.setState({environment: environmentSelected})
-    }
+  onChangeEnvironment(event) {
+    var corbelConfig = this.corbel.corbelStore.getState().backofficeCorbel.getCorbelConfig()
+    var environmentSelected = this.refs.environmentSelect.value || state.environments[0]
+    this.setState({environment: environmentSelected})
+  }
 
   render() {
     return (
       <div>
         <h1>Connect</h1>
         <div>
-        <div style={{margin: '5px', heigth:'auto', verticalAlign: 'middle', width:'200px', float:'left'}}>
-          <select
-            onChange={(event) => this.onChangeProfile(event)}
-            className="form-control"
-            value={this.state.profile}
-            ref="profileSelect">
-            {
-              this.state.profiles.map(function(profileName) {
-                return (
-                  <option value={profileName}>
-                    {profileName}
-                  </option>
-                )
-              })
-            }
-          </select>
-          <select
-            onChange={(event) => this.onChangeEnvironment(event)}
-            className="form-control"
-            value={this.state.evironment}
-            ref="environmentSelect">
-            {
-              this.state.environments.map(function(environmentName) {
-                return (
-                  <option value={environmentName}>
-                    {environmentName}
-                  </option>
-                )
-              })
-            }
-          </select>
-        </div>
-        <div style={{margin: '5px', heigth:'auto', verticalAlign: 'middle', float:'left'}}>
-          <Button
-            onClick={() => this.onConnectClick()}
-            class="btn btn-form btn-primary"
-             ptSize="large" ptStyle="primary"
-            text="Connect" />
-        </div>
-        <div style={{display: 'block', clear: 'both'}} />
+          <div style={{margin: '5px', heigth:'auto', verticalAlign: 'middle', width:'200px', float:'left'}}>
+            <select
+              onChange={(event) => this.onChangeProfile(event)}
+              className="form-control"
+              value={this.state.profile}
+              ref="profileSelect">
+              {
+                this.state.profiles.map(function(profileName) {
+                  return (
+                    <option value={profileName}>
+                      {profileName}
+                    </option>
+                  )
+                })
+              }
+            </select>
+            <select
+              onChange={(event) => this.onChangeEnvironment(event)}
+              className="form-control"
+              value={this.state.evironment}
+              ref="environmentSelect">
+              {
+                this.state.environments.map(function(environmentName) {
+                  return (
+                    <option value={environmentName}>
+                      {environmentName}
+                    </option>
+                  )
+                })
+              }
+            </select>
+          </div>
+          <div style={{margin: '5px', heigth:'auto', verticalAlign: 'middle', float:'left'}}>
+            <Button
+              onClick={() => this.onConnectClick()}
+              class="btn btn-form btn-primary"
+              ptSize="large"
+              ptStyle="primary"
+              text="Connect" />
+          </div>
+          <div style={{display: 'block', clear: 'both'}} />
         </div>
       </div>
     )

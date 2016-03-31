@@ -66,6 +66,7 @@ class CorbelStore {
 	onStoreNewLoginData(state) {
 		this.backofficeCorbel.getCorbelSession()
 			.setProfile(state.profile)
+			.setEnvironment(state.environment)
 			.setLogin(state.login)
 			.setUrl(state.url);
 		this.toSessionStorage();

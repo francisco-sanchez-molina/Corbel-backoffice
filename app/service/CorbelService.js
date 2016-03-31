@@ -52,6 +52,7 @@ class CorbelService {
 
 		CorbelActions.storeNewLoginData({
 			profile: profileName,
+			environment: environmentName,
 			login: corbelConfig.getLogin(profileName),
 			url: corbelConfig.getEnvironmentUrl(environmentName)
 		})
