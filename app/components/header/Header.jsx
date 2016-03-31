@@ -32,7 +32,7 @@ class Header extends React.Component {
     state.token = this.corbelSession.getToken();
     state.refreshToken = this.corbelSession.getRefreshToken();
     state.sessionProfile = this.corbelSession.getProfile();
-    state.url = this.corbelSession.getUrl()
+    state.environment = this.corbelSession.getEnvironment()
     state.login= this.corbelSession.getLogin()
     return state;
   }
@@ -69,7 +69,7 @@ class Header extends React.Component {
             Login: {this.state.login}
           </div>
           <div>
-            URL: {this.state.url}
+            Environment: {this.state.environment}
           </div>
         </div>
       </Toolbar>
