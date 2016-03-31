@@ -14,7 +14,7 @@ class CorbelStore {
 		localStorage.setItem('CorbelStore', this.backofficeCorbel.serialize());
 	}
 
-  onStoreNewProfile(state) {
+	onStoreNewProfile(state) {
 		this.backofficeCorbel.getCorbelConfig()
 			.addProfile(state.profileName);
 		this.toSessionStorage();
@@ -22,12 +22,14 @@ class CorbelStore {
 
 	onStoreCorbelConfigProfile(state) {
 		this.backofficeCorbel.getCorbelConfig()
+			.addProfile(state.profileName)
+		this.backofficeCorbel.getCorbelConfig()
 			.setClientId(state.profileName, state.clientId)
 			.setClientSecret(state.profileName, state.clientSecret)
 			.setUrlBase(state.profileName, state.urlBase)
 			.setLogin(state.profileName, state.login)
-			.setPassword(state.profileName, state.password);
-		this.toSessionStorage();
+			.setPassword(state.profileName, state.password)
+		this.toSessionStorage()
 	}
 
 	onStoreCorbelConfigEnvironment(state) {
@@ -42,8 +44,8 @@ class CorbelStore {
 	}
 
 	onSetProfile(state) {
-			this.backofficeCorbel.getCorbelConfig().setDefaultProfile(state.name);
-			this.toSessionStorage();
+		this.backofficeCorbel.getCorbelConfig().setDefaultProfile(state.name);
+		this.toSessionStorage();
 	}
 
 	onDeleteCorbelConfigProfile(state) {

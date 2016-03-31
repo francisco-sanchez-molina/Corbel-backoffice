@@ -17,30 +17,30 @@ class CorbelService {
 		return this.driver;
 	}
 
-	createDriver(profileName) {
+	createDriver(profileName, environmentName) {
 		var corbelConfig = CorbelStore.getState().backofficeCorbel.getCorbelConfig()
 		if (!profileName ||
-			!corbelConfig.getUrlBase(profileName) ||
+			!corbelConfig.getEnvironmentUrl(environmentName) ||
 			!corbelConfig.getClientId(profileName) ||
 			!corbelConfig.getClientSecret(profileName)) {
 			return undefined
 		}
 
 		return corbel.getDriver({
-			urlBase: corbelConfig.getUrlBase(profileName),
+			urlBase: corbelConfig.getEnvironmentUrl(environmentName),
 			clientId: corbelConfig.getClientId(profileName),
 			clientSecret: corbelConfig.getClientSecret(profileName),
 			scopes: ''
 		})
 	}
 
-	login(profileName) {
+	login(profileName, environmentName) {
 		var params = {}
 		var corbelConfig = CorbelStore.getState().backofficeCorbel.getCorbelConfig()
 
 		CorbelActions.resetLastLoginData();
 
-		this.driver = this.createDriver(profileName)
+		this.driver = this.createDriver(profileName, environmentName)
 
 		if (!this.driver) {
 			return Promise.reject({
@@ -53,7 +53,7 @@ class CorbelService {
 		CorbelActions.storeNewLoginData({
 			profile: profileName,
 			login: corbelConfig.getLogin(profileName),
-			url: corbelConfig.getUrlBase(profileName)
+			url: corbelConfig.getEnvironmentUrl(environmentName)
 		})
 
 		if (corbelConfig.getLogin(profileName) && corbelConfig.getLogin(profileName).length > 0) {
@@ -86,7 +86,7 @@ class CorbelService {
 		}
 		return tokenInfo
 	}
-	
+
 }
 
 export default new CorbelService();

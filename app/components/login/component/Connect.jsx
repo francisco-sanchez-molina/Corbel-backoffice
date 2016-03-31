@@ -11,7 +11,7 @@ class Connect extends React.Component {
     this.waitingActions = this.corbel.waitingActions
     this.state = {};
     this.state.profiles = [];
-    this.state.environments = [];  
+    this.state.environments = [];
     this._onChange = this._onChange.bind(this);
   }
 
@@ -43,7 +43,9 @@ class Connect extends React.Component {
   onConnectClick() {
     var corbelConfig = this.corbel.corbelStore.getState().backofficeCorbel.getCorbelConfig()
     var profileSelected = this.refs.profileSelect.value || state.profiles[0]
-    var promise = this.corbel.corbelService.login(profileSelected)
+    var environmentSelected = this.refs.environmentSelect.value || state.environments[0]
+
+    var promise = this.corbel.corbelService.login(profileSelected, environmentSelected)
     this.waitingActions.waitForPromise({module: 'corbelLogin', promise: promise})
   }
 

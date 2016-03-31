@@ -44,15 +44,6 @@ export default class CorbelConfig {
 		return this.state.profiles[profileName].clientSecret;
 	}
 
-	setUrlBase(profileName, urlBase: string): ? CorbelConfigProfile {
-		this.state.profiles[profileName].urlBase = urlBase;
-		return this;
-	}
-
-	getUrlBase(profileName): ? string {
-		return this.state.profiles[profileName].urlBase;
-	}
-
 	setLogin(profileName, login: string): ? CorbelConfigProfile {
 		this.state.profiles[profileName].login = login;
 		return this;
@@ -85,8 +76,8 @@ export default class CorbelConfig {
 	}
 
 	addProfile(profileName) {
-		this.state.profiles[profileName] = this.state.profiles[profileName] || {};
-		return this;
+		this.state.profiles[profileName] = this.state.profiles[profileName] || {}
+		return this
 	}
 
 	getProfileNames(): ? string {

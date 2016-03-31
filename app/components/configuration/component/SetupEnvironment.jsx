@@ -70,24 +70,38 @@ class SetupEnvironment extends React.Component {
       <div>
 
         <h2>Environment</h2>
+        <div>
+          <div style={{margin: '5px', heigth:'auto', verticalAlign: 'middle', width:'200px', float:'left'}}>
 
-        <select
-          onChange={(event) => this.onChangeEnvironment(event)}
-          className="form-control"
-          ref="environmentSelect">
-          <option value={this.FIRST_OPTION}>
-            Select one environmet:
-          </option>
-          {
-            this.state.environments.map(function(environmetName) {
-              return (
-                <option value={environmetName}>
-                  {environmetName}
-                </option>
-              )
-            })
-          }
-        </select>
+            <select
+              onChange={(event) => this.onChangeEnvironment(event)}
+              className="form-control"
+              ref="environmentSelect">
+              <option value={this.FIRST_OPTION}>
+                Select one environmet:
+              </option>
+              {
+                this.state.environments.map(function(environmetName) {
+                  return (
+                    <option value={environmetName}>
+                      {environmetName}
+                    </option>
+                  )
+                })
+              }
+            </select>
+          </div>
+          <div style={{margin: '5px', heigth:'auto', verticalAlign: 'middle', float: 'left'}}>
+            <Button
+              onClick={() => this.onDeleteEnvironmentClick()}
+              class="btn btn-form btn-primary"
+              ptStyle="negative"
+              glyph="trash"
+              text="Delete"/>
+          </div>
+          <div style={{display: 'block', clear: 'both'}} />
+        </div>
+
 
         <Input
           label="Name"
@@ -101,23 +115,12 @@ class SetupEnvironment extends React.Component {
           ref="urlBase"/>
 
         <div>
-          <div style={{float: 'left'}}>
-            <Button
-              onClick={() => this.onSaveEnvironmentClick()}
-              class="btn btn-form btn-primary"
-              ptStyle="positive"
-              glyph="floppy"
-              text="Save"/>
-          </div>
-          <div style={{float: 'right'}}>
-            <Button
-              onClick={() => this.onDeleteEnvironmentClick()}
-              class="btn btn-form btn-primary"
-              ptStyle="negative"
-              glyph="trash"
-              text="Delete"/>
-          </div>
-          <div style={{display: 'block', clear: 'both'}} />
+          <Button
+            onClick={() => this.onSaveEnvironmentClick()}
+            class="btn btn-form btn-primary"
+            ptStyle="positive"
+            glyph="floppy"
+            text="Save"/>
         </div>
 
       </div>
