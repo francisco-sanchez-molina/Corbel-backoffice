@@ -8,10 +8,8 @@ export default class CorbelConfig {
 	}
 
 	deserialize(state: string): ? CorbelConfig {
-		this.state = JSON.parse(state);
-		this.state.profiles = this.state.profiles || {
-			default: {}
-		};
+		this.state = JSON.parse(state)
+		this.state.profiles = this.state.profiles || {}
 		this.state.environments = this.state.environments || {}
 		return this;
 	}

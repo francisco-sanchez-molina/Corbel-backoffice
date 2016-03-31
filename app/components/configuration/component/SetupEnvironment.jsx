@@ -61,6 +61,7 @@ class SetupEnvironment extends React.Component {
     var corbelConfig = this.corbel.corbelStore.getState().backofficeCorbel.getCorbelConfig()
     var environmentSelected = this.refs.environmentSelect.value
 
+    this.setState({environment: environmentSelected})
     if (environmentSelected==this.FIRST_OPTION) {
       this.cleanFields()
       return
@@ -68,8 +69,6 @@ class SetupEnvironment extends React.Component {
 
     this.refs.name.refs.text.value = environmentSelected
     this.refs.urlBase.refs.text.value = corbelConfig.getEnvironmentUrl(environmentSelected) || ''
-
-    this.setState({environmet: environmentSelected})
   }
 
   cleanFields(){
@@ -91,13 +90,13 @@ class SetupEnvironment extends React.Component {
               ref="environmentSelect"
               value={this.state.environment}>
               <option value={this.FIRST_OPTION}>
-                Select one environmet:
+                Select one environment:
               </option>
               {
-                this.state.environments.map(function(environmetName) {
+                this.state.environments.map(function(environmentName) {
                   return (
-                    <option value={environmetName}>
-                      {environmetName}
+                    <option value={environmentName}>
+                      {environmentName}
                     </option>
                   )
                 })

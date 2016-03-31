@@ -11,7 +11,7 @@ class CorbelService {
 			var corbelSession = CorbelStore.getState().backofficeCorbel.getCorbelSession();
 			var config = corbelSession.getCorbelDriverConfig();
 			if (config && config.urlBase) {
-				this.driver = corbel.getDriver(config);
+				this.driver = corbel.getDriver(config)
 			}
 		}
 		return this.driver;
@@ -78,11 +78,50 @@ class CorbelService {
 		})
 	}
 
+	loginToken(token, environmentName) {
+		var params = {}
+		var corbelConfig = CorbelStore.getState().backofficeCorbel.getCorbelConfig()
+
+		CorbelActions.resetLastLoginData();
+
+		var tokenInfo = this.decodeToken(token)
+		this.driver = corbel.getDriver({
+			urlBase: corbelConfig.getEnvironmentUrl(environmentName),
+			domain: tokenInfo.domainId,
+			clientId: tokenInfo.clientId,
+			iamToken: {
+				accessToken: token,
+				expiresAt: tokenInfo.state
+			}
+		})
+
+		if (!this.driver) {
+			return Promise.reject({
+				error: 'misconfigure profile'
+			})
+		}
+
+		CorbelActions.storeCorbelDriver(this.driver.config.config)
+
+		CorbelActions.storeNewLoginData({
+			profile: 'From token',
+			environment: environmentName,
+			login: 'From token',
+			url: corbelConfig.getEnvironmentUrl(environmentName)
+		})
+
+		CorbelActions.newLogin({
+			token: token,
+			refreshToken: undefined
+		});
+
+	}
+
 	decodeToken(token) {
 		var tokenInfo
-		try{
+		try {
 			tokenInfo = JSON.parse(window.atob(token.split('.')[0]))
-		} catch(error) {
+		} catch (error) {
 			tokenInfo = {}
 		}
 		return tokenInfo
