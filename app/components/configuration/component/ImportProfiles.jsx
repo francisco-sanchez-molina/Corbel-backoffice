@@ -21,19 +21,25 @@ class ImportProfiles extends React.Component {
     tempLink.click()
   }
 
+  tryLoadConfig(name, content) {
+    try{
+      content = JSON.parse(content)
+      if (content.corbelConfig) {
+        this.onImport(window.atob(content.corbelConfig))
+        this.setState({import: ' ' + name + ' imported!'})
+      } else {
+        this.setState({import: ' ' + name + ' fail!'})
+      }
+    }catch(error) {
+      this.setState({import: ' ' + name + ' fail!'})
+    }
+  }
+
   handleFile(e) {
     var reader = new FileReader()
     reader.onload = function(file, upload) {
-      try{ var content = JSON.parse(upload.target.result)
-        if (content.corbelConfig) {
-          this.onImport(window.atob(content.corbelConfig))
-          this.setState({import: ' ' + file.name + ' imported!'})
-        } else {
-          this.setState({import: ' ' + file.name + ' fail!'})
-        }
-      }catch(error) {
-        this.setState({import: ' ' + file.name + ' fail!'})
-      }
+      var content = upload.target.result
+      this.tryLoadConfig(file.name, content)
     }.bind(this, e.target.files[0])
     reader.readAsText(e.target.files[0])
   }
@@ -41,6 +47,10 @@ class ImportProfiles extends React.Component {
   onImport(data) {
     this.corbel.corbelActions.importConfiguration(data)
     this.refs.file.value=''
+  }
+
+  onTextualConfigurationChange(event) {
+    this.tryLoadConfig('clipboard', event.target.value)
   }
 
   render() {
@@ -70,6 +80,13 @@ class ImportProfiles extends React.Component {
               class="btn btn-form btn-primary"
               text="Export"/>
           </p>
+          <Input
+            label="Paste configuration here:"
+            id="textualConfiguration"
+            placeholder="configuration"
+            ref="textualConfiguration"
+            value=""
+            onChange={(event) => this.onTextualConfigurationChange(event)}/>
         </div>
       </div>
 
