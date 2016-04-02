@@ -14,6 +14,12 @@ export default class DataAccessObject {
 	}
 
 	getTotalElements() {
+		var driver = corbelService.getDriver();
+		var domain = driver.config.config.domain;
+		if (!domain) {
+			return Promise.reject({error: 'Driver has not domain'})
+		}
+
 		var params = {
 			aggregation: {
 				'$count': '*'
@@ -22,10 +28,16 @@ export default class DataAccessObject {
 		if (this.apiQuery) {
 			params.query = [this.apiQuery];
 		}
-		return this._getCollection(params);
+		return this._getCollection(driver, params);
 	}
 
 	fetchPage(page: int) {
+		var driver = corbelService.getDriver();
+		var domain = driver.config.config.domain;
+		if (!domain) {
+			return Promise.reject({error: 'Driver has not domain'})
+		}
+
 		var that = this;
 		var query = {
 			pagination: {
@@ -38,15 +50,25 @@ export default class DataAccessObject {
 			query.query = [this.apiQuery];
 		}
 
-		return this._getCollection(query);
+		return this._getCollection(driver, query);
 	}
 
 	updateResource(oldData: object, newData: object) {
-		return this._updateResource(oldData.id, newData);
+		var driver = corbelService.getDriver();
+		var domain = driver.config.config.domain;
+		if (!domain) {
+			return Promise.reject({error: 'Driver has not domain'})
+		}
+		return this._updateResource(driver, oldData.id, newData);
 	}
 
 	getResource(id: string) {
-		return this._getResource(id);
+		var driver = corbelService.getDriver();
+		var domain = driver.config.config.domain;
+		if (!domain) {
+			return Promise.reject({error: 'Driver has not domain'})
+		}
+		return this._getResource(driver, id);
 	}
 
 	setQuery(query: object) {
