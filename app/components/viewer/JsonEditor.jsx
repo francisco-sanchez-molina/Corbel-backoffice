@@ -51,7 +51,6 @@ class JsonEditor extends React.Component {
       ref={"editor:page:" + this.props.page + ":index:"+ this.props.index}
       value={content}
       onChange={(newValue) => this.setState({editorContent: newValue})}
-      onKeyDown={() => this.setState({status:'reading'})}
       />
     this.aceRef = "editor:page:" + this.props.page + ":index:"+ this.props.index
     if (this.refs[this.aceRef]){
@@ -112,11 +111,6 @@ class JsonEditor extends React.Component {
 
     var divPad = {
       padding: '10px 10px 10px 5px'
-    };
-
-    var divStyle = {
-      display: 'block',
-      backgroundColor: 'WhiteSmoke'
     };
 
     var editor

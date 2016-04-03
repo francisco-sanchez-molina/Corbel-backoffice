@@ -8,6 +8,7 @@ import Home from "./components/home.jsx"
 import Sidebar from "./components/sidebar.jsx"
 import CorbelLogin from "./components/login/CorbelLogin.jsx"
 import Configuration from "./components/configuration/Configuration.jsx"
+import Shell from './components/shell/Shell.jsx'
 
 import CorbelUsers from "./components/iam/user/Users.jsx"
 import CorbelClients from "./components/iam/client/Clients.jsx"
@@ -58,6 +59,7 @@ var sidebarEntries = [
   new SidebarEntry('Clients', '#/clients', 'monitor'),
   new SidebarEntry('Assets', '#/assets', 'bag'),
   new SidebarEntry('Resources', '#/resources', 'archive'),
+  new SidebarEntry('Shell', '#/shell', 'window'),
   new SidebarEntry('Configuration', '#/configuration', 'cog'),
   new SidebarEntry('Versions', '#/versions', 'bookmark'),
   new SidebarEntry('Tools', '#/tools', 'cog')
@@ -108,6 +110,11 @@ var routes = (
     <Route
       component={CorbelResources}
       path="/resources"
+      corbel={corbel}/>
+
+    <Route
+      component={Shell}
+      path="/shell"
       corbel={corbel}/>
 
     <Route
