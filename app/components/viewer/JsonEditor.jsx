@@ -6,6 +6,8 @@ import AceEditor from 'react-ace';
 import 'brace/mode/json';
 import 'brace/theme/xcode';
 
+import Paper from 'material-ui/lib/paper';
+
 class JsonEditor extends React.Component {
 
   constructor(props) {
@@ -120,29 +122,25 @@ class JsonEditor extends React.Component {
     var editor
 
     return (
-
       <div style={divPad}>
-        <div style={divStyle}>
+        <Paper zDepth='2'>
           <div style={{
+              float: 'left',
+              width: '90%'
+            }}>
+            {this.getEditor()}
+          </div>
+          <div  style={{
+              float: 'left',
+              width: '10%',
               padding: '10px 10px 10px 10px'
             }}>
-            <div style={{
-                float: 'left',
-                width: '90%'
-              }}>
-              {this.getEditor()}
-            </div>
-            <div  style={{
-                float: 'left',
-                width: '10%',
-                padding: '10px 10px 10px 10px'
-              }}>
-              {this.getControls()}
-            </div>
-            <div style={{display: 'block', clear: 'both'}} />
+            {this.getControls()}
           </div>
-        </div>
+          <div style={{display: 'block', clear: 'both'}} />
+        </Paper>
       </div>
+
     )
   }
 

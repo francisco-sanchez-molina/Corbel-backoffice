@@ -50,7 +50,7 @@ class Status extends React.Component {
   render() {
     return (
       <div>
-        <h1>Status</h1>
+        <h3>Status</h3>
         <div class="form-group">
           <Input
             type="text"

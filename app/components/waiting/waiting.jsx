@@ -2,6 +2,8 @@ import React from "react";
 
 import WaitingStore from '../../stores/WaitingStore'
 import WaitingActions from '../../actions/WaitingActions'
+import RefreshIndicator from 'material-ui/lib/refresh-indicator'
+
 
 import {Button} from 'react-photonkit'
 
@@ -28,6 +30,7 @@ class Waiting extends React.Component {
   }
 
   render() {
+
     var style = {
       position:   'fixed',
       zIndex:    1000,
@@ -35,7 +38,7 @@ class Waiting extends React.Component {
       left:       0,
       height:     '100%',
       width:      '100%',
-      background: 'rgba( 255, 255, 255, .8 ) url(\'assets/loading.gif\') 50% 50% no-repeat'
+      background: 'rgba( 255, 255, 255, .8 )'
     }
 
     var textStyle = {
@@ -67,23 +70,29 @@ class Waiting extends React.Component {
       content =
       <div style={style}>
         <div style={textStyle}>
-          <h2>processing...</h2>
-          <Button
-            onClick={() => WaitingActions.abortPromise(this.module)}
-            class="btn btn-form btn-primary"
-            text="cancel" />
+          <RefreshIndicator
+            size={35}
+            left={-50}
+            top={27}
+            loadingColor={"#FF9800"}
+            status="loading"/>
+            <h2>processing...</h2>
+            <Button
+              onClick={() => WaitingActions.abortPromise(this.module)}
+              class="btn btn-form btn-primary"
+              text="cancel" />
+          </div>
         </div>
-      </div>
+      }
+
+      return (
+        <div>
+          {fail}
+          {content}
+          {this.props.children}
+        </div>
+      )
     }
-
-    return (
-      <div>
-        {fail}
-        {content}
-        {this.props.children}
-      </div>
-    )
   }
-}
 
-export default Waiting;
+  export default Waiting;

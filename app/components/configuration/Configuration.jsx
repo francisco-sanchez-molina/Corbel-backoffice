@@ -1,5 +1,6 @@
 import React from "react";
 import {Window, Button, Pane, Input} from "react-photonkit";
+import Paper from 'material-ui/lib/paper'
 
 import SetupProfiles from "./component/SetupProfiles.jsx";
 import SetupEnvironment from "./component/SetupEnvironment.jsx";
@@ -16,17 +17,27 @@ class Configuration extends React.Component {
   render() {
     return (
       <Pane className="padded">
-        <div>
-          <SetupProfiles corbel={this.corbel} />
-        </div>
-        <hr />
-        <div>
-          <SetupEnvironment corbel={this.corbel} />
-        </div>
-        <hr />
-        <div>
-          <ImportProfiles corbel={this.corbel} />
-        </div>
+        <Paper>
+          <div style={{
+              padding: '0px 5px 5px 5px'
+            }}>
+            <SetupProfiles corbel={this.corbel} />
+          </div>
+        </Paper>
+        <Paper>
+          <div style={{
+              padding: '0px 5px 5px 5px'
+            }}>
+            <SetupEnvironment corbel={this.corbel} />
+          </div>
+        </Paper>
+        <Paper>
+          <div style={{
+              padding: '0px 5px 5px 5px'
+            }}>
+            <ImportProfiles corbel={this.corbel} />
+          </div>
+        </Paper>
       </Pane>
     )
   }

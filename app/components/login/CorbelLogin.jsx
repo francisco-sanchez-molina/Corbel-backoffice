@@ -5,6 +5,8 @@ import Connect from './component/Connect.jsx'
 import ConnectToken from './component/ConnectToken.jsx'
 import Status from './component/Status.jsx'
 import Waiting from '../waiting/waiting.jsx'
+import Paper from 'material-ui/lib/paper'
+
 
 class CorbelLogin extends React.Component {
 
@@ -17,9 +19,27 @@ class CorbelLogin extends React.Component {
     return (
       <Pane className="padded">
         <Waiting name="corbelLogin" />
-        <Connect corbel={this.corbel} />
-        <ConnectToken corbel={this.corbel} />
-        <Status  corbel={this.corbel} />
+        <Paper>
+          <div style={{
+              padding: '0px 5px 5px 5px'
+            }}>
+            <Connect corbel={this.corbel} />
+          </div>
+        </Paper>
+        <Paper>
+          <div style={{
+              padding: '0px 5px 5px 5px'
+            }}>
+            <ConnectToken corbel={this.corbel} />
+          </div>
+        </Paper>
+        <Paper>
+          <div style={{
+              padding: '0px 5px 5px 5px'
+            }}>
+            <Status  corbel={this.corbel} />
+          </div>
+        </Paper>
       </Pane>
     )
   }

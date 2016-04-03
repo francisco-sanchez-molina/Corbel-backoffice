@@ -80,7 +80,7 @@ class SetupEnvironment extends React.Component {
     return (
       <div>
 
-        <h2>Environment</h2>
+        <h3>Environment</h3>
         <div>
           <div style={{margin: '5px', heigth:'auto', verticalAlign: 'middle', width:'200px', float:'left'}}>
 

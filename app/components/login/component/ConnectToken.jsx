@@ -50,9 +50,9 @@ class ConnectToken extends React.Component {
   render() {
     return (
       <div>
-        <h1>
+        <h3>
           Connect with token
-        </h1>
+        </h3>
 
         <div style={{margin: '5px', heigth:'auto', verticalAlign: 'middle', width:'200px'}}>
           <select

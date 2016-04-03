@@ -56,9 +56,7 @@ class ImportProfiles extends React.Component {
   render() {
     return (
       <div>
-        <h1>
-          Import / Export profiles
-        </h1>
+        <h3>Import / Export profiles</h3>
         <div>
           <input
             style={{position:'absolute', visibility:'hidden'}}

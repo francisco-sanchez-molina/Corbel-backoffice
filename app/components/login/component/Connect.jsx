@@ -65,7 +65,7 @@ class Connect extends React.Component {
   render() {
     return (
       <div>
-        <h1>Connect</h1>
+        <h3>Connect</h3>
         <div>
           <div style={{margin: '5px', heigth:'auto', verticalAlign: 'middle', width:'200px', float:'left'}}>
             <select

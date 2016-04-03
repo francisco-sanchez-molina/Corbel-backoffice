@@ -1,5 +1,5 @@
-import React from "react";
-import {Window, Button, Input} from "react-photonkit";
+import React from "react"
+import {Window, Button, Input} from "react-photonkit"
 
 class SetupProfiles extends React.Component {
 
@@ -66,6 +66,8 @@ class SetupProfiles extends React.Component {
     var corbelConfig = this.corbel.corbelStore.getState().backofficeCorbel.getCorbelConfig()
     var profileSelected = this.refs.profileSelect.value
 
+    this.setState({profile: profileSelected})
+
     if (profileSelected==this.FIRST_OPTION) {
       this.cleanFields()
       return
@@ -76,7 +78,6 @@ class SetupProfiles extends React.Component {
     this.refs.login.refs.text.value = corbelConfig.getLogin(profileSelected) || ''
     this.refs.password.value = corbelConfig.getPassword(profileSelected) || ''
 
-    this.setState({profile: profileSelected})
   }
 
   cleanFields(){
@@ -90,11 +91,7 @@ class SetupProfiles extends React.Component {
   render() {
     return (
       <div>
-
-        <h1>
-          Profiles
-        </h1>
-
+        <h3>Profiles</h3>
         <div>
           <div style={{margin: '5px', heigth:'auto', verticalAlign: 'middle', width:'200px', float:'left'}}>
             <select
