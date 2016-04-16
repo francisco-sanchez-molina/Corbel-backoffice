@@ -12,13 +12,31 @@ class CorbelLogin extends React.Component {
 
   constructor(props) {
     super(props);
-    this.corbel = props.route.corbel;
+    this.corbel = props.route.corbel
+    this.state = this.corbel.corbelStore.getState();
+    this._onChange = this._onChange.bind(this);
+  }
+
+  componentDidMount() {
+    this.corbel.corbelStore.listen(this._onChange);
+  }
+
+  componentWillUnmount() {
+    this.corbel.corbelStore.unlisten(this._onChange);
+  }
+
+  _onChange() {
+    this.setState(this.corbel.corbelStore.getState())
+  }
+
+  cancelWaiting() {
+    this.corbel.corbelActions.cancelLogin()
   }
 
   render() {
     return (
       <Pane className="padded">
-        <Waiting name="corbelLogin" />
+        <Waiting name="corbelLogin" waiting={this.state.loginInProgress} onCancel={() => this.cancelWaiting()} />
         <Paper>
           <div style={{
               padding: '0px 5px 5px 5px'
@@ -37,7 +55,7 @@ class CorbelLogin extends React.Component {
           <div style={{
               padding: '0px 5px 5px 5px'
             }}>
-            <Status  corbel={this.corbel} />
+            <Status corbel={this.corbel} />
           </div>
         </Paper>
       </Pane>

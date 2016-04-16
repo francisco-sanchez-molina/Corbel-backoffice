@@ -1,11 +1,14 @@
 import alt from "../alt.js";
 import CorbelActions from "../actions/CorbelActions";
+
 import BackofficeCorbel from "../model/BackofficeCorbel.js"
+import CorbelService from "../service/CorbelService"
 
 class CorbelStore {
 
 	constructor() {
 		this.bindActions(CorbelActions);
+		this.loginInProgress = false
 		this.backofficeCorbel = new BackofficeCorbel();
 		this.backofficeCorbel.deserialize(localStorage.getItem('CorbelStore') || '{}');
 	}
@@ -82,13 +85,29 @@ class CorbelStore {
 		this.toSessionStorage();
 	}
 
-	onNewLogin(state) {
+	onRequestLogin() {
+		this.loginInProgress = true
+	}
+
+	onCancelLogin() {
+		this.loginInProgress = false
+	}
+
+	onNewLogin({token, refresh}) {
+		this.loginInProgress = false
 		this.backofficeCorbel.getCorbelSession()
-			.setToken(state.token)
-			.setRefreshToken(state.refreshToken)
+			.setToken(token)
+			.setRefreshToken(refresh)
 		this.toSessionStorage()
 	}
 
+	onErrorOnLogin({error}) {
+		this.loginInProgress = false
+		this.backofficeCorbel.getCorbelSession()
+			.setToken(undefined)
+			.setRefreshToken(undefined)
+		this.toSessionStorage()
+	}
 }
 
 export default alt.createStore(CorbelStore, 'CorbelStore');

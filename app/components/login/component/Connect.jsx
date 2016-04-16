@@ -8,7 +8,6 @@ class Connect extends React.Component {
     this.corbel = props.corbel;
     this.corbelSession =  this.corbel.corbelStore.getState().backofficeCorbel.getCorbelSession();
     this.corbelConfig = this.corbel.corbelStore.getState().backofficeCorbel.getCorbelConfig();
-    this.waitingActions = this.corbel.waitingActions
     this.state = {};
     this.state.profiles = [];
     this.state.environments = [];
@@ -44,9 +43,7 @@ class Connect extends React.Component {
     var corbelConfig = this.corbel.corbelStore.getState().backofficeCorbel.getCorbelConfig()
     var profileSelected = this.refs.profileSelect.value || state.profiles[0]
     var environmentSelected = this.refs.environmentSelect.value || state.environments[0]
-
-    var promise = this.corbel.corbelService.login(profileSelected, environmentSelected)
-    this.waitingActions.waitForPromise({module: 'corbelLogin', promise: promise})
+    this.corbel.corbelActions.requestLogin(profileSelected, environmentSelected)
   }
 
   onChangeProfile(event) {

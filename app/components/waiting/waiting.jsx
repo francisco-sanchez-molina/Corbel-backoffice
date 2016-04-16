@@ -1,7 +1,5 @@
 import React from "react";
 
-import WaitingStore from '../../stores/WaitingStore'
-import WaitingActions from '../../actions/WaitingActions'
 import RefreshIndicator from 'material-ui/lib/refresh-indicator'
 
 
@@ -13,24 +11,9 @@ class Waiting extends React.Component {
   constructor(props) {
     super()
     this.module = props.name
-    this._onChange = this._onChange.bind(this)
-    this.state = WaitingStore.getState(this.module) || {}
-  }
-
-  _onChange() {
-    this.setState(WaitingStore.getState(this.module) || {})
-  }
-
-  componentDidMount() {
-    WaitingStore.listen(this._onChange);
-  }
-
-  componentWillUnmount() {
-    WaitingStore.unlisten(this._onChange);
   }
 
   render() {
-
     var style = {
       position:   'fixed',
       zIndex:    1000,
@@ -49,7 +32,8 @@ class Waiting extends React.Component {
       width:      '100%',
     }
 
-    var fail = (this.state[this.module] || {}).error
+    var fail = ''
+  /*  var fail = (this.state[this.module] || {}).error
     if (fail) {
       var failMessage = JSON.stringify(fail)
       if (failMessage === '{}') {
@@ -63,10 +47,10 @@ class Waiting extends React.Component {
     } else {
       fail = ''
     }
-
+*/
     var content = ''
 
-    if (this.state[this.module] && this.state[this.module].wait) {
+    if (this.props.waiting) {
       content =
       <div style={style}>
         <div style={textStyle}>
@@ -78,7 +62,11 @@ class Waiting extends React.Component {
             status="loading"/>
             <h2>processing...</h2>
             <Button
-              onClick={() => WaitingActions.abortPromise(this.module)}
+              onClick={() => {
+                  if(this.props.onCancel) {
+                    this.props.onCancel()
+                  }
+              }}
               class="btn btn-form btn-primary"
               text="cancel" />
           </div>

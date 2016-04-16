@@ -27,8 +27,6 @@ import CorbelVersionStore from "./stores/CorbelVersionStore";
 import CorbelVersionActions from "./actions/CorbelVersionActions";
 
 import DataViewerStore from "./stores/DataViewerStore";
-import WaitingStore from "./stores/WaitingStore";
-import WaitingActions from "./actions/WaitingActions";
 
 
 import CorbelService from "./service/CorbelService"
@@ -42,8 +40,6 @@ require('../index.scss');
 var corbel = {
   corbelStore: CorbelStore,
   corbelVersionStore: CorbelVersionStore,
-  waitingStore: WaitingStore,
-  waitingActions:  WaitingActions,
   corbelActions: CorbelActions,
   corbelService: CorbelService,
   UserDataAccessObject: UserDataAccessObject,

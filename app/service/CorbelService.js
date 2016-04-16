@@ -34,6 +34,10 @@ class CorbelService {
 		})
 	}
 
+	cancelLogin() {
+		this.currentLogin = undefined;
+	}
+
 	login(profileName, environmentName) {
 		var params = {}
 		var corbelConfig = CorbelStore.getState().backofficeCorbel.getCorbelConfig()
@@ -61,21 +65,26 @@ class CorbelService {
 			params.claims = {
 				'basic_auth.username': corbelConfig.getLogin(profileName),
 				'basic_auth.password': corbelConfig.getPassword(profileName)
-			};
+			}
 		}
+
 		if (corbelConfig.getDevice(profileName) && corbelConfig.getDevice(profileName).length > 0) {
 			params.claims['device_id'] = deviceId;
 		}
 
-		return this.driver.iam.token().create(params).then(function(result) {
-			CorbelActions.newLogin({
-				token: result.data.accessToken,
-				refreshToken: result.data.refreshToken
-			});
-			return result
-		}).catch(error => {
-			throw error
-		})
+		var currentLogin = Date.now()
+		this.currentLogin = currentLogin
+
+		return this.driver.iam.token().create(params)
+			.then(result => {
+				if (this.currentLogin === currentLogin) {
+					CorbelActions.newLogin(result.data.accessToken, result.data.refreshToken)
+				}
+			}).catch(error => {
+				if (this.currentLogin === currentLogin) {
+					CorbelActions.errorOnLogin(error)
+				}
+			})
 	}
 
 	loginToken(token, environmentName) {
@@ -110,10 +119,7 @@ class CorbelService {
 			url: corbelConfig.getEnvironmentUrl(environmentName)
 		})
 
-		CorbelActions.newLogin({
-			token: token,
-			refreshToken: undefined
-		});
+		CorbelActions.newLogin(token)
 
 	}
 
