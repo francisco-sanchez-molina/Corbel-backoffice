@@ -1,7 +1,10 @@
 import corbel from "corbel-js";
 
-import CorbelStore from "../stores/CorbelStore";
-import CorbelActions from "../actions/CorbelActions";
+import CorbelStore from "../stores/CorbelStore"
+import CorbelActions from "../actions/CorbelActions"
+
+import AppNotificationActions from "../actions/AppNotificationActions"
+
 
 class CorbelService {
 	constructor() {}
@@ -36,6 +39,7 @@ class CorbelService {
 
 	cancelLogin() {
 		this.currentLogin = undefined;
+		AppNotificationActions.notifyError('Login cancelled')
 	}
 
 	login(profileName, environmentName) {
@@ -47,9 +51,8 @@ class CorbelService {
 		this.driver = this.createDriver(profileName, environmentName)
 
 		if (!this.driver) {
-			return Promise.reject({
-				error: 'misconfigure profile'
-			})
+			AppNotificationActions.notifyError('Misconfigure profile')
+			CorbelActions.errorOnLogin('Misconfigure profile')
 		}
 
 		CorbelActions.storeCorbelDriver(this.driver.config.config)
@@ -78,10 +81,12 @@ class CorbelService {
 		return this.driver.iam.token().create(params)
 			.then(result => {
 				if (this.currentLogin === currentLogin) {
+					AppNotificationActions.notifyError('Logged in ' + environmentName + ' with ' + profileName )
 					CorbelActions.newLogin(result.data.accessToken, result.data.refreshToken)
 				}
 			}).catch(error => {
 				if (this.currentLogin === currentLogin) {
+					AppNotificationActions.notifyError('Login error: ' + error)
 					CorbelActions.errorOnLogin(error)
 				}
 			})

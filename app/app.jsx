@@ -4,6 +4,8 @@ import {Window, Content, PaneGroup, Pane} from "react-photonkit";
 import {Router, Route, Link, hashHistory} from 'react-router'
 import Header from "./components/header/Header.jsx"
 import Footer from "./footer.jsx";
+import AppNotification from "./components/appNotification/AppNotification.jsx"
+
 import Home from "./components/home.jsx"
 import Sidebar from "./components/sidebar.jsx"
 import CorbelLogin from "./components/login/CorbelLogin.jsx"
@@ -23,11 +25,13 @@ import SidebarEntry from "./model/SidebarEntry.js"
 import CorbelStore from "./stores/CorbelStore";
 import CorbelActions from "./actions/CorbelActions";
 
-import CorbelVersionStore from "./stores/CorbelVersionStore";
-import CorbelVersionActions from "./actions/CorbelVersionActions";
+import AppNotificationStore from "./stores/AppNotificationStore"
+import AppNotificationActions from "./actions/AppNotificationActions"
 
-import DataViewerStore from "./stores/DataViewerStore";
+import CorbelVersionStore from "./stores/CorbelVersionStore"
+import CorbelVersionActions from "./actions/CorbelVersionActions"
 
+import DataViewerStore from "./stores/DataViewerStore"
 
 import CorbelService from "./service/CorbelService"
 import UserDataAccessObject from "./service/UserDataAccessObject"
@@ -39,6 +43,7 @@ require('../index.scss')
 
 var corbel = {
   corbelStore: CorbelStore,
+  appNotificationStore: AppNotificationStore,
   corbelVersionStore: CorbelVersionStore,
   corbelActions: CorbelActions,
   corbelService: CorbelService,
@@ -72,6 +77,7 @@ class App extends React.Component {
             {this.props.children}
           </PaneGroup>
         </Content>
+        <AppNotification corbel={corbel}/>
         <Footer/>
       </Window>
     )
