@@ -12,7 +12,7 @@ class Home extends React.Component {
     };
 
     return (
-      <div style={divStyle}>
+      <div className='padded pane' style={divStyle}>
         <h1>
           Welcome to Corbel backoffice
         </h1>

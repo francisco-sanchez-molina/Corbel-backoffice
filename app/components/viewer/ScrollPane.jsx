@@ -44,7 +44,7 @@ class ScrollPane extends React.Component {
       overflow: 'auto',
     }
     return (
-      <div className='padded' style={style} ref='scrolled' className="padded" onScroll={(e) => {this.scrollState(e)}}>
+      <div className='padded pane' style={style} ref='scrolled' onScroll={(e) => {this.scrollState(e)}}>
         <h1>{this.props.title}</h1>
         {this.props.children}
       </div>
