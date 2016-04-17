@@ -1,5 +1,5 @@
 import React from "react";
-import ReactDom from 'react-dom'
+import ReactDOM from 'react-dom'
 import {Window, Content, PaneGroup, Pane} from "react-photonkit";
 import {Router, Route, Link, hashHistory} from 'react-router'
 import Header from "./components/header/Header.jsx"
@@ -35,7 +35,7 @@ import ClientsDataAccessObject from "./service/ClientsDataAccessObject"
 import AssetsDataAccessObject from "./service/AssetsDataAccessObject"
 import ResourcesDataAccessObject from "./service/ResourcesDataAccessObject"
 
-require('../index.scss');
+require('../index.scss')
 
 var corbel = {
   corbelStore: CorbelStore,
@@ -59,7 +59,7 @@ var sidebarEntries = [
   new SidebarEntry('Configuration', '#/configuration', 'cog'),
   new SidebarEntry('Versions', '#/versions', 'bookmark'),
   new SidebarEntry('Tools', '#/tools', 'cog')
-];
+]
 
 class App extends React.Component {
   render() {
@@ -132,7 +132,7 @@ var routes = (
 )
 
 hashHistory.push('/home')
-ReactDom.render(
+ReactDOM.render(
   <Router history={hashHistory}>
     {routes}
   </Router>,
@@ -141,6 +141,7 @@ ReactDom.render(
 
 function refreshVersion () {
   CorbelVersionActions.refresh()
-  setTimeout(refreshVersion,5000)
+  setTimeout(refreshVersion, 5000)
 }
+
 refreshVersion()
