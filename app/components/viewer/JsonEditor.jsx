@@ -6,7 +6,7 @@ import AceEditor from 'react-ace';
 import 'brace/mode/json';
 import 'brace/theme/xcode';
 
-import Paper from 'material-ui/lib/paper';
+import Paper from 'material-ui/Paper';
 
 class JsonEditor extends React.Component {
 

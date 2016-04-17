@@ -1,6 +1,6 @@
 import React from 'react'
 
-import Snackbar from 'material-ui/lib/snackbar'
+import Snackbar from 'material-ui/Snackbar'
 
 import AppNotificationActions from '../../actions/AppNotificationActions'
 

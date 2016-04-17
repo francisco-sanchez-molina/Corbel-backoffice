@@ -1,5 +1,9 @@
 import React from "react";
 import ReactDOM from 'react-dom'
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import {deepOrange500} from 'material-ui/styles/colors';
+
 import {Window, Content, PaneGroup, Pane} from "react-photonkit";
 import {Router, Route, Link, hashHistory} from 'react-router'
 import Header from "./components/header/Header.jsx"
@@ -41,6 +45,12 @@ import ResourcesDataAccessObject from "./service/ResourcesDataAccessObject"
 
 require('../index.scss')
 
+const muiTheme = getMuiTheme({
+  palette: {
+    accent1Color: deepOrange500,
+  },
+});
+
 var corbel = {
   corbelStore: CorbelStore,
   appNotificationStore: AppNotificationStore,
@@ -69,17 +79,22 @@ var sidebarEntries = [
 class App extends React.Component {
   render() {
     return (
+      <MuiThemeProvider muiTheme={muiTheme}>
+
       <Window>
         <Header corbel={corbel}/>
-        <Content>
-          <PaneGroup>
-            <Sidebar entries={sidebarEntries}/>
-            {this.props.children}
-          </PaneGroup>
-        </Content>
-        <AppNotification corbel={corbel}/>
+          <Content>
+            <PaneGroup>
+              <Sidebar entries={sidebarEntries}/>
+              {this.props.children}
+            </PaneGroup>
+          </Content>
+          <AppNotification corbel={corbel}/>
+
         <Footer/>
       </Window>
+    </MuiThemeProvider>
+
     )
   }
 }

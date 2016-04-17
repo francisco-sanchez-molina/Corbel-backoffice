@@ -5,7 +5,7 @@ import Connect from './component/Connect.jsx'
 import ConnectToken from './component/ConnectToken.jsx'
 import Status from './component/Status.jsx'
 import Waiting from '../waiting/waiting.jsx'
-import Paper from 'material-ui/lib/paper'
+import Paper from 'material-ui/Paper'
 
 
 class CorbelLogin extends React.Component {

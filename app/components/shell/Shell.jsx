@@ -1,6 +1,6 @@
 import React from "react";
 import {Window, Button, Pane, Input} from "react-photonkit";
-import Paper from 'material-ui/lib/paper'
+import Paper from 'material-ui/Paper'
 
 import brace from 'brace'
 import AceEditor from 'react-ace'
