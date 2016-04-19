@@ -1,4 +1,7 @@
 var path = require('path');
+var webpack = require('webpack');
+
+var PROD = JSON.parse(process.env.production || '0')
 
 module.exports = {
   entry: path.resolve(__dirname, 'app/app.jsx'),
@@ -7,6 +10,14 @@ module.exports = {
     publicPath: 'out/',
     filename: 'app.js'
   },
+  plugins: PROD ? [
+    new webpack.optimize.UglifyJsPlugin({
+      compress: { warnings: false },
+      output: {
+        comments: false
+      }
+    })
+  ] : [],
   module: {
     loaders: [
       { test: /\.jsx?$/, exclude: /node_modules/, loaders: ['babel-loader'] },

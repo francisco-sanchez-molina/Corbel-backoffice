@@ -6,15 +6,32 @@ import brace from 'brace'
 import AceEditor from 'react-ace'
 import 'brace/mode/javascript'
 import 'brace/theme/xcode'
+require("brace/ext/language_tools");
 
 class Shell extends React.Component {
 
   constructor(props) {
     super(props);
     this.corbel = props.route.corbel;
+    this.corbelMethods = ['corbel']
     this.state = {result:''}
     this.context = {}
     this.sandboxframe = document.createElement('iframe')
+    this.init('corbel', this.corbel.corbelService.getDriver())
+  }
+
+  init(path, obj) {
+    var keys = Object.keys(obj)
+    var protoKeys = Object.keys(obj.__proto__)
+    protoKeys.forEach(key => keys.push(key))
+
+    keys
+    .filter(key => ['guid', 'config', 'driver', '_events', '__proto__', 'constructor'].indexOf(key)===-1)
+    .forEach((key) => {
+      var newPath = path + '.' +key
+      this.corbelMethods.push(newPath)
+      this.init(newPath, obj[key])
+    })
   }
 
   getEditor() {
@@ -39,6 +56,19 @@ class Shell extends React.Component {
       onChange={(newValue) => this.updateContent(newValue)}
       value={this.state.editorContent}
       />
+
+      var langTools = ace.acequire("ace/ext/language_tools");
+
+      var that = this;
+      var flowCompleter = {
+          getCompletions: function(editor, session, pos, prefix, callback) {
+            var words = that.corbelMethods.map((method) => {return {name: method, value: method, score: 1, meta:'corbel'}})
+            callback(null, words)
+
+          }
+      }
+      langTools.addCompleter(flowCompleter);
+
 
     return this.ace
   }
@@ -94,7 +124,7 @@ class Shell extends React.Component {
             height: '100%'
           }}>
           <h3>shell</h3>
-          <div           onKeyPress = {(e) => {
+          <div onKeyPress = {(e) => {
               if (e.key === 'Enter') {
                 this.exec()
               }
