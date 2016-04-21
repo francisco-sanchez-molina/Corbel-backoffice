@@ -53,6 +53,8 @@ class CorbelService {
 		if (!this.driver) {
 			AppNotificationActions.notifyError('Misconfigure profile')
 			CorbelActions.errorOnLogin('Misconfigure profile')
+			CorbelActions.storeCorbelDriver({})
+			return
 		}
 
 		CorbelActions.storeCorbelDriver(this.driver.config.config)
