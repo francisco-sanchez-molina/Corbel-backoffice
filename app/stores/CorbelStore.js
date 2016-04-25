@@ -31,6 +31,7 @@ class CorbelStore {
 			.setClientSecret(state.profileName, state.clientSecret)
 			.setLogin(state.profileName, state.login)
 			.setPassword(state.profileName, state.password)
+			.setDeviceId(state.profileName, state.deviceId)
 		this.toSessionStorage()
 	}
 

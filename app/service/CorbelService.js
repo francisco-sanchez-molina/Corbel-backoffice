@@ -73,8 +73,8 @@ class CorbelService {
 			}
 		}
 
-		if (corbelConfig.getDevice(profileName) && corbelConfig.getDevice(profileName).length > 0) {
-			params.claims['device_id'] = deviceId;
+		if (corbelConfig.getDeviceId(profileName) && corbelConfig.getDeviceId(profileName).length > 0) {
+			params.claims['device_id'] = corbelConfig.getDeviceId(profileName);
 		}
 
 		var currentLogin = Date.now()

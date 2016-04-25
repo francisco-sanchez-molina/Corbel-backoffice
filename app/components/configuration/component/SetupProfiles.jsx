@@ -45,7 +45,8 @@ class SetupProfiles extends React.Component {
       clientId : this.refs.clientId.refs.text.value,
       clientSecret : this.refs.secret.refs.text.value,
       login : this.refs.login.refs.text.value,
-      password : this.refs.password.value
+      password : this.refs.password.value,
+      deviceId : this.refs.deviceId.refs.text.value,
     }
 
     this.corbel.corbelActions.storeCorbelConfigProfile(data)
@@ -77,6 +78,8 @@ class SetupProfiles extends React.Component {
     this.refs.secret.refs.text.value = corbelConfig.getClientSecret(profileSelected) || ''
     this.refs.login.refs.text.value = corbelConfig.getLogin(profileSelected) || ''
     this.refs.password.value = corbelConfig.getPassword(profileSelected) || ''
+    this.refs.deviceId.refs.text.value = corbelConfig.getDeviceId(profileSelected) || ''
+
 
   }
 
@@ -86,6 +89,7 @@ class SetupProfiles extends React.Component {
     this.refs.secret.refs.text.value = ''
     this.refs.login.refs.text.value = ''
     this.refs.password.value = ''
+    this.refs.deviceId.text.value = ''
   }
 
   render() {
@@ -154,6 +158,11 @@ class SetupProfiles extends React.Component {
             type="password"
             ref="password" />
         </div>
+        <Input
+          label="Device id"
+          id="deviceId"
+          placeholder="device id"
+          ref="deviceId" />
         <div>
           <div>
             <Button

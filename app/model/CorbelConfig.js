@@ -51,6 +51,15 @@ export default class CorbelConfig {
 		return this.state.profiles[profileName].login;
 	}
 
+	setDeviceId(profileName, deviceId: string): ? CorbelConfigProfile {
+		this.state.profiles[profileName].deviceId = deviceId;
+		return this;
+	}
+
+	getDeviceId(profileName): ? string {
+		return this.state.profiles[profileName].deviceId;
+	}
+
 	setPassword(profileName, password: string): ? CorbelConfigProfile {
 		this.state.profiles[profileName].password = password;
 		return this;
@@ -58,15 +67,6 @@ export default class CorbelConfig {
 
 	getPassword(profileName): ? string {
 		return this.state.profiles[profileName].password;
-	}
-
-	setDevice(profileName, device: string): ? CorbelConfigProfile {
-		this.state.profiles[profileName].device = device;
-		return this;
-	}
-
-	getDevice(profileName): ? string {
-		return this.state.profiles[profileName].device;
 	}
 
 	getProfiles(): ? string {
