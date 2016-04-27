@@ -14,14 +14,16 @@ class CorbelActions {
 			'storeNewLoginData',
 			'resetLastLoginData',
 			'setProfile',
-			'importConfiguration'
+			'importConfiguration',
+			'eventSended',
+			'eventSendFailed'
 		)
 	}
 
-  cancelLogin() {
-      CorbelService.cancelLogin()
-      return {}
-  }
+	cancelLogin() {
+		CorbelService.cancelLogin()
+		return {}
+	}
 
 	requestLogin(profile, environment) {
 		return (dispatch) => {
@@ -31,12 +33,25 @@ class CorbelActions {
 	}
 
 	newLogin(token, refresh) {
-		return {token, refresh}
+		return { token, refresh }
 	}
 
 	errorOnLogin(error) {
-		return {error}
+		return { error }
 	}
+
+	sendEvent(type, data) {
+		return (dispatch) => {
+			dispatch()
+			CorbelService.sendEvent(type, data)
+		}
+	}
+
+	cancelSendEvent() {
+		CorbelService.cancelSendEvent()
+		return {}
+	}
+
 }
 
 export default alt.createActions(CorbelActions);

@@ -33,21 +33,6 @@ class Waiting extends React.Component {
     }
 
     var fail = ''
-  /*  var fail = (this.state[this.module] || {}).error
-    if (fail) {
-      var failMessage = JSON.stringify(fail)
-      if (failMessage === '{}') {
-        try {
-          fail = fail.toString()
-        } catch(error){}
-      }
-      else {
-        fail = failMessage
-      }
-    } else {
-      fail = ''
-    }
-*/
     var content = ''
 
     if (this.props.waiting) {

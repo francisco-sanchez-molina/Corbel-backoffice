@@ -9,6 +9,7 @@ class CorbelStore {
 	constructor() {
 		this.bindActions(CorbelActions);
 		this.loginInProgress = false
+		this.sendEventInProgress = false
 		this.backofficeCorbel = new BackofficeCorbel();
 		this.backofficeCorbel.deserialize(localStorage.getItem('CorbelStore') || '{}');
 	}
@@ -108,6 +109,25 @@ class CorbelStore {
 			.setToken(undefined)
 			.setRefreshToken(undefined)
 		this.toSessionStorage()
+	}
+
+	onSendEvent() {
+		this.sendEventInProgress = true
+	}
+
+	onEventSended() {
+		this.sendEventInProgress = false
+		this.sendEventResult = 'Ok!'
+	}
+
+	onEventSendFailed({error}) {
+		this.sendEventInProgress = false		
+		this.sendEventResult = error 
+	}
+
+	onCancelSendEvent() {
+		this.sendEventInProgress = false		
+		this.sendEventResult = 'Canceled'
 	}
 }
 

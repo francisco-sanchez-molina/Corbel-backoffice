@@ -140,6 +140,28 @@ class CorbelService {
 		return tokenInfo
 	}
 
+	sendEvent(event, data) {
+		var currentSendEvent = Date.now()
+		this.currentSendEvent = currentSendEvent
+
+		return this.driver.evci.event(event).publish(data)
+			.then(result => {
+				if (this.currentSendEvent === currentSendEvent) {
+					CorbelActions.eventSended()
+					AppNotificationActions.notifyError('Event type ' + event + ' sended!')
+				}
+			}).catch(error => {
+				if (this.currentSendEvent === currentSendEvent) {
+					CorbelActions.eventSendFailed(error)
+					AppNotificationActions.notifyError('Event type ' + event + ' fail to send: ' + error)					
+				}
+			})
+	}
+	
+	cancelSendEvent() {
+		this.currentSendEvent = undefined
+		AppNotificationActions.notifyError('Send event canceled')
+	}
 }
 
 export default new CorbelService();
