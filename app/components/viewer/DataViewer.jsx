@@ -18,14 +18,23 @@ class DataViewer extends React.Component {
       dataViewerActions.setDataAccessObject({dataAccessObject : this.props.dataAccessObject})
     }
   }
-
-  componentsDataViewer () {
-    return (
-      <div>
-        <Query
+  
+  queryComponent() {
+    var queryComponent
+    if (this.props.queryEnable=== undefined || this.props.queryEnable===true || this.props.queryEnable==='true') {
+         queryComponent = <Query
           dataAccessObject={this.props.dataAccessObject}
           dataViewerStore={dataViewerStore}
           dataViewerActions={dataViewerActions}/>
+        }
+    return queryComponent
+  }
+
+  componentsDataViewer () {
+    var that = this
+    return (
+      <div>
+        {this.queryComponent()}
         <Pager
           dataAccessObject={this.props.dataAccessObject}
           dataViewerStore={dataViewerStore}

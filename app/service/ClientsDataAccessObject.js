@@ -6,7 +6,7 @@ export default class ClientsDataAccessObject extends DataAccessObject {
 	}
 
 	_getCollection(driver, query) {
-		return driver.iam.client(driver.config.config.domain)
+		return driver.domain(driver.config.config.domain).iam.client()
 			.getAll(query)
 			.then(function(result) {
 				return result.data;
